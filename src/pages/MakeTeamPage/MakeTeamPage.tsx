@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from '../../components/Header/Header'
 
 const MakeTeamPage = () => {
     return (
         <div>
-            make team page
+            <Header />
         </div>
     )
 }
