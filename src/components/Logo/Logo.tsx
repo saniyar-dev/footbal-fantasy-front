@@ -6,8 +6,9 @@ const LogoSvg = styled.img.attrs((props) => {
         src: LogoUrl,
     }
 })`
-    background: #37013B;
     transform: matrix(-1, 0, 0, 1, 0, 0);
+    width: 118px;
+    height: 150px;
 `
 
 export default LogoSvg
