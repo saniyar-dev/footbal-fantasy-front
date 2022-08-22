@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 import CreateTeamNavbar from '../../components/Navbar/Navbar'
+import WeakSeason from '../../components/WeakSeason/WeakSeason'
 
 interface NavItem {
     title: string;
@@ -36,6 +37,7 @@ const MakeTeamPage = () => {
         <div>
             <Header />
             <CreateTeamNavbar NavItemsList={NavItems}/>
+            <WeakSeason />
         </div>
     )
 }
