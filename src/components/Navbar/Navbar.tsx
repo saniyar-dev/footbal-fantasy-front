@@ -20,6 +20,22 @@ const Button = styled.button<{
     border-radius: 8px;
 `
 
+const Container = styled.div`
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: 770px;
+    height: 80px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0 auto;
+
+    position: relative;
+    bottom: 40px;
+`
+
 interface NavItem {
     title: string;
     active: boolean;
@@ -31,7 +47,7 @@ interface NavbarProps {
 
 const CreateTeamNavbar: FC<NavbarProps> = ({NavItemsList}): ReactElement => {
     return (
-        <div>
+        <Container>
             {
                 NavItemsList.map((NavItem: NavItem) => {
                     return (
@@ -40,7 +56,7 @@ const CreateTeamNavbar: FC<NavbarProps> = ({NavItemsList}): ReactElement => {
                     )
                 })
             }
-        </div>
+        </Container>
     )
 }
 
