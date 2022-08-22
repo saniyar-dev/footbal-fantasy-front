@@ -1,6 +1,7 @@
 import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
 import LogoSvg from "../Logo/Logo";
+import ImageUrl from '../..//assets/pl_completed_transfers.png'
 
 const Container = styled.div<{
 }>`
@@ -29,6 +30,18 @@ const TitleContainer = styled.div`
     top: 2rem;
 `
 
+const HeaderImage = styled.img.attrs(props => {
+    return {
+        src: ImageUrl
+    }
+})`
+    width: 550px;
+    height: 261px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+`
+
 const Header: FC = (): ReactElement => {
     return (
         <Container>
@@ -36,6 +49,7 @@ const Header: FC = (): ReactElement => {
                 <LogoSvg />
                 <Title>فوتبال فانتزی</Title>
             </TitleContainer>
+            <HeaderImage />
         </Container>
     )
 }
