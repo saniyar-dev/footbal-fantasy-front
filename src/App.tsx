@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from './components/Button';
+import Button from './components/Button/Button';
 
 function App() {
   return (
     <div>
-      <Button></Button>
+      <Button buttonWidth={100} buttonHeight={150} text={'تیم من'}></Button>
     </div>
   );
 }
