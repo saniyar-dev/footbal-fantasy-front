@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from './components/Button/Button';
+import MakeTeamPage from './pages/MakeTeamPage/MakeTeamPage';
 
 function App() {
   return (
-    <div>
-      <Button buttonWidth={100} buttonHeight={150} text={'تیم من'}></Button>
-    </div>
+    <>
+      <MakeTeamPage />
+    </>
   );
 }
 
