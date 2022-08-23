@@ -2,6 +2,7 @@ import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
 import SearchComponent from "../SearchComponent/SearchComponent"
 import FilterComponent from "./Filter/Filter"
+import PlayerCount from "./PlayerCount/PlayerCount"
 
 const Container = styled.div`
     width: 273px;
@@ -36,6 +37,7 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
             <Header>انتخاب بازیکن</Header>
             <SearchComponent />
             <FilterComponent />
+            <PlayerCount />
         </Container>
     )
 }
