@@ -1,6 +1,7 @@
-import React, {FC, ReactElement} from "react";
+import React, {FC, ReactElement, useState} from "react";
 import styled from "styled-components";
-import Button from "../Button/Button";
+import ButtonGroup from "../Button/ButtonGroup";
+import { ButtonType } from "../Button/types";
 
 const Container = styled.div`
     background: #FFFFFF;
@@ -18,27 +19,48 @@ const Container = styled.div`
     bottom: 40px;
 `
 
-interface NavItem {
-    title: string;
-    active: boolean;
-}
+const CreateTeamNavbar: FC = (): ReactElement => {
+    const [NavItemsList, setNavItemsList] = useState<Array<ButtonType>>([
+        {
+            id: 0,
+            title: 'تیم من',
+            active: true
+        },
+        {
+            id: 1,
+            title: 'نقل و انتقالات',
+            active: false 
+        },
+        {
+            id: 2,
+            title: 'آخرین رویداد‌ها',
+            active: false 
+        },
+        {
+            id: 3,
+            title: 'پروفایل',
+            active: false 
+        },
+        {
+            id: 4,
+            title: 'جوایز',
+            active: false 
+        },
+    ])
 
-interface NavbarProps {
-    NavItemsList: Array<NavItem>
-}
 
-const CreateTeamNavbar: FC<NavbarProps> = ({NavItemsList}): ReactElement => {
     return (
         <Container>
-            {
-                NavItemsList.map((NavItem: NavItem) => {
-                    return (
-                        <Button key={NavItem.title}
-                         width={142} height={60} bgColor="#05F4F1" active={NavItem.active}>{NavItem.title}</Button>
-                    )
-                })
-            }
-        </Container>
+            <ButtonGroup 
+                buttonList={NavItemsList}
+                activeBgColor="linear-gradient(262.49deg, #05F4F1 -27.69%, #00FF87 112.29%)"
+                defaultBgColor="white"
+                activeDefaultId={0}
+                changeFunction={setNavItemsList}
+                defaultHeight={60}
+                defaultWidth={142}
+            />
+       </Container>
     )
 }
 
