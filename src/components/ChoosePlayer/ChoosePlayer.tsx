@@ -9,6 +9,10 @@ const Container = styled.div`
     height: 828px;
 
     background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 `
 
 const Header = styled.h2`
