@@ -2,13 +2,13 @@ import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
 import ListItem from "../../ListComponents/ListItem";
 
-interface ListItem {
+interface ListItemType {
     name: string;
     performance: number;
     price: number;
 }
 
-const ListItems: Array<ListItem> = [
+const ListItems: Array<ListItemType> = [
     {
         name: 'saniyar',
         performance: 10,
