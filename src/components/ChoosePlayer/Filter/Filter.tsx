@@ -38,7 +38,7 @@ const Container = styled.div`
     justify-content: center;
 `
 
-const Filter: FC = (): ReactElement => {
+const FilterComponent: FC = (): ReactElement => {
     return (
         <Container>
             {
@@ -54,4 +54,4 @@ const Filter: FC = (): ReactElement => {
     )
 }
 
-export default Filter
+export default FilterComponent
