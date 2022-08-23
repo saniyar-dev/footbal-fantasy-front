@@ -82,7 +82,12 @@ const ListComponent: FC = (): ReactElement => {
         <Container>
             {
                 ListItems.map(listItem => {
-                    return <ListItem width={240} height={40}>{listItem.name + listItem.performance}</ListItem>
+                    return <ListItem width={240} height={40} name={listItem.name} position={'CEH'}
+                    staticNumbers={{
+                        performance: listItem.performance,
+                        price: listItem.price
+                    }}
+                    />
                 })
             }
         </Container>
