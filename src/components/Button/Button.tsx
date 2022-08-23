@@ -5,18 +5,25 @@ const Button = styled.button<{
     height: number;
     bgColor: string;
     active: boolean;
+    font?: {
+        fontSize?: number;
+        fontWeight?: number
+    };
+    border?: {
+        radius?: number;
+        type?: string;
+    }
 }>`
     width: ${props => props.width + 'px'};
     height: ${props => props.height + 'px'};
-    background: ${props => {
-        return props.active ? props.bgColor : 'white'
-    }};
+    background: ${props => props.active ? props.bgColor : 'white'};
     font-family: 'Vazirmatn';
     font-style: normal;
-    font-weight: 900;
-    font-size: 17px;
+    font-weight: ${props => props.font?.fontSize ? props.font.fontWeight : 900};
+    font-size: ${props => props.font?.fontSize ? props.font.fontSize + 'px' : '17px'};
     text-align: center;
-    border-radius: 8px;
+    border-radius: ${props => props.border?.radius ? props.border.radius : '8px'};
+    border: ${props => props.border?.type ? props.border.type : ''}
 `
 
 export default Button

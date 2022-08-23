@@ -44,6 +44,13 @@ const FilterComponent: FC = (): ReactElement => {
             {
                 filterList.map((filter) => {
                     return <Button 
+                            border={{
+                                type: "1px solid #EFEFEF"
+                            }}
+                            font={{
+                                fontSize: 12,
+                                fontWeight: 400
+                            }}
                             height={30}
                             width={40}
                             bgColor={filter.active ? 'linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)' : 'white'}
