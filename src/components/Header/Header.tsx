@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
-import LogoSvg from "../Logo/Logo";
+import LogoSvg from "../../atomComponents/Logo/Logo";
 import ImageUrl from '../..//assets/pl_completed_transfers.png'
 
 const Container = styled.div<{

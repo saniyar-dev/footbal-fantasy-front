@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
-import Button from "../../Button/Button"
+import Button from "../../../atomComponents/Button/Button"
 
 const BoldText = styled.span`
     font-weight: 700;

@@ -1,7 +1,7 @@
 import React, {FC, ReactElement, useState} from "react";
 import styled from "styled-components";
-import ButtonGroup from "../Button/ButtonGroup";
-import { ButtonType } from "../Button/types";
+import ButtonGroup from "../../atomComponents/Button/ButtonGroup";
+import { ButtonType } from "../../atomComponents/Button/types";
 
 const Container = styled.div`
     background: #FFFFFF;

@@ -1,7 +1,7 @@
 import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
-import Button from "../../Button/Button";
-import ListItem from "../../ListComponents/ListItem";
+import Button from "../../../atomComponents/Button/Button";
+import ListItem from "../../../atomComponents/ListComponents/ListItem";
 
 interface ListItemType {
     name: string;

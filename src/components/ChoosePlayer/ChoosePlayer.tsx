@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
-import SearchComponent from "../SearchComponent/SearchComponent"
+import SearchComponent from "../../atomComponents/SearchComponent/SearchComponent"
 import FilterComponent from "./Filter/Filter"
 import ListComponent from "./ListComponent/ListComponent"
 import PlayerCount from "./PlayerCount/PlayerCount"
