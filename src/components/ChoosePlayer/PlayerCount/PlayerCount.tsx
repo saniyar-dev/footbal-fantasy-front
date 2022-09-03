@@ -10,13 +10,16 @@ const PlayerCount: FC = (): ReactElement => {
     return (
         <Button
             active={true}
-            bgColor="linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)"
-            height={30}
-            width={180}
-            font={{
-                fontSize: 11,
-                fontWeight: 300
+            styles={{
+                activeBgColor: "linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)",
+                defaultHeight: 30,
+                defaultWidth: 180,
+                font: {
+                    fontSize: 11,
+                    fontWeight: 300,
+                }
             }}
+            disabled
         >
             <BoldText>
                 ۵۲۳
