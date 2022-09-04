@@ -1,33 +1,24 @@
 import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
+import {Styles} from '../../types/index'
 
 interface ListItemProps {
     name: string;
     position?: string;
-    border?: {
-        bottem?: string;
-    };
-    width: number;
-    height: number;
-    bgColor?: string;
     staticNumbers: {
         performance: number;
         price: number;
     }
+    styles: Styles;
 }
 
 const ListItemContainer = styled.div<{
-    border?: {
-        bottem?: string;
-    };
-    width: number;
-    height: number;
-    bgColor?: string;
+    styles: Styles;
 }>`
-    width: ${props => props.width + 'px'};
-    height: ${props => props.height + 'px'};
-    background: ${props => props.bgColor ? props.bgColor : 'white'};
-    border-bottom: ${props => props.border?.bottem ? props.border.bottem : '1px solid #EFEFEF'};
+    width: ${props => props.styles.defaultWidth + 'px'};
+    height: ${props => props.styles.defaultHeight + 'px'};
+    background: ${props => props.styles.activeBgColor ? props.styles.activeBgColor : props.styles.defaultBgColor};
+    border-bottom: ${props => props.styles.border ? props.styles.border.value : ''};
     display: flex;
     justify-content: space-between;
 `
@@ -70,13 +61,10 @@ const Static = styled.span`
     color: #3D195B;
 `
 
-const ListItem: FC<ListItemProps> = ({name, position, staticNumbers, width, height, bgColor, border}): ReactElement => {
+const ListItem: FC<ListItemProps> = ({name, position, staticNumbers, styles}): ReactElement => {
     return (
         <ListItemContainer 
-            width={width} 
-            height={height} 
-            bgColor={bgColor ? bgColor : undefined} 
-            border={border ? border : undefined}>
+        styles={styles} >
             <Title>
                 {name}
                 {

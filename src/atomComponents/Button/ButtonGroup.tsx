@@ -1,6 +1,6 @@
 import React, {FC, ReactElement, useContext, useState} from "react"
 import Button from "./Button";
-import {Styles} from './types'
+import {Styles} from '../../types/index'
 
 
 const ButtonGroupContext = React.createContext<{
@@ -16,14 +16,12 @@ const ButtonGroupContext = React.createContext<{
     onClickFn: (id: number) => {throw new Error("no init value found: ButtonGroupContext")}
 })
 
-interface ButtonGroupProps {
+export const ButtonGroup: FC<{
     styles: Styles;
     onChange: (id: number) => void;
     children: React.ReactNode
     defaultId: number;
-}
-
-export const ButtonGroup: FC<ButtonGroupProps> = ({
+}> = ({
     styles,
     children,
     defaultId,
