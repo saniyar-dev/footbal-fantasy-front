@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@atomComponents/*": ["src/atomComponents/*"],
+      "@assets/*": ["src/assets/*"],
+      "@pages/*": ["src/pages/*"],
+      "@state/*": ["src/state/*"],
+      "@types/*": ["src/types/*"],
+      "@public/*": ["public/*"],
+    },
     "target": "es5",
     "lib": [
       "dom",
