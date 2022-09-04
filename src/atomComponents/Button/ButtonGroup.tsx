@@ -1,71 +1,52 @@
-import React, {FC, ReactElement} from "react"
-import styled from 'styled-components'
+import React, {FC, ReactElement, useContext, useState} from "react"
 import Button from "./Button";
-import {ButtonType} from './types'
+import {Styles} from './types'
 
+
+const ButtonGroupContext = React.createContext<{
+    styles: Styles;
+    selectedId: number;
+    onClickFn: (id: number) => void;
+}>({
+    styles: {
+        defaultWidth: 0,
+        defaultHeight: 0,
+    },
+    selectedId: 0,
+    onClickFn: (id: number) => {throw new Error("no init value found: ButtonGroupContext")}
+})
 
 interface ButtonGroupProps {
-    buttonList: Array<ButtonType>;
-    defaultWidth: number;
-    defaultHeight: number;
-    activeBgColor: string;
-    defaultBgColor: string;
-    activeDefaultId: number;
-    defaultFont?: {
-        fontSize?: number;
-        fontWeight?: number
-    };
-    defaultBorder?: {
-        radius?: number;
-        type?: string;
-    }
-    changeFunction: Function
+    styles: Styles;
+    onChange: (id: number) => void;
+    children: React.ReactNode
+    defaultId: number;
 }
 
-const ButtonGroup: FC<ButtonGroupProps> = ({
-    buttonList, 
-    activeBgColor, 
-    defaultBgColor, 
-    defaultHeight, 
-    defaultWidth,
-    defaultBorder,
-    defaultFont,
-    changeFunction
+export const ButtonGroup: FC<ButtonGroupProps> = ({
+    styles,
+    children,
+    defaultId,
+    onChange
 }): ReactElement => {
-    return (
-        <>
-        {
-            buttonList.map((buttonItem: ButtonType) => 
-                <Button 
-                active={buttonItem.active} 
-                bgColor={buttonItem.active ? activeBgColor : defaultBgColor}
-                width={defaultWidth}
-                height={defaultHeight}
-                font={defaultFont}
-                border={defaultBorder}
-                onClick={(e) => {
-                    e.preventDefault();
-                    const newList = buttonList.map((item: ButtonType): ButtonType => 
-                        (item.id === buttonItem.id) ?
-                        {
-                            id: item.id,
-                            title: item.title,
-                            active: true,
-                        } : {
-                            id: item.id,
-                            title: item.title,
-                            active: false
-                        }
-                    )
-                    changeFunction(newList)
-                }}
-                >
-                    {buttonItem.title}
-                </Button>
-            )
-        }
-        </>
-    )
+    const [selectedId, setSelectedId] = useState(defaultId)
+
+    return <ButtonGroupContext.Provider value={{styles, selectedId: selectedId, onClickFn: (id) => {
+        onChange(id)
+        setSelectedId(id)
+    }}}>
+        {children}
+    </ButtonGroupContext.Provider>
+}
+
+export const ButtonGroupBtn: FC<{
+    id: number;
+    children: React.ReactNode
+}> = ({id, children}): ReactElement => {
+    const {styles, selectedId, onClickFn} = useContext(ButtonGroupContext)
+    return <Button styles={styles} active={selectedId === id} onClick={() => onClickFn(id)}>
+        {children}
+    </Button>
 }
 
 export default ButtonGroup

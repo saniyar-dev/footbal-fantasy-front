@@ -1,7 +1,6 @@
-import React, {FC, ReactElement, useState} from "react";
+import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
-import ButtonGroup from "../../atomComponents/Button/ButtonGroup";
-import { ButtonType } from "../../atomComponents/Button/types";
+import {ButtonGroup, ButtonGroupBtn} from "../../atomComponents/Button/ButtonGroup";
 
 const Container = styled.div`
     background: #FFFFFF;
@@ -20,46 +19,54 @@ const Container = styled.div`
 `
 
 const CreateTeamNavbar: FC = (): ReactElement => {
-    const [NavItemsList, setNavItemsList] = useState<Array<ButtonType>>([
+    const NavItemsList = [
         {
             id: 0,
             title: 'تیم من',
-            active: true
         },
         {
             id: 1,
             title: 'نقل و انتقالات',
-            active: false 
         },
         {
             id: 2,
             title: 'آخرین رویداد‌ها',
-            active: false 
         },
         {
             id: 3,
             title: 'پروفایل',
-            active: false 
         },
         {
             id: 4,
             title: 'جوایز',
-            active: false 
         },
-    ])
+    ]
 
 
     return (
         <Container>
-            <ButtonGroup 
-                buttonList={NavItemsList}
-                activeBgColor="linear-gradient(262.49deg, #05F4F1 -27.69%, #00FF87 112.29%)"
-                defaultBgColor="white"
-                activeDefaultId={0}
-                changeFunction={setNavItemsList}
-                defaultHeight={60}
-                defaultWidth={142}
-            />
+            <ButtonGroup
+            styles={{
+                defaultWidth: 142,
+                defaultHeight: 60,
+                activeBgColor: 'linear-gradient(262.49deg, #05F4F1 -27.69%, #00FF87 112.29%)',
+                defaultBgColor: 'white',
+                border: {
+                    radius: 8,
+                    value: '',
+                },
+                font: {
+                    fontSize: 17,
+                    fontWeight: 900,
+                }
+            }}
+            onChange={(id) => console.log(id)}
+            defaultId={0}
+            >
+                {
+                    NavItemsList.map((navItem) => <ButtonGroupBtn id={navItem.id} key={navItem.id   }>{navItem.title}</ButtonGroupBtn>)
+                }
+            </ButtonGroup>
        </Container>
     )
 }
