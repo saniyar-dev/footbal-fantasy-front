@@ -1,7 +1,7 @@
 import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
 import Button from "../../../atomComponents/Button/Button";
-import ListItem from "../../../atomComponents/ListComponents/ListItem";
+import ListItem from "../../../atomComponents/List/ListItem";
 
 interface ListItemType {
     name: string;
@@ -140,7 +140,18 @@ const ListComponent: FC = (): ReactElement => {
             </ListHeader>
             {
                 ListItems.map(listItem => {
-                    return <ListItem width={240} height={40} name={listItem.name} position={'CEH'}
+                    return <ListItem  
+                    styles={{
+                        defaultWidth: 240,
+                        defaultHeight: 40,
+                        activeBgColor: 'white',
+                        border: {
+                            value: '1px solid #EFEFEF',
+                            radius: 0
+                        },
+                    }}
+                    name={listItem.name} 
+                    position={'CEH'}
                     staticNumbers={{
                         performance: listItem.performance,
                         price: listItem.price

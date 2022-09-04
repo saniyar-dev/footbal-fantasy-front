@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Styles } from "./types";
+import { Styles } from "../../types/index";
 
 const Button = styled.button<{
     styles: Styles;
