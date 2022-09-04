@@ -315,7 +315,7 @@ module.exports = function (webpackEnv) {
         "@atomComponents": path.resolve(__dirname, '../src/atomComponents/'),
         "@assets": path.resolve(__dirname, '../src/assets/'),
         "@pages": path.resolve(__dirname, '../src/pages/'),
-        "@state": path.resolve(__dirname, '../src/assets/'),
+        "@state": path.resolve(__dirname, '../src/state/'),
         "@types": path.resolve(__dirname, '../src/types/'),
         "@public": path.resolve(__dirname, '../public/'),
         // Support React Native Web
