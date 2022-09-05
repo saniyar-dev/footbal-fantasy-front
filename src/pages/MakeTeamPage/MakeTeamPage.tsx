@@ -28,6 +28,11 @@ const SpecialLogoColumn = styled(Column)`
     align-items: center;
 `
 
+const SpecialMainRow = styled(Row)`
+    margin-left: auto;
+    margin-right: auto;
+`
+
 const MakeTeamPage = () => {
     return (
         <Container styles={{
@@ -46,7 +51,7 @@ const MakeTeamPage = () => {
             }}>
                 <WeakSeason />
             </Row>
-            <Row styles={{}}>
+            <SpecialMainRow styles={{}}>
                 <Container styles={{
                     gridTemplateColumns: 'auto auto',
                     gap: '24px',
@@ -88,7 +93,7 @@ const MakeTeamPage = () => {
                     </Column>
                 </Container>
                 {/* <MiddleComponent /> */}
-            </Row>
+            </SpecialMainRow>
         </Container>
     )
 }
