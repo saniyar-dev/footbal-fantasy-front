@@ -73,8 +73,7 @@ const FieldTitle = styled.h1`
 `
 const InputBox = styled.input`
     box-sizing: border-box;
-
-    width: 273px;
+    width: 571px;
     height: 48px;
 
     background: #3D185B;
@@ -91,72 +90,54 @@ const SelectBox = styled.select`
     border: 1px solid #A057DB;
     border-radius: 8px;`
 
-const SignUpBtn = styled.button`
+const SignInBtn = styled.button`
     display: flex;
     justify-content:center;
     align-items: center;
-    width: 571px;
+    width: 273px;
     height: 48px;
 
+    box-sizing: border-box;
     background: linear-gradient(90deg, #CF31B9 0%, #9B3AF9 73.44%);
     border-radius: 8px;`
 
 
+const SignUpBtn = styled.button`
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 273px;
+    height: 48px;
+    border: 1px solid #A057DB;
+    background: #3D185B;
+    border-radius: 8px;`
 
-const SignUp: FC = () : ReactElement => {
+const SignIn: FC = () : ReactElement => {
     return(
         <Container>
             <HeaderContainer>
                 <LeftLine />
-                <HeaderTitle>فرم ثبت نام</HeaderTitle>
+                <HeaderTitle>ورودبه فانتزی</HeaderTitle>
                 <RightLine />
             </HeaderContainer>
                 <FormContainer>
-                    <RowContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                نام
-                            </FieldTitle>
-                            <InputBox />
-                        </FieldContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                نام خانوادگی
-                            </FieldTitle>
-                            <InputBox />
-                        </FieldContainer>
-                    </RowContainer>
-                    <RowContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                ایمیل
-                            </FieldTitle>
-                            <InputBox type="email" />
-                        </FieldContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                کشور
-                            </FieldTitle>
-                            <SelectBox />
-                        </FieldContainer>
-                    </RowContainer>
-                    <RowContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                نام کاربری
-                            </FieldTitle>
-                            <InputBox />
-                        </FieldContainer>
-                        <FieldContainer>
-                            <FieldTitle>
-                                رمز عبور
-                            </FieldTitle>
-                            <InputBox type= "password"/>
-                        </FieldContainer>
-                    </RowContainer>
+                    <FieldContainer>
+                        <FieldTitle>
+                            نام کاربری
+                        </FieldTitle>
+                        <InputBox />
+                        <FieldTitle>
+                            رمز عبور
+                        </FieldTitle>
+                        <InputBox type= "password"/>
+                    </FieldContainer>
                 </FormContainer>
-                <SignUpBtn><FieldTitle>ثبت نام</FieldTitle></SignUpBtn>
+                <RowContainer>
+                    <SignInBtn><FieldTitle>ورود</FieldTitle></SignInBtn>
+                    <SignUpBtn><FieldTitle>ثبت نام</FieldTitle></SignUpBtn>
+                </RowContainer>
         </Container>
     )
 }
-export default SignUp
+export default SignIn
