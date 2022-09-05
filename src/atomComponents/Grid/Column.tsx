@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import {CSSProperties} from "react";
 
-const Column = styled.div`
+type Style = Pick<CSSProperties, "gap" | "width" | "height">
+
+const Column = styled.div<{
+    styles: Style
+}>`
     display: flex;
     flex-direction: column;
+    width: ${props => props.styles.width};
+    height: ${props => props.styles.height};
+    gap: ${props => props.styles.gap};
 `
 export default Column
