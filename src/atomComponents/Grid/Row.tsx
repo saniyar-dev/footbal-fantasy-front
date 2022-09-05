@@ -10,6 +10,8 @@ const Row = styled.div<{
     width: ${props => props.styles.width};
     height: ${props => props.styles.height};
     gap: ${props => props.styles.gap};
+    margin-left: auto;
+    margin-left: auto;
 `
 export default Row
 

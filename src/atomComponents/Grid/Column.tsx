@@ -11,5 +11,7 @@ const Column = styled.div<{
     width: ${props => props.styles.width};
     height: ${props => props.styles.height};
     gap: ${props => props.styles.gap};
+    margin-top: auto;
+    margin-bottom: auto;
 `
 export default Column
