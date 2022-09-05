@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const Row = styled.div`
+const Container = styled.div`
     display: flex;
 `
 
-export default Row
+export default Container
