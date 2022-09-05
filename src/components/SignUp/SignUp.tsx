@@ -1,6 +1,14 @@
 import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+`
+
 const HeaderContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -8,12 +16,25 @@ const HeaderContainer = styled.div`
     gap: 24px;`
 
 const FormContainer = styled.div`
-    desplay: flex;
+    display: flex;
     justify-content: center;
-    align-items: center;`
+    align-items: center;
+    flex-direction: column;
+`
 
-
-
+const RowContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+`
+const FieldContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap:10px;
+`
 const RightLine = styled.hr`
     border: 3px solid #933087;
     width: 174px;`
@@ -22,7 +43,7 @@ const LeftLine = styled.hr`
     border: 3px solid #9B3AF9;
     width: 174px;`
 
-const Title = styled.h1`
+const HeaderTitle = styled.h1`
     width: 175px;
     height: 60px;
     font-family: 'Vazirmatn';
@@ -36,14 +57,94 @@ const Title = styled.h1`
     text-align: center;
     color: #FFFFFF;
 `
+const FieldTitle = styled.h1`
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+
+    color: #EDD8FF;
+`
+const InputBox = styled.input`
+    box-sizing: border-box;
+
+    width: 273px;
+    height: 48px;
+
+    background: #3D185B;
+    border: 1px solid #A057DB;
+    border-radius: 8px;`
+
+const SignUpBtn = styled.button`
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 571px;
+    height: 48px;
+
+    background: linear-gradient(90deg, #CF31B9 0%, #9B3AF9 73.44%);
+    border-radius: 8px;`
+
+
 
 const SignUp: FC = () : ReactElement => {
     return(
-        <HeaderContainer>
-            <LeftLine />
-            <Title>فرم ثبت نام</Title>
-            <RightLine />
-        </HeaderContainer>
+        <Container>
+            <HeaderContainer>
+                <LeftLine />
+                <HeaderTitle>فرم ثبت نام</HeaderTitle>
+                <RightLine />
+            </HeaderContainer>
+                <FormContainer>
+                    <RowContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                نام
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                نام خانوادگی
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                    </RowContainer>
+                    <RowContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                ایمیل
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                کشور
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                    </RowContainer>
+                    <RowContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                نام کاربری
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                        <FieldContainer>
+                            <FieldTitle>
+                                رمز عبور
+                            </FieldTitle>
+                            <InputBox />
+                        </FieldContainer>
+                    </RowContainer>
+                </FormContainer>
+                <SignUpBtn><FieldTitle>ثبت نام</FieldTitle></SignUpBtn>
+        </Container>
     )
 }
 export default SignUp

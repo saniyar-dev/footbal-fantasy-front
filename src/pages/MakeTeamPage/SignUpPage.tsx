@@ -7,18 +7,20 @@ const Container = styled.div`
     display: flex;
     justify-content: start;
     flex-direction: row;
-    align-items: stretch; 
+    align-items: start; 
     background: #3D185B;
 `
  const PlayersImg = styled.img.attrs(props => {
     return{
         src: Players
     }
- })``
+ })`
+`
 
  const FormContainer = styled.div`
-    // background: #3D185B;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;`
     
 const SignUpPage = () => {
