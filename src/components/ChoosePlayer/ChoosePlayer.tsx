@@ -38,13 +38,13 @@ const Header = styled.h2`
 
 const ChoosePlayerComponent: FC = (): ReactElement => {
     return (
-        <Container>
-            <Header>انتخاب بازیکن</Header>
-            <SearchComponent />
-            <FilterComponent />
-            <PlayerCount />
-            <ListComponent />
-        </Container>
+            <Container>
+                <Header>انتخاب بازیکن</Header>
+                <SearchComponent />
+                <FilterComponent />
+                <PlayerCount />
+                <ListComponent />
+            </Container>
     )
 }
 

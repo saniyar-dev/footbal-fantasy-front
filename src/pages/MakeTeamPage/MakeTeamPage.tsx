@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChoosePlayerComponent from '../../components/ChoosePlayer/ChoosePlayer'
 import Header from '../../components/Header/Header'
 import CreateTeamNavbar from '../../components/Navbar/Navbar'
 import WeakSeason from '../../components/WeakSeason/WeakSeason'
-
+import MiddleComponent from '../../components/MiddleContainer/MiddleContainer'
 const Container = styled.div`
     /* display: flex;
     justify-content: center;
@@ -18,7 +17,7 @@ const MakeTeamPage = () => {
             <Header />
             <CreateTeamNavbar />
             <WeakSeason />
-            <ChoosePlayerComponent />
+            <MiddleComponent />
         </Container>
     )
 }
