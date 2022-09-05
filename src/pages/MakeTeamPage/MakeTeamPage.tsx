@@ -4,18 +4,23 @@ import Header from '../../components/Header/Header'
 import CreateTeamNavbar from '../../components/Navbar/Navbar'
 import WeakSeason from '../../components/WeakSeason/WeakSeason'
 import MiddleComponent from '../../components/MiddleContainer/MiddleContainer'
-const Container = styled.div`
-    /* display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh; */
-`
+import Container from '@atomComponents/Grid/Container'
+import Row from '@atomComponents/Grid/Container'
 
 const MakeTeamPage = () => {
     return (
-        <Container>
-            <Header />
-            <CreateTeamNavbar />
+        <Container styles={{
+            width: '100%',
+            height: '100vh',
+            gridTemplateColumns: 'auto',
+            gridTemplateRows: 'auto auto auto'
+        }}>
+            <Row styles={{
+
+            }}>
+                <Header />
+                <CreateTeamNavbar />
+            </Row>
             <WeakSeason />
             <MiddleComponent />
         </Container>
