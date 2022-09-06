@@ -25,7 +25,7 @@ const PlayersImg = styled.img.attrs(props => {
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
 `
     
 const SignUpPage = () => {
