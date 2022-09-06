@@ -3,6 +3,7 @@ import styled, { CSSProperties } from "styled-components";
 import Column from '../Grid/Column';
 import Container from '../Grid/Container';
 import Row from '../Grid/Row';
+import Button from '../Button/Button';
 
 const FormContext = createContext<{
     onSubmitFn: () => void,
@@ -92,4 +93,51 @@ export const FormInput: FC<{
     )
 }
 
+const PrimaryButton = styled.button`
+background: linear-gradient(90deg, #CF31B9 0%, #9B3AF9 73.44%);
+border-radius: 8px;
 
+font-family: 'Vazirmatn';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+
+color: #FFFFFF;
+`
+
+export const FormPrimaryButton: FC<{
+    children: ReactNode,
+}> = ({children}): ReactElement => {
+    return <PrimaryButton>{children}</PrimaryButton>
+}
+
+const SecondaryButton = styled.button`
+box-sizing: border-box;
+
+background: #3D185B;
+border-radius: 8px; 
+
+font-family: 'Vazirmatn';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+
+color: #FFFFFF;
+
+`
+
+export const FormSecondaryButton: FC<{
+    children: ReactNode,
+}> = ({children}): ReactElement => {
+    return <SecondaryButton>{children}</SecondaryButton>
+}
