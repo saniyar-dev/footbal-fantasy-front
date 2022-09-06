@@ -12,3 +12,5 @@ export interface Styles {
     fontWeight: number;
   };
 }
+
+export type Role = "GK" | "DEF" | "MID" | "ATT";
