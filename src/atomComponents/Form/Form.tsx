@@ -3,7 +3,6 @@ import styled, { CSSProperties } from "styled-components";
 import Column from '../Grid/Column';
 import Container from '../Grid/Container';
 import Row from '../Grid/Row';
-import Button from '../Button/Button';
 
 const FormContext = createContext<{
     onSubmitFn: () => void,
@@ -15,9 +14,6 @@ const FormContext = createContext<{
     onSubmitFn: () => {throw new Error("form doesn't have onSubmitFn function")}
 })
 
-const StyledForm = styled(Container)`
-
-`
 export const Form: FC<{
     children: ReactNode,
     styles?: Pick<CSSProperties, "gap" | "gridTemplateColumns" | "gridTemplateRows" | "width" | "height">,
@@ -28,7 +24,7 @@ export const Form: FC<{
     return <FormContext.Provider value={{
         onSubmitFn: () => console.log(),
         setValues: setValues,
-        values: {},
+        values: values,
     }}>
         <Container styles={styles}>{children}</Container>
     </FormContext.Provider>
@@ -81,7 +77,7 @@ export const FormInput: FC<{
     label: string,
     placeHolder: string,
 }> = ({label, placeHolder, id}): ReactElement => {
-    const {values, setValues, onSubmitFn} = useContext(FormContext)
+    const {values, setValues} = useContext(FormContext)
     return (
         <Column styles={{justifyContent: 'center', gap: '16px'}}>
             <StyledLabel>{label}</StyledLabel>
