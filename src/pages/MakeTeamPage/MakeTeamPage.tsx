@@ -11,6 +11,7 @@ import Wallet from '@src/components/Wallet/Wallet'
 import RahnemaLogo from '@src/components/RahnemaLogo/RahnemaLogo'
 import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
+import ListView from '@src/components/ListView/ListView'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -30,6 +31,15 @@ const SpecialLogoColumn = styled(Column)`
 const SpecialMainRow = styled(Row)`
     margin-left: auto;
     margin-right: auto;
+`
+
+const SpecialMainViewContainer = styled(Container)`
+width: 869px;
+height: 768px;
+
+border-radius: 16px;
+background-color: white;
+filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.15));
 `
 
 const MakeTeamPage = () => {
@@ -89,9 +99,14 @@ const MakeTeamPage = () => {
                             </SpecialLogoColumn>
                             <RemainingPlayer />
                         </Row>
+                        <SpecialMainViewContainer styles={{
+                            gridTemplateColumns: 'auto',
+                            gridTemplateRows: 'auto'
+                        }}>
+                            <ListView />
+                        </SpecialMainViewContainer>
                     </Column>
                 </Container>
-                {/* <MiddleComponent /> */}
             </SpecialMainRow>
         </Container>
     )
