@@ -42,6 +42,7 @@ align-items: center;
 justify-content: end;
 
 background: #3D195B;
+border-radius: 16px 0px 0px 16px;
 `
 
 const ListView: FC = (): ReactElement => {
