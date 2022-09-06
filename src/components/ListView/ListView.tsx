@@ -1,11 +1,12 @@
 import React, {FC, ReactElement} from "react";
-import PlayerPreview from "./PlayerPreview/PlayerPreview";
 import myPlayers from "@state/players"
+import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { Role } from "@src/types";
 import { Table, TableHeader, TableRow, TableTitle } from "@src/atomComponents/Table/Table";
 import Container from "@src/atomComponents/Grid/Container";
 import Column from "@src/atomComponents/Grid/Column";
+import LogoUrl from "@assets/PremierLogoWhite.svg"
 
 const roleHeaderList: Array<{type: Role, title: string}> = [
     {
@@ -26,11 +27,30 @@ const roleHeaderList: Array<{type: Role, title: string}> = [
     },
 ]
 
+const PremireLogo = styled.img.attrs(props => {return {src: LogoUrl}} )`
+    width: 149px;
+    height: 63px;
+`
+
+const SpecialTableColumn = styled(Column)`
+justify-content: center;
+align-items: center;
+`
+
+const SpecialPreviewColumn = styled(Column)`
+align-items: center;
+justify-content: end;
+
+background: #3D195B;
+`
 
 const ListView: FC = (): ReactElement => {
     const [players, ] = useRecoilState(myPlayers)
     return (
-        <Container styles={{}}>
+        <Container styles={{
+            gridTemplateColumns: 'auto 274px',
+        }}>
+            <SpecialTableColumn styles={{}}>
             <Table styles={{
                 gap: '16px',
                 width: '541px',
@@ -68,6 +88,15 @@ const ListView: FC = (): ReactElement => {
                     })
                 }
             </Table>
+            </SpecialTableColumn>
+            
+            <SpecialPreviewColumn styles={{
+                gap: '24px'
+            }}>
+                <img src={require('@assets/Images/Valencia_college-2-min 1.png')} alt="player preview" width={"202px"}/>
+                <PremireLogo />
+                <img src={require('@assets/PremierLeagueRebrands.png')} alt="premier league rebrands"/>
+            </SpecialPreviewColumn>
         </Container>
     )
 }
