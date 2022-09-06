@@ -36,7 +36,7 @@ const SignUpPage = () => {
             height: '100vh',
         }}>
             <FormContainer>
-                <SignUpCodeConfirmation></SignUpCodeConfirmation>
+                <SignIn></SignIn>
             </FormContainer>
             <PlayersImg />
         </SpecialContainer>
