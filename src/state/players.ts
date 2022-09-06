@@ -1,3 +1,4 @@
+import { Role } from "@src/types";
 import { atom } from "recoil";
 
 interface PLAYER {
@@ -6,7 +7,7 @@ interface PLAYER {
   score: number;
   price: number;
   club: string;
-  role: "GK" | "DEF" | "MID" | "ATT";
+  role: Role;
 }
 
 const myPlayers = atom<Array<PLAYER>>({
