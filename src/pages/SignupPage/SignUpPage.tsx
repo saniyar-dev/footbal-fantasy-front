@@ -37,7 +37,6 @@ const SignUpPage = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-<<<<<<< HEAD
                 {
                     formStatus === "login" ?
                      <LoginFormComponent setStatus={setFormStatus}/> :
@@ -45,31 +44,6 @@ const SignUpPage = () => {
                     <SignupFormComponent setStatus={setFormStatus} /> : 
                     <SignupConfirmFormComponent />
                 }
-=======
-                <Form onSubmitFn={(data) => {console.log(data)}} styles={{
-                    gridTemplateColumns: 'auto',
-                    gridTemplateRows: 'auto auto auto',
-                    gap: '56px',
-                    width: '571px',
-                    height: 'fit-content',
-                }}>
-                    <FormHeader>
-                        ورود به فانتزی
-                    </FormHeader>
-                    <Column styles={{
-                        gap: '16px'
-                    }}>
-                        <FormInput id="username" label="نام کاربری" placeHolder="" />
-                        <FormInput id="password" label="رمز عبور" placeHolder="" />
-                    </Column>
-                    <Row styles={{
-                        gap: '24px'
-                    }}>
-                        <FormPrimaryButton>ورود</FormPrimaryButton>
-                        <FormSecondaryButton onClickFn={() => {console.log('go to registery')}}>ثبت نام</FormSecondaryButton>
-                    </Row>
-                </Form>
->>>>>>> 7f1fbc0 (fix: style fixed)
             </FormColumn>
             <Column styles={{
             }}>
