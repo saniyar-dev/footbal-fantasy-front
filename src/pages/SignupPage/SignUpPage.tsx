@@ -5,6 +5,7 @@ import Row from "@src/atomComponents/Grid/Row";
 import Column from "@src/atomComponents/Grid/Column";
 
 import LoginFormComponent from "@src/components/LoginForm/LoginForm";
+import SignupFormComponent from "@src/components/SignUpForm/SignUpForm";
 
 const BackgroundContainer = styled(Row)`
     background: #3D185B;
@@ -32,7 +33,9 @@ const SignUpPage = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <LoginFormComponent />
+                {
+                    false ? <LoginFormComponent /> : <SignupFormComponent />
+                }
             </FormColumn>
             <Column styles={{
             }}>
