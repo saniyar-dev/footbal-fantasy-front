@@ -11,8 +11,6 @@ import Column from "@src/atomComponents/Grid/Column";
 
 const SpecialContainer = styled(Container)`
     background: #3D185B;
-    display: flex;
-    justify-content: center;
     align-items: center;
 `
 const PlayersImg = styled.img.attrs(props => {

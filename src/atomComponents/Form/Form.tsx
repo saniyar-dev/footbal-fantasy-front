@@ -30,11 +30,23 @@ export const Form: FC<{
     </FormContext.Provider>
 }
 
-const RightBar = styled.span`
+const RightBar = styled.div`
 border: 3px solid #9B3AF9;
+flex-grow: 1;
 `
-const LeftBar = styled.span`
+const LeftBar = styled.div`
 border: 3px solid #933087;
+flex-grow: 1;
+`
+
+const HeaderTitle = styled.div`
+font-family: 'Vazirmatn';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+text-align: center;
+
+color: #FFFFFF;   
 `
 
 export const FormHeader: FC<{
@@ -42,13 +54,14 @@ export const FormHeader: FC<{
 }> = ({children}): ReactElement => {
     return (
         <Row styles={{
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
+            gap: '16px',
         }}>
             <RightBar />
-            <span>
+            <HeaderTitle>
                 {children}
-            </span>
+            </HeaderTitle>
             <LeftBar />
         </Row>
     )
@@ -56,6 +69,8 @@ export const FormHeader: FC<{
 
 const StyledInput = styled.input`
     box-sizing: border-box;
+
+    height: 48px;
 
     background: #3D185B;
     border: 1px solid #A057DB;
@@ -92,6 +107,7 @@ export const FormInput: FC<{
 const PrimaryButton = styled.button`
 background: linear-gradient(90deg, #CF31B9 0%, #9B3AF9 73.44%);
 border-radius: 8px;
+height: 48px;
 
 font-family: 'Vazirmatn';
 font-style: normal;
@@ -101,6 +117,7 @@ font-size: 20px;
 display: flex;
 align-items: center;
 justify-content: center;
+flex-grow: 1;
 text-align: center;
 
 color: #FFFFFF;
@@ -114,9 +131,12 @@ export const FormPrimaryButton: FC<{
 
 const SecondaryButton = styled.button`
 box-sizing: border-box;
+height: 48px;
 
-background: #3D185B;
-border-radius: 8px; 
+background: linear-gradient(#3D185B, #3D185B) padding-box,
+linear-gradient(90deg, #C847AF 1.65%, #9B3AF9 43.98%) border-box;
+border-radius: 8px;
+border: 2px solid transparent;
 
 font-family: 'Vazirmatn';
 font-style: normal;
@@ -126,10 +146,10 @@ font-size: 20px;
 display: flex;
 align-items: center;
 justify-content: center;
+flex-grow: 1;
 text-align: center;
 
 color: #FFFFFF;
-
 `
 
 export const FormSecondaryButton: FC<{
