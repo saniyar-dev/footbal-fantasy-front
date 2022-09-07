@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/Header/Header'
 import CreateTeamNavbar from '../../components/Navbar/Navbar'
@@ -12,6 +12,7 @@ import RahnemaLogo from '@src/components/RahnemaLogo/RahnemaLogo'
 import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
+import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -42,7 +43,10 @@ background-color: white;
 filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.15));
 `
 
+type MainViewType = "SoccerFieldView" | "ListView"
+
 const MakeTeamPage = () => {
+    const [mainView, setMainView] = useState<MainViewType>("SoccerFieldView")
     return (
         <Container styles={{
             width: '100%',
@@ -92,8 +96,12 @@ const MakeTeamPage = () => {
                                         },
                                     }}
                                     >
-                                        <ButtonGroupBtn id={0}>شماتیک ترکیب</ButtonGroupBtn>
-                                        <ButtonGroupBtn id={1}>مشاهده لیست</ButtonGroupBtn>
+                                        <span onClick={() => setMainView("SoccerFieldView")}>
+                                            <ButtonGroupBtn id={0}>شماتیک ترکیب</ButtonGroupBtn>
+                                        </span>
+                                        <span onClick={() => setMainView("ListView")}>
+                                            <ButtonGroupBtn id={1}>مشاهده لیست</ButtonGroupBtn>
+                                        </span>
                                     </ButtonGroup>
                                 </SpecialButtonRow>
                             </SpecialLogoColumn>
@@ -103,7 +111,9 @@ const MakeTeamPage = () => {
                             gridTemplateColumns: 'auto',
                             gridTemplateRows: 'auto'
                         }}>
-                            <ListView />
+                            {
+                                mainView === "SoccerFieldView" ? <SoccerFieldView /> : <ListView />
+                            }
                         </SpecialMainViewContainer>
                     </Column>
                 </Container>
