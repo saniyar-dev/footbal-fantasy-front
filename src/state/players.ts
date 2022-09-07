@@ -1,14 +1,5 @@
-import { Role } from "@src/types";
+import { Role, PLAYER } from "@src/types";
 import { atom } from "recoil";
-
-interface PLAYER {
-  id: number;
-  name: string;
-  score: number;
-  price: number;
-  club: string;
-  role: Role;
-}
 
 const myPlayers = atom<Array<PLAYER>>({
   key: "myPlayers",
