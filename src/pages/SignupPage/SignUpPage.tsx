@@ -4,7 +4,7 @@ import ImageUrl from "@assets/Images/LoginPlayerImage.png"
 import Row from "@src/atomComponents/Grid/Row";
 import Column from "@src/atomComponents/Grid/Column";
 
-import LoginFormComponent from "@src/components/Login/Login";
+import LoginFormComponent from "@src/components/LoginForm/LoginForm";
 
 const BackgroundContainer = styled(Row)`
     background: #3D185B;
