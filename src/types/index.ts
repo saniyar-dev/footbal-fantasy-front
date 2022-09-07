@@ -14,3 +14,12 @@ export interface Styles {
 }
 
 export type Role = "GK" | "DEF" | "MID" | "ATT";
+
+export interface PLAYER {
+  id: number;
+  name: string;
+  score: number;
+  price: number;
+  club: string;
+  role: Role;
+}
