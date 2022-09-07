@@ -5,24 +5,24 @@ import Container from '../Grid/Container';
 import Row from '../Grid/Row';
 
 const FormContext = createContext<{
-    onSubmitFn: () => void,
+    onSubmitFn: (data: Object) => void,
     setValues: Function,
     values: Object
 }>({
     values: {},
     setValues: () => {throw new Error("form doesn't have onSubmitFn function")},
-    onSubmitFn: () => {throw new Error("form doesn't have onSubmitFn function")}
+    onSubmitFn: (data) => {throw new Error("form doesn't have onSubmitFn function")}
 })
 
 export const Form: FC<{
     children: ReactNode,
     styles?: Pick<CSSProperties, "gap" | "gridTemplateColumns" | "gridTemplateRows" | "width" | "height">,
-    onSubmitFn: () => void,
-}> = ({children, styles}): ReactElement => {
+    onSubmitFn: (data: Object) => void,
+}> = ({children, styles, onSubmitFn}): ReactElement => {
     const [values, setValues] = useState({})
 
     return <FormContext.Provider value={{
-        onSubmitFn: () => console.log(),
+        onSubmitFn: onSubmitFn,
         setValues: setValues,
         values: values,
     }}>
@@ -69,12 +69,14 @@ export const FormHeader: FC<{
 
 const StyledInput = styled.input`
     box-sizing: border-box;
-
+    padding-right: 16px;
     height: 48px;
 
     background: #3D185B;
     border: 1px solid #A057DB;
     border-radius: 8px;
+
+    color: #EDD8FF;
 `
 
 const StyledLabel = styled.div`
@@ -98,7 +100,7 @@ export const FormInput: FC<{
             <StyledLabel>{label}</StyledLabel>
             <StyledInput placeholder={placeHolder} onChange={(e) => {
                 e.preventDefault()
-                setValues({...values, id: e.target.value})
+                setValues({...values, [id]: e.target.value})
             }} />
         </Column>
     )
@@ -126,7 +128,10 @@ color: #FFFFFF;
 export const FormPrimaryButton: FC<{
     children: ReactNode,
 }> = ({children}): ReactElement => {
-    return <PrimaryButton>{children}</PrimaryButton>
+    const {values, onSubmitFn} = useContext(FormContext)
+    return <PrimaryButton onClick={() => {
+        onSubmitFn(values)
+    }}>{children}</PrimaryButton>
 }
 
 const SecondaryButton = styled.button`
@@ -154,6 +159,7 @@ color: #FFFFFF;
 
 export const FormSecondaryButton: FC<{
     children: ReactNode,
-}> = ({children}): ReactElement => {
-    return <SecondaryButton>{children}</SecondaryButton>
+    onClickFn: () => void,
+}> = ({children, onClickFn}): ReactElement => {
+    return <SecondaryButton onClick={onClickFn}>{children}</SecondaryButton>
 }
