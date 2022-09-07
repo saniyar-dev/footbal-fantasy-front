@@ -37,6 +37,7 @@ const SpecialMainRow = styled(Row)`
 const SpecialMainViewContainer = styled(Container)`
 width: 869px;
 height: 768px;
+margin-bottom: 104px;
 
 border-radius: 16px;
 background-color: white;
