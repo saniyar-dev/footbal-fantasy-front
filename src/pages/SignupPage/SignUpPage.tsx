@@ -1,58 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Players from "../../assets/Icons/EPL Players.svg"
-// import SignUp from "@src/components/SignUp/SignUp";
-import Container from "@src/atomComponents/Grid/Container";
-// import SignIn from "@src/components/SignIn/SignIn";
-// import SignUpCodeConfirmation from "@src/components/SignUpCodeConfirmation/SignUpCodeConfirmation";
-import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
+import ImageUrl from "@assets/Images/LoginPlayerImage.png"
 import Row from "@src/atomComponents/Grid/Row";
 import Column from "@src/atomComponents/Grid/Column";
 
-const SpecialContainer = styled(Container)`
+import LoginFormComponent from "@src/components/LoginForm/LoginForm";
+import SignupFormComponent from "@src/components/SignUpForm/SignUpForm";
+import SignupConfirmFormComponent from "@src/components/SignupConfirmForm/SignupConfirmForm";
+
+const BackgroundContainer = styled(Row)`
     background: #3D185B;
-    align-items: center;
 `
+
+const FormColumn = styled(Column)`
+flex-grow: 1;
+`
+
 const PlayersImg = styled.img.attrs(props => {
     return{
-        src: Players
+        src: ImageUrl
     }
  })`
- height: 100vh;
+ height: 100vh !important;
  width: auto;
 `
 
+type FormStatusType = "login" | "signup" | "confirm"
+
 const SignUpPage = () => {
+    const [formStatus, setFormStatus] = useState<FormStatusType>("login")
     return(
-        <SpecialContainer styles={{
-            gridTemplateColumns: 'auto 574px',
-            gridTemplateRows: 'auto',
+        <BackgroundContainer styles={{
             height: '100vh',
         }}>
-            <Form onSubmitFn={(data) => {console.log(data)}} styles={{
-                gridTemplateColumns: 'auto',
-                gridTemplateRows: 'auto auto auto',
-                gap: '56px',
-                width: '571px',
+            <FormColumn styles={{
+                justifyContent: 'center',
+                alignItems: 'center',
             }}>
-                <FormHeader>
-                    ورود به فانتزی
-                </FormHeader>
-                <Column styles={{
-                    gap: '16px'
-                }}>
-                    <FormInput id="username" label="نام کاربری" placeHolder="" />
-                    <FormInput id="password" label="رمز عبور" placeHolder="" />
-                </Column>
-                <Row styles={{
-                    gap: '24px'
-                }}>
-                    <FormPrimaryButton>ورود</FormPrimaryButton>
-                    <FormSecondaryButton onClickFn={() => {console.log('go to registery')}}>ثبت نام</FormSecondaryButton>
-                </Row>
-            </Form>
-            <PlayersImg />
-        </SpecialContainer>
+                {
+                    formStatus === "login" ?
+                     <LoginFormComponent setStatus={setFormStatus}/> :
+                    formStatus === "signup" ? 
+                    <SignupFormComponent setStatus={setFormStatus} /> : 
+                    <SignupConfirmFormComponent />
+                }
+            </FormColumn>
+            <Column styles={{
+            }}>
+                <PlayersImg />
+            </Column>
+        </BackgroundContainer>
     )
 }
 
