@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ImageUrl from "@assets/Images/LoginPlayerImage.png"
 import Row from "@src/atomComponents/Grid/Row";
@@ -24,7 +24,10 @@ const PlayersImg = styled.img.attrs(props => {
  width: auto;
 `
 
+type FormStatusType = "login" | "signup" | "confirm"
+
 const SignUpPage = () => {
+    const [formStatus, setFormStatus] = useState<FormStatusType>("login")
     return(
         <BackgroundContainer styles={{
             height: '100vh',
@@ -34,7 +37,7 @@ const SignUpPage = () => {
                 alignItems: 'center',
             }}>
                 {
-                    false ? <LoginFormComponent /> : <SignupFormComponent />
+                    formStatus === "login" ? <LoginFormComponent setStatus={setFormStatus}/> : <SignupFormComponent />
                 }
             </FormColumn>
             <Column styles={{

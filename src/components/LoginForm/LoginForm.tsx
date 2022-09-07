@@ -1,9 +1,13 @@
-import React, {FC, ReactElement} from "react";
+import React, {Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
 import Column from "@src/atomComponents/Grid/Column";
 import Row from "@src/atomComponents/Grid/Row";
 
-const LoginFormComponent: FC = () : ReactElement => {
+type FormStatusType = "login" | "signup" | "confirm"
+
+const LoginFormComponent: FC<{
+    setStatus: Dispatch<SetStateAction<FormStatusType>>,
+}> = ({setStatus}) : ReactElement => {
     return(
     <Form onSubmitFn={(data) => {console.log(data)}} styles={{
         gridTemplateColumns: 'auto',
@@ -25,7 +29,7 @@ const LoginFormComponent: FC = () : ReactElement => {
             gap: '24px'
         }}>
             <FormPrimaryButton>ورود</FormPrimaryButton>
-            <FormSecondaryButton onClickFn={() => {console.log('go to registery')}}>ثبت نام</FormSecondaryButton>
+            <FormSecondaryButton onClickFn={() => {setStatus("signup")}}>ثبت نام</FormSecondaryButton>
         </Row>
     </Form>
     )
