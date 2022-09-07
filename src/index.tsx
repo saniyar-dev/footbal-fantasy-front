@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from 'recoil'
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import SignUpPage from './pages/MakeTeamPage/SignUpPage';
+import SignUpPage from './pages/SignupPage/SignUpPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
