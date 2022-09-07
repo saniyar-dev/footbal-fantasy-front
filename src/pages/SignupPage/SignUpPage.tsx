@@ -11,8 +11,6 @@ import Column from "@src/atomComponents/Grid/Column";
 
 const SpecialContainer = styled(Container)`
     background: #3D185B;
-    display: flex;
-    justify-content: center;
     align-items: center;
 `
 const PlayersImg = styled.img.attrs(props => {
@@ -31,7 +29,7 @@ const SignUpPage = () => {
             gridTemplateRows: 'auto',
             height: '100vh',
         }}>
-            <Form onSubmitFn={() => {console.log('server call for login')}} styles={{
+            <Form onSubmitFn={(data) => {console.log(data)}} styles={{
                 gridTemplateColumns: 'auto',
                 gridTemplateRows: 'auto auto auto',
                 gap: '56px',
@@ -50,7 +48,7 @@ const SignUpPage = () => {
                     gap: '24px'
                 }}>
                     <FormPrimaryButton>ورود</FormPrimaryButton>
-                    <FormSecondaryButton>ثبت نام</FormSecondaryButton>
+                    <FormSecondaryButton onClickFn={() => {console.log('go to registery')}}>ثبت نام</FormSecondaryButton>
                 </Row>
             </Form>
             <PlayersImg />
