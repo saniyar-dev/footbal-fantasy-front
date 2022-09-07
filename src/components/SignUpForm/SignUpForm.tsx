@@ -30,7 +30,7 @@ const SignupFormComponent: FC<{
                 <FormInput id="name" label="نام" placeHolder="مثلا محمود" />
                 <FormInput id="lastname" label="نام خانوادگی" placeHolder="مثلا محمودی" />
                 <FormInput id="email" label="ایمیل" placeHolder="mahmood@gmail.com" />
-                <FormInput id="country" label="کشور" placeHolder="ایران" />
+                <FormInput id="country" label="کشور" placeHolder="قم" />
                 <FormInput id="username" label="نام کاربری" placeHolder="mahmoodMahmoodi" />
                 <FormInput id="password" label="رمز عبور" placeHolder="" />
             </Container>
