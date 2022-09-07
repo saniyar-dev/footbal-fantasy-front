@@ -1,11 +1,17 @@
-import React, {FC, ReactElement} from "react";
+import React, {Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { Form, FormHeader, FormInput, FormPrimaryButton } from "@src/atomComponents/Form/Form";
 import Container from "@src/atomComponents/Grid/Container";
 
+type FormStatusType = "login" | "signup" | "confirm"
 
-const SignupFormComponent: FC = () : ReactElement => {
+const SignupFormComponent: FC<{
+    setStatus: Dispatch<SetStateAction<FormStatusType>>,
+}> = ({setStatus}) : ReactElement => {
     return(
-        <Form onSubmitFn={(data) => console.log(data)} styles={{
+        <Form onSubmitFn={(data) => {
+            console.log(data)
+            setStatus("confirm")
+        }} styles={{
             gridTemplateColumns: 'auto',
             gridTemplateRows: 'auto auto auto',
             gap: '48px',
@@ -28,7 +34,7 @@ const SignupFormComponent: FC = () : ReactElement => {
                 <FormInput id="username" label="نام کاربری" placeHolder="mahmoodMahmoodi" />
                 <FormInput id="password" label="رمز عبور" placeHolder="" />
             </Container>
-            <FormPrimaryButton>ثبت نام</FormPrimaryButton>
+            <FormPrimaryButton >ثبت نام</FormPrimaryButton>
         </Form>
     )
 }

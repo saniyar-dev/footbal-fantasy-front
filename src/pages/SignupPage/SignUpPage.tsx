@@ -6,6 +6,7 @@ import Column from "@src/atomComponents/Grid/Column";
 
 import LoginFormComponent from "@src/components/LoginForm/LoginForm";
 import SignupFormComponent from "@src/components/SignUpForm/SignUpForm";
+import SignupConfirmFormComponent from "@src/components/SignupConfirmForm/SignupConfirmForm";
 
 const BackgroundContainer = styled(Row)`
     background: #3D185B;
@@ -37,7 +38,11 @@ const SignUpPage = () => {
                 alignItems: 'center',
             }}>
                 {
-                    formStatus === "login" ? <LoginFormComponent setStatus={setFormStatus}/> : <SignupFormComponent />
+                    formStatus === "login" ?
+                     <LoginFormComponent setStatus={setFormStatus}/> :
+                    formStatus === "signup" ? 
+                    <SignupFormComponent setStatus={setFormStatus} /> : 
+                    <SignupConfirmFormComponent />
                 }
             </FormColumn>
             <Column styles={{
