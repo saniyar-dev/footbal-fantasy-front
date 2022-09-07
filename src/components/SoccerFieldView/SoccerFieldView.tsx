@@ -38,7 +38,7 @@ const SoccerFieldView: FC = (): ReactElement => {
                         }}>
                             {
                                 players.filter(player => player.role === role).map(player => {
-                                    return <Player status="Active" />
+                                    return <Player status="Active" playerInfo={player} />
                                 })
                             }
                         </Row>
