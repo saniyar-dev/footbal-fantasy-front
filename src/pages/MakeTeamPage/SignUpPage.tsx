@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Players from "../../assets/Icons/EPL Players.svg"
-import SignUp from "@src/components/SignUp/SignUp";
+// import SignUp from "@src/components/SignUp/SignUp";
 import Container from "@src/atomComponents/Grid/Container";
-import SignIn from "@src/components/SignIn/SignIn";
-import SignUpCodeConfirmation from "@src/components/SignUpCodeConfirmation/SignUpCodeConfirmation";
+// import SignIn from "@src/components/SignIn/SignIn";
+// import SignUpCodeConfirmation from "@src/components/SignUpCodeConfirmation/SignUpCodeConfirmation";
+import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
+import Row from "@src/atomComponents/Grid/Row";
+import Column from "@src/atomComponents/Grid/Column";
 
 const SpecialContainer = styled(Container)`
     background: #3D185B;
@@ -21,13 +24,6 @@ const PlayersImg = styled.img.attrs(props => {
  width: auto;
 `
 
- const FormContainer = styled.div`
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-`
-    
 const SignUpPage = () => {
     return(
         <SpecialContainer styles={{
@@ -35,9 +31,28 @@ const SignUpPage = () => {
             gridTemplateRows: 'auto',
             height: '100vh',
         }}>
-            <FormContainer>
-                <SignIn></SignIn>
-            </FormContainer>
+            <Form onSubmitFn={() => {console.log('server call for login')}} styles={{
+                gridTemplateColumns: 'auto',
+                gridTemplateRows: 'auto auto auto',
+                gap: '56px',
+                width: '571px',
+            }}>
+                <FormHeader>
+                    ورود به فانتزی
+                </FormHeader>
+                <Column styles={{
+                    gap: '16px'
+                }}>
+                    <FormInput id="username" label="نام کاربری" placeHolder="" />
+                    <FormInput id="password" label="رمز عبور" placeHolder="" />
+                </Column>
+                <Row styles={{
+                    gap: '24px'
+                }}>
+                    <FormPrimaryButton>ورود</FormPrimaryButton>
+                    <FormSecondaryButton>ثبت نام</FormSecondaryButton>
+                </Row>
+            </Form>
             <PlayersImg />
         </SpecialContainer>
     )
