@@ -5,6 +5,8 @@ import Column from "../Grid/Column";
 export const Modal = styled(Column)`
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 border-radius: 16px;
+background: #FFFFFF;
+padding-bottom: 82px;
 `
 
 export const ModalHeader = styled(Row)`
@@ -21,10 +23,13 @@ color: #00FF87;
 
 justify-content: center;
 align-items: center;
+
+width: 100%;
+height: 60px;
 `
 
 export const ModalDescription = styled(Row)`
-font-family: 'Roboto';
+font-family: 'Vazirmatn';
 font-style: normal;
 font-weight: 700;
 font-size: 20px;
@@ -34,14 +39,18 @@ color: #3D195B;
 `
 
 export const ModalPrimaryButton = styled.button`
-font-family: 'Roboto';
+font-family: 'Vazirmatn';
 font-style: normal;
 font-weight: 700;
 font-size: 16px;
 
 display: flex;
 align-items: center;
+justify-content: center;
 text-align: center;
+flex-grow: 1;
+
+height: 40px;
 
 color: #FFFFFF;
 
@@ -50,14 +59,18 @@ border-radius: 4px;
 `
 
 export const ModalSecondaryButton = styled.button`
-font-family: 'Roboto';
+font-family: 'Vazirmatn';
 font-style: normal;
 font-weight: 700;
 font-size: 16px;
 
 display: flex;
 align-items: center;
+justify-content: center;
 text-align: center;
+flex-grow: 1;
+
+height: 40px;
 
 color: #3D195B;
 

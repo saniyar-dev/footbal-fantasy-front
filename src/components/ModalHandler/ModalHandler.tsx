@@ -19,13 +19,18 @@ const ModalHandler: FC = (): ReactElement => {
     const [modalList, ] = useRecoilState(myModals)
     console.log(modalList)
     return (
-        <CustomContainer>
-            {
-                modalList.map(modal => {
-                    return <DeletePlayerModal playerInfo={modal.playerInfo} />
-                })
-            }
-        </CustomContainer>
+        <>
+        {
+            modalList.length ? 
+            <CustomContainer>
+                {
+                    modalList.map(modal => {
+                        return <DeletePlayerModal playerInfo={modal.playerInfo} />
+                    })
+                }
+            </CustomContainer> : undefined
+        }
+        </>
     )
 }
 

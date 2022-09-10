@@ -21,6 +21,7 @@ const DeletePlayerModal: FC<{
             <ModalDescription>ایا از حذف {playerInfo.name} مطمین هستید؟</ModalDescription>
             <Row styles={{
                 gap: '24px',
+                width: '370px'
             }}>
                 <ModalPrimaryButton>حذف</ModalPrimaryButton>
                 <ModalSecondaryButton>لغو</ModalSecondaryButton>
