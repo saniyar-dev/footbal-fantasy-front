@@ -1,3 +1,4 @@
+import useAppState from '@src/helpers/useAppState';
 import React, {FC, ReactElement} from 'react';
 import styled from 'styled-components';
 import ImageUrl from "../../assets/Icons/empty-wallet.svg"
@@ -12,7 +13,7 @@ border-radius: 16px 16px 0px 0px;
 display: flex;
 justify-content: center;
 align-items: center;
-gap:20px`
+gap:20px;`
 
 const LogoContainer = styled.div`
 display: flex;
@@ -47,6 +48,7 @@ text-align: center;
 color: #3D195B;`
 
 const Wallet: FC = () : ReactElement => {
+    const {wallet} = useAppState()
     return(
         <Container>
             <LogoContainer>
@@ -54,7 +56,7 @@ const Wallet: FC = () : ReactElement => {
             </WalletLogo>
             <Title>باقی مانده پول</Title>
             </LogoContainer>
-            <WalletAmount>۶۸.۳</WalletAmount>
+            <WalletAmount>{wallet}</WalletAmount>
 
         </Container>
     )

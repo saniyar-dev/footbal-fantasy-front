@@ -76,9 +76,9 @@ const ListView: FC = (): ReactElement => {
                                     height: '25px',
                                 }}>{roleHeader.title}</TableTitle>
                                 {
-                                    players.filter(player => player.role === roleHeader.type).map(player => {
+                                    players.filter(player => player.position === roleHeader.type).map(player => {
                                         return <TableRow styles={{}}>
-                                                <Column styles={{}}>{player.name}</Column>
+                                                <Column styles={{}}>{player.web_name}</Column>
                                                 <Column styles={{}}>{player.score}</Column>
                                                 <Column styles={{}}>{player.price}</Column>
                                         </TableRow>
