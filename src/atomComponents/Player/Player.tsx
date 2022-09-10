@@ -4,7 +4,7 @@ import ActivePlayerUrl from '@assets/Images/Player/ActivePlayer.svg'
 import DefaultPlayerUrl from '@assets/Images/Player/DefaultPlayer.svg'
 import SelectedPlayerUrl from '@assets/Images/Player/SelectedPlayer.svg'
 import HoveredPlayerUrl from '@assets/Images/Player/HoveredPlayer.svg'
-import CloseCircle from '@assets/Icons/Player/CloseCircle.svg'
+import CloseCircleUrl from '@assets/Icons/Player/CloseCircle.svg'
 import Column from "../Grid/Column";
 import styled from "styled-components";
 import { PLAYER } from "@src/types";
@@ -13,6 +13,12 @@ const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
 const SelectedImg = () => <img src={SelectedPlayerUrl} alt="selected player" />
 const DefaultImg = () => <img src={DefaultPlayerUrl} alt="default player" />
 const HoveredImg = () => <img src={HoveredPlayerUrl} alt="hovered player" />
+
+const CloseCircle = () => <img src={CloseCircleUrl} alt="close circle icon" />
+
+const CustomPlayerColumn = styled(Column)`
+position: relative;
+`
 
 const PlayerDetailName = styled(Row)`
 background: #37013B;
@@ -46,6 +52,12 @@ text-align: center;
 color: #38003C;
 `
 
+const PlayerCloseCircle = styled(Column)`
+position: absolute;
+top: 0;
+right: 0;
+`
+
 type StatusType = "Active" | "Default" | "Selected" | "Hovered"
 
 const Player: FC<{
@@ -54,10 +66,16 @@ const Player: FC<{
 }> = ({status, playerInfo}): ReactElement => {
     const [_status, setStatus] = useState<StatusType>(status)
     return (
-        <Column>
-            <Column>
-                <CloseCircle />
-            </Column>
+        <CustomPlayerColumn>
+            {
+                _status === 'Active' ? 
+                <PlayerCloseCircle styles={{
+                    width: '24px',
+                    height: '24px',
+                }}>
+                    <CloseCircle />
+                </PlayerCloseCircle> : undefined
+            }
             <Row onMouseOver={(e) => {
                 e.preventDefault()
                 if (_status !== 'Active') setStatus('Hovered')
@@ -95,7 +113,7 @@ const Player: FC<{
                     </> : undefined
                 }
             </Column>
-        </Column>
+        </CustomPlayerColumn>
     )
 }
 
