@@ -8,6 +8,7 @@ import CloseCircleUrl from '@assets/Icons/Player/CloseCircle.svg'
 import Column from "../Grid/Column";
 import styled from "styled-components";
 import { PLAYER } from "@src/types";
+import useModal from "@src/helpers/useModal";
 
 const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
 const SelectedImg = () => <img src={SelectedPlayerUrl} alt="selected player" />
@@ -70,11 +71,15 @@ const Player: FC<{
     playerInfo: PLAYER;
 }> = ({status, playerInfo}): ReactElement => {
     const [_status, setStatus] = useState<StatusType>(status)
+    const {addModal} = useModal()
     return (
         <CustomPlayerColumn>
             {
                 _status === 'Active' ? 
-                <PlayerCloseCircle onClick={() => console.log('delete player')} 
+                <PlayerCloseCircle onClick={() => addModal({
+                    _tag: "player-delete",
+                    playerInfo: playerInfo,
+                })} 
                 styles={{
                     width: '24px',
                     height: '24px',
