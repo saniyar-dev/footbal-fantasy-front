@@ -1,4 +1,5 @@
 import React from "react";
+import HTTP from "./axios";
 
 type AuthStateType = "in" | "out" | "Error";
 type TokenType = string | false;
@@ -19,7 +20,7 @@ interface SignupDataType {
 
 const useAuth = (): {
   // checkAuth: () => boolean;
-  Login: (data: LoginDataType) => AuthStateType;
+  Login: (data: LoginDataType) => Promise<AuthStateType>;
   getTokenFromLocal: () => TokenType;
   Signup: (data: SignupDataType) => AuthStateType;
 } => {
@@ -46,13 +47,16 @@ const useAuth = (): {
   //   return true;
   // };
 
-  const Login = (data: LoginDataType): AuthStateType => {
+  const Login = async (data: LoginDataType): Promise<AuthStateType> => {
     try {
       const token = getTokenFromLocal();
       if (token) {
         return "in";
       }
-      return "out";
+
+      const response = await HTTP.post("user/login", data);
+      setToken(response.data.token);
+      return "in";
     } catch (err) {
       console.log(err);
       return "Error";
@@ -62,6 +66,7 @@ const useAuth = (): {
   const Signup = (data: SignupDataType): AuthStateType => {
     try {
       // signup with server
+      // HTTP.post("user/signup", data);
       const token = "";
       setToken(token);
       return "in";
