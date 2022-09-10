@@ -5,20 +5,21 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import HTTP from "./axios";
 
-const useSetAppState = (): {
-  setAllPlayers: () => void;
+const useAppState = (): {
+  setAllPlayersToDefault: () => void;
   setAppState: () => void;
-  setPlayerWallet: () => void;
+  setPlayerWalletToDefault: () => void;
+  players: Array<USERPLAYER>;
+  wallet: number;
 } => {
   const [players, setPlayers] = useRecoilState(myPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
 
   // const playerListModifier = (data) => {};
 
-  const setAllPlayers = async () => {
+  const setAllPlayersToDefault = async () => {
     // const response = await HTTP.get("user/get-players");
     // setPlayers(response.data as Array<PLAYER>);
-
     const userPlayerList = [...Array(15)]
       .map((_, index) => index + 1)
       .reduce(
@@ -43,20 +44,22 @@ const useSetAppState = (): {
     setPlayers(userPlayerList);
   };
 
-  const setPlayerWallet = async () => {
+  const setPlayerWalletToDefault = async () => {
     setWallet(100);
   };
 
   const setAppState = () => {
-    setAllPlayers();
-    setPlayerWallet();
+    setAllPlayersToDefault();
+    setPlayerWalletToDefault();
   };
 
   return {
-    setAllPlayers,
+    setAllPlayersToDefault,
     setAppState,
-    setPlayerWallet,
+    setPlayerWalletToDefault,
+    players,
+    wallet,
   };
 };
 
-export default useSetAppState;
+export default useAppState;

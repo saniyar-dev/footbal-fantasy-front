@@ -13,7 +13,7 @@ import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
 import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
-import useSetAppState from '@src/helpers/useSetAppState'
+import useAppState from '@src/helpers/useAppState'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -50,7 +50,7 @@ type MainViewType = "SoccerFieldView" | "ListView"
 const MakeTeamPage = () => {
     const [mainView, setMainView] = useState<MainViewType>("SoccerFieldView")
 
-    const {setAppState} = useSetAppState()
+    const {setAppState} = useAppState()
     
     useEffect(() => {
         setAppState()
