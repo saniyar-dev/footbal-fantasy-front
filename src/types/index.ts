@@ -16,15 +16,22 @@ export interface Styles {
 export type Role = "GK" | "DEF" | "MID" | "ATT";
 
 export interface PLAYER {
-  id: number;
-  name: string;
+  player_id: number;
+  first_name: string;
+  last_name: string;
+  web_name: string;
+  photo: string;
+  position: Role;
+  team_id: number;
   score: number;
   price: number;
-  club: string;
-  role: Role;
+}
+
+export interface USERPLAYER extends PLAYER {
+  squad_place: number;
 }
 
 export type ModalTypes = {
   _tag: "player-delete";
-  playerInfo: PLAYER;
+  playerInfo: USERPLAYER;
 };

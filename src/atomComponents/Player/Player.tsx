@@ -7,7 +7,7 @@ import HoveredPlayerUrl from '@assets/Images/Player/HoveredPlayer.svg'
 import CloseCircleUrl from '@assets/Icons/Player/CloseCircle.svg'
 import Column from "../Grid/Column";
 import styled from "styled-components";
-import { PLAYER } from "@src/types";
+import { USERPLAYER } from "@src/types";
 import useModal from "@src/helpers/useModal";
 
 const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
@@ -68,7 +68,7 @@ type StatusType = "Active" | "Default" | "Selected" | "Hovered"
 
 const Player: FC<{
     status: StatusType;
-    playerInfo: PLAYER;
+    playerInfo: USERPLAYER;
 }> = ({status, playerInfo}): ReactElement => {
     const [_status, setStatus] = useState<StatusType>(status)
     const {addModal} = useModal()
@@ -119,7 +119,7 @@ const Player: FC<{
                         <PlayerDetailName styles={{
                             justifyContent: 'center',
                             alignItems: 'center'
-                        }}>{playerInfo.name}</PlayerDetailName> 
+                        }}>{playerInfo.web_name}</PlayerDetailName> 
                         <PlayerDetailScore styles={{
                             justifyContent: 'center',
                             alignItems: 'center'

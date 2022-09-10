@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/Header/Header'
 import CreateTeamNavbar from '../../components/Navbar/Navbar'
@@ -13,6 +13,7 @@ import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
 import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
+import useAppState from '@src/helpers/useAppState'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -48,6 +49,12 @@ type MainViewType = "SoccerFieldView" | "ListView"
 
 const MakeTeamPage = () => {
     const [mainView, setMainView] = useState<MainViewType>("SoccerFieldView")
+
+    const {setAppStateToDefault: setAppState} = useAppState()
+    
+    useEffect(() => {
+        setAppState()
+    }, [])
     return (
         <Container styles={{
             width: '100%',
