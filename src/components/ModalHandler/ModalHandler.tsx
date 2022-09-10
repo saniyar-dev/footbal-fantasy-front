@@ -9,7 +9,7 @@ import useModal from "@src/helpers/useModal";
 const CustomContainer = styled(Container)`
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     z-index: 110;
     top: 0;
     width: 100%;
@@ -17,9 +17,9 @@ const CustomContainer = styled(Container)`
 `
 
 const CustomBackground = styled.div`
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
 
     background: rgba(0, 0, 0, 0.2);
