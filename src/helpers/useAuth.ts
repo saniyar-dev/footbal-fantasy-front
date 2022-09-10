@@ -19,12 +19,12 @@ interface SignupDataType {
 }
 
 const useAuth = (): {
-  // checkAuth: () => boolean;
+  CheckAuth: () => boolean;
   Login: (data: LoginDataType) => Promise<AuthStateType>;
-  getTokenFromLocal: () => TokenType;
+  GetTokenFromLocal: () => TokenType;
   Signup: (data: SignupDataType) => AuthStateType;
 } => {
-  const getTokenFromLocal = (): TokenType => {
+  const GetTokenFromLocal = (): TokenType => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
       return false;
@@ -32,30 +32,29 @@ const useAuth = (): {
     return token;
   };
 
-  const setToken = (token: TokenType): void => {
+  const SetToken = (token: TokenType): void => {
     if (token) {
       window.localStorage.setItem("token", token);
     }
   };
 
-  // const checkAuth = (): boolean => {
-  //   // console.log("check auth");
-  //   const token = getTokenFromLocal();
-  //   if (token) {
-  //     // login to server
-  //   }
-  //   return true;
-  // };
+  const CheckAuth = (): boolean => {
+    const token = GetTokenFromLocal();
+    if (token) {
+      return true;
+    }
+    return false;
+  };
 
   const Login = async (data: LoginDataType): Promise<AuthStateType> => {
     try {
-      const token = getTokenFromLocal();
+      const token = GetTokenFromLocal();
       if (token) {
         return "in";
       }
 
       const response = await HTTP.post("user/login", data);
-      setToken(response.data.token);
+      SetToken(response.data.token);
       return "in";
     } catch (err) {
       console.log(err);
@@ -68,7 +67,7 @@ const useAuth = (): {
       // signup with server
       // HTTP.post("user/signup", data);
       const token = "";
-      setToken(token);
+      SetToken(token);
       return "in";
     } catch (err) {
       return "Error";
@@ -77,8 +76,9 @@ const useAuth = (): {
 
   return {
     Login,
-    getTokenFromLocal,
+    GetTokenFromLocal,
     Signup,
+    CheckAuth,
   };
 };
 
