@@ -3,12 +3,14 @@ import { Modal, ModalDescription, ModalHeader, ModalPrimaryButton, ModalSecondar
 import ImageUrl from '@assets/Images/Player/ActivePlayer.svg'
 import { PLAYER } from "@src/types";
 import Row from "@src/atomComponents/Grid/Row";
+import useModal from "@src/helpers/useModal";
 
 const Image = () => <img src={ImageUrl} alt="active player" width="100px" />
 
 const DeletePlayerModal: FC<{
     playerInfo: PLAYER
 }> = ({playerInfo}): ReactElement => {
+    const {removeLastModal} = useModal()
     return (
         <Modal styles={{
             justifyContent: 'center',
@@ -24,7 +26,7 @@ const DeletePlayerModal: FC<{
                 width: '370px'
             }}>
                 <ModalPrimaryButton>حذف</ModalPrimaryButton>
-                <ModalSecondaryButton>لغو</ModalSecondaryButton>
+                <ModalSecondaryButton onClick={removeLastModal}>لغو</ModalSecondaryButton>
             </Row>
         </Modal>
     )
