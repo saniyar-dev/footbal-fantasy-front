@@ -2,14 +2,17 @@ import React, {Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
 import Column from "@src/atomComponents/Grid/Column";
 import Row from "@src/atomComponents/Grid/Row";
+import useAuth from "@src/helpers/useAuth";
 
 type FormStatusType = "login" | "signup" | "confirm"
 
 const LoginFormComponent: FC<{
     setStatus: Dispatch<SetStateAction<FormStatusType>>,
 }> = ({setStatus}) : ReactElement => {
+    const {Login} = useAuth()
+
     return(
-    <Form onSubmitFn={(data) => {console.log(data)}} styles={{
+    <Form onSubmitFn={(data) => {Login(data as {username: string; password: string;})}} styles={{
         gridTemplateColumns: 'auto',
         gridTemplateRows: 'auto auto auto',
         gap: '56px',

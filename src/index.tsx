@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from 'recoil'
-import {BrowserRouter, Route, Routes} from "react-router-dom"
-import SignUpPage from './pages/SignupPage/SignUpPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,12 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/' element={<App />} />
-        </Routes>
-      </BrowserRouter>
+      <App />
     </RecoilRoot>
   </React.StrictMode>
 );
