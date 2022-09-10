@@ -6,9 +6,8 @@ import { useRecoilState } from "recoil";
 import HTTP from "./axios";
 
 const useAppState = (): {
-  setAllPlayersToDefault: () => void;
   setAppStateToDefault: () => void;
-  setPlayerWalletToDefault: () => void;
+  getAppState: () => void;
   players: Array<USERPLAYER>;
   wallet: number;
 } => {
@@ -17,7 +16,7 @@ const useAppState = (): {
 
   // const playerListModifier = (data) => {};
 
-  const setAllPlayersToDefault = () => {
+  const setAppStateToDefault = () => {
     const userPlayerList = [...Array(15)]
       .map((_, index) => index + 1)
       .reduce(
@@ -40,21 +39,43 @@ const useAppState = (): {
         [] as Array<USERPLAYER>
       );
     setPlayers(userPlayerList);
-  };
-
-  const setPlayerWalletToDefault = () => {
     setWallet(100);
   };
 
-  const setAppStateToDefault = () => {
-    setAllPlayersToDefault();
-    setPlayerWalletToDefault();
+  const getPlayers = (): Array<USERPLAYER> => {
+    try {
+      // connect to server
+      // const response = HTTP.get("user/players");
+
+      const playersList = [] as Array<USERPLAYER>;
+      return playersList;
+    } catch (err) {
+      return [];
+    }
+  };
+
+  const getWallet = (): number => {
+    try {
+      // connect to server
+      // const response = HTTP.get('user/wallet')
+
+      return 100;
+    } catch (err) {
+      return -1;
+    }
+  };
+
+  const getAppState = () => {
+    const playersList = getPlayers();
+    setPlayers(playersList);
+
+    const walletValue = getWallet();
+    setWallet(walletValue);
   };
 
   return {
-    setAllPlayersToDefault,
     setAppStateToDefault,
-    setPlayerWalletToDefault,
+    getAppState,
     players,
     wallet,
   };
