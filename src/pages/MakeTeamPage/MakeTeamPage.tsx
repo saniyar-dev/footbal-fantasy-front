@@ -51,7 +51,7 @@ const MakeTeamPage = () => {
     return (
         <Container styles={{
             width: '100%',
-            height: '100vh',
+            height: '100%',
             gridTemplateColumns: 'auto',
             gridTemplateRows: 'auto auto auto'
         }}>

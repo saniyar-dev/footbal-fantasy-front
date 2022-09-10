@@ -23,3 +23,8 @@ export interface PLAYER {
   club: string;
   role: Role;
 }
+
+export type ModalTypes = {
+  _tag: "player-delete";
+  playerInfo: PLAYER;
+};
