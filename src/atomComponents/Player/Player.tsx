@@ -12,7 +12,11 @@ import { PLAYER } from "@src/types";
 const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
 const SelectedImg = () => <img src={SelectedPlayerUrl} alt="selected player" />
 const DefaultImg = () => <img src={DefaultPlayerUrl} alt="default player" />
-const HoveredImg = ()=> <img src={HoveredPlayerUrl} alt="hovered player" />
+const HoveredImg = styled.img.attrs({
+    src: HoveredPlayerUrl,
+})`
+cursor: pointer;
+`
 
 const CloseCircle = () => <img src={CloseCircleUrl} alt="close circle icon" />
 
@@ -92,21 +96,14 @@ const Player: FC<{
             onMouseLeave={(e) => {
                 e.preventDefault()
                 setStatus(status)
-            }} 
-
-            onClick={() => {
-                if (_status === 'Hovered') {
-                    console.log('add player')
-                }
-            }}
-            >
+            }} >
                 {
                     _status === 'Active' ? 
                     <ActiveImg /> :
                     _status === 'Default' ?
                     <DefaultImg /> : 
                     _status === 'Hovered' ? 
-                    <HoveredImg /> : 
+                    <HoveredImg onClick={() => console.log('add player')} /> : 
                     <SelectedImg />
                 }
             </Row>
