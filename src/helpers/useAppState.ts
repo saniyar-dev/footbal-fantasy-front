@@ -7,7 +7,7 @@ import HTTP from "./axios";
 
 const useAppState = (): {
   setAllPlayersToDefault: () => void;
-  setAppState: () => void;
+  setAppStateToDefault: () => void;
   setPlayerWalletToDefault: () => void;
   players: Array<USERPLAYER>;
   wallet: number;
@@ -17,9 +17,7 @@ const useAppState = (): {
 
   // const playerListModifier = (data) => {};
 
-  const setAllPlayersToDefault = async () => {
-    // const response = await HTTP.get("user/get-players");
-    // setPlayers(response.data as Array<PLAYER>);
+  const setAllPlayersToDefault = () => {
     const userPlayerList = [...Array(15)]
       .map((_, index) => index + 1)
       .reduce(
@@ -44,18 +42,18 @@ const useAppState = (): {
     setPlayers(userPlayerList);
   };
 
-  const setPlayerWalletToDefault = async () => {
+  const setPlayerWalletToDefault = () => {
     setWallet(100);
   };
 
-  const setAppState = () => {
+  const setAppStateToDefault = () => {
     setAllPlayersToDefault();
     setPlayerWalletToDefault();
   };
 
   return {
     setAllPlayersToDefault,
-    setAppState,
+    setAppStateToDefault,
     setPlayerWalletToDefault,
     players,
     wallet,
