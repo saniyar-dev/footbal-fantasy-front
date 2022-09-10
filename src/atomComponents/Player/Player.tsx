@@ -56,6 +56,7 @@ const PlayerCloseCircle = styled(Column)`
 position: absolute;
 top: 0;
 right: 0;
+cursor: pointer;
 `
 
 type StatusType = "Active" | "Default" | "Selected" | "Hovered"
@@ -69,7 +70,8 @@ const Player: FC<{
         <CustomPlayerColumn>
             {
                 _status === 'Active' ? 
-                <PlayerCloseCircle styles={{
+                <PlayerCloseCircle onClick={() => console.log('delete player')} 
+                styles={{
                     width: '24px',
                     height: '24px',
                 }}>
