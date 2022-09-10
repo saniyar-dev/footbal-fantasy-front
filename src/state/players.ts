@@ -1,4 +1,4 @@
-import { Role, PLAYER } from "@src/types";
+import { PLAYER } from "@src/types";
 import { atom } from "recoil";
 
 const myPlayers = atom<Array<PLAYER>>({
