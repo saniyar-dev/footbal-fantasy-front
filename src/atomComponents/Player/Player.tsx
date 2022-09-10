@@ -12,7 +12,7 @@ import { PLAYER } from "@src/types";
 const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
 const SelectedImg = () => <img src={SelectedPlayerUrl} alt="selected player" />
 const DefaultImg = () => <img src={DefaultPlayerUrl} alt="default player" />
-const HoveredImg = () => <img src={HoveredPlayerUrl} alt="hovered player" />
+const HoveredImg = ()=> <img src={HoveredPlayerUrl} alt="hovered player" />
 
 const CloseCircle = () => <img src={CloseCircleUrl} alt="close circle icon" />
 
@@ -78,18 +78,28 @@ const Player: FC<{
                     <CloseCircle />
                 </PlayerCloseCircle> : undefined
             }
-            <Row onMouseOver={(e) => {
-                e.preventDefault()
-                if (_status !== 'Active') setStatus('Hovered')
-            }}
-            onMouseLeave={(e) => {
-                e.preventDefault()
-                setStatus(status)
-            }} styles={{
+            <Row styles={{
                 width: '120px',
                 alignItems: 'center',
                 justifyContent: 'center'
-            }}>
+            }}
+
+            onMouseOver={(e) => {
+                e.preventDefault()
+                if (_status !== 'Active') setStatus('Hovered')
+            }}
+
+            onMouseLeave={(e) => {
+                e.preventDefault()
+                setStatus(status)
+            }} 
+
+            onClick={() => {
+                if (_status === 'Hovered') {
+                    console.log('add player')
+                }
+            }}
+            >
                 {
                     _status === 'Active' ? 
                     <ActiveImg /> :
