@@ -1,15 +1,22 @@
-import myPlayers from "@src/state/players";
+import { myPlayers } from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { PLAYER, USERPLAYER } from "@src/types";
 import React from "react";
 import { useRecoilState } from "recoil";
 import HTTP from "./axios";
 
+/* TODO: 
+    setAppStateToDeafult: to backend;
+    getAllPlayers: to backend;
+    getWallet: to backend;
+*/
+
 const useAppState = (): {
   setAppStateToDefault: () => void;
   getAppState: () => void;
   players: Array<USERPLAYER>;
   wallet: number;
+  setAppState: (playerList: Array<USERPLAYER>) => void;
 } => {
   const [players, setPlayers] = useRecoilState(myPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
@@ -73,11 +80,24 @@ const useAppState = (): {
     setWallet(walletValue);
   };
 
+  const setAppState = (playerList: Array<USERPLAYER>) => {
+    try {
+      // connect to server
+      if (playerList) {
+        setPlayers(playerList);
+      }
+      return;
+    } catch (err) {
+      return;
+    }
+  };
+
   return {
     setAppStateToDefault,
     getAppState,
     players,
     wallet,
+    setAppState,
   };
 };
 

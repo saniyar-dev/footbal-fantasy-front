@@ -5,8 +5,8 @@ import Column from "@src/atomComponents/Grid/Column";
 import Row from "@src/atomComponents/Grid/Row";
 import { Role } from "@src/types";
 import { useRecoilState } from "recoil";
-import myPlayers from "@src/state/players";
-import Player from "@src/atomComponents/Player/Player";
+import {myPlayers} from "@src/state/players";
+import {Player, PlayersContainer} from "@src/atomComponents/Player/Player";
 
 const Background = styled.img.attrs({
     src: BackgroundUrl
@@ -26,25 +26,27 @@ const SoccerFieldView: FC = (): ReactElement => {
             justifyContent: 'center'
         }}>
             <Background />
-            <Column styles={{
-                gap: '24px',
-            }}>
-                {
-                    roleList.map(role => {
-                        return <Row styles={{
-                            height: '155px',
-                            gap: '56px',
-                            justifyContent: 'center'
-                        }}>
-                            {
-                                players.filter(player => player.position === role).map(player => {
-                                    return <Player status={player.player_id === -1 ? "Default" : "Active"} playerInfo={player} />
-                                })
-                            }
-                        </Row>
-                    })
-                }
-            </Column>
+            <PlayersContainer>
+                <Column styles={{
+                    gap: '24px',
+                }}>
+                    {
+                        roleList.map(role => {
+                            return <Row styles={{
+                                height: '155px',
+                                gap: '56px',
+                                justifyContent: 'center'
+                            }}>
+                                {
+                                    players.filter(player => player.position === role).map(player => {
+                                        return <Player playerInfo={player} />
+                                    })
+                                }
+                            </Row>
+                        })
+                    }
+                </Column>
+            </PlayersContainer>
         </Column>
     )
 }
