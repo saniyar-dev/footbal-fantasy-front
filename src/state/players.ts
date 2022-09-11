@@ -1,7 +1,7 @@
-import { USERPLAYER } from "@src/types";
+import { PLAYER, USERPLAYER } from "@src/types";
 import { atom } from "recoil";
 
-const myPlayers = atom<Array<USERPLAYER>>({
+export const myPlayers = atom<Array<USERPLAYER>>({
   key: "myPlayers",
   default: [
     // {
@@ -127,4 +127,12 @@ const myPlayers = atom<Array<USERPLAYER>>({
   ],
 });
 
-export default myPlayers;
+export const selectedSquadId = atom<number>({
+  key: "selectedSquadId",
+  default: 0,
+});
+
+export const serverPlayers = atom<Array<PLAYER>>({
+  key: "serverPlayers",
+  default: [],
+});

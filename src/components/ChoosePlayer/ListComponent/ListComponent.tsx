@@ -1,76 +1,10 @@
+import useManagePlayer from "@src/helpers/useManagePlayer";
+import { serverPlayers } from "@src/state/players";
 import React, {FC, ReactElement} from "react"
+import { useRecoilState } from "recoil";
 import styled from "styled-components"
 import Button from "../../../atomComponents/Button/Button";
 import ListItem from "../../../atomComponents/List/ListItem";
-
-interface ListItemType {
-    name: string;
-    performance: number;
-    price: number;
-}
-
-const ListItems: Array<ListItemType> = [
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-    {
-        name: 'saniyar',
-        performance: 10,
-        price: 10,
-    },
-]
 
 const Container = styled.div`
     display: flex;
@@ -125,6 +59,8 @@ const PaginationControl = styled.span<{
 `
 
 const ListComponent: FC = (): ReactElement => {
+    const {addPlayer} = useManagePlayer()
+    const [playerList,] = useRecoilState(serverPlayers)
     return (
         <Container>
             <ListHeader>
@@ -139,7 +75,7 @@ const ListComponent: FC = (): ReactElement => {
                 </Colomn>
             </ListHeader>
             {
-                ListItems.map(listItem => {
+                playerList.map(player => {
                     return <ListItem  
                     styles={{
                         defaultWidth: 240,
@@ -150,12 +86,14 @@ const ListComponent: FC = (): ReactElement => {
                             radius: 0
                         },
                     }}
-                    name={listItem.name} 
+                    name={player.web_name} 
                     position={'CEH'}
                     staticNumbers={{
-                        performance: listItem.performance,
-                        price: listItem.price
+                        performance: player.score,
+                        price: player.price
                     }}
+
+                    onClickFn={() => addPlayer(player)}
                     />
                 })
             }

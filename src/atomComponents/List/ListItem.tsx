@@ -10,6 +10,7 @@ interface ListItemProps {
         price: number;
     }
     styles: Styles;
+    onClickFn: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const ListItemContainer = styled.div<{
@@ -61,10 +62,10 @@ const Static = styled.span`
     color: #3D195B;
 `
 
-const ListItem: FC<ListItemProps> = ({name, position, staticNumbers, styles}): ReactElement => {
+const ListItem: FC<ListItemProps> = ({name, position, staticNumbers, styles, onClickFn}): ReactElement => {
     return (
         <ListItemContainer 
-        styles={styles} >
+        styles={styles} onClick={onClickFn} >
             <Title>
                 {name}
                 {

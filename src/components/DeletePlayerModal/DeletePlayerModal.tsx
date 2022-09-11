@@ -4,6 +4,7 @@ import ImageUrl from '@assets/Images/Player/ActivePlayer.svg'
 import { USERPLAYER } from "@src/types";
 import Row from "@src/atomComponents/Grid/Row";
 import useModal from "@src/helpers/useModal";
+import useManagePlayer from "@src/helpers/useManagePlayer";
 
 const Image = () => <img src={ImageUrl} alt="active player" width="100px" />
 
@@ -11,6 +12,7 @@ const DeletePlayerModal: FC<{
     playerInfo: USERPLAYER 
 }> = ({playerInfo}): ReactElement => {
     const {removeLastModal} = useModal()
+    const {removePlayer} = useManagePlayer()
     return (
         <Modal styles={{
             justifyContent: 'center',
@@ -25,7 +27,7 @@ const DeletePlayerModal: FC<{
                 gap: '24px',
                 width: '370px'
             }}>
-                <ModalPrimaryButton>حذف</ModalPrimaryButton>
+                <ModalPrimaryButton onClick={() => removePlayer(playerInfo.squad_place)}>حذف</ModalPrimaryButton>
                 <ModalSecondaryButton onClick={removeLastModal}>لغو</ModalSecondaryButton>
             </Row>
         </Modal>

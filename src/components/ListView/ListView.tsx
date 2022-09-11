@@ -1,5 +1,5 @@
 import React, {FC, ReactElement} from "react";
-import myPlayers from "@state/players"
+import {myPlayers} from "@state/players"
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { Role } from "@src/types";
