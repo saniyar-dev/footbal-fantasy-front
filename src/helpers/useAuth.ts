@@ -1,5 +1,5 @@
 import React from "react";
-import HTTP from "./axios";
+import { USER } from "./axios";
 
 type AuthStateType = "in" | "out" | "Error";
 type TokenType = string | false;
@@ -53,7 +53,7 @@ const useAuth = (): {
         return "in";
       }
 
-      const response = await HTTP.post("user/login", data);
+      const response = await USER.post("user/login", data);
       SetToken(response.data.token);
       return "in";
     } catch (err) {

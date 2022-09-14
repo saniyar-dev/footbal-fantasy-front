@@ -3,7 +3,7 @@ import myWallet from "@src/state/wallet";
 import { PLAYER, USERPLAYER } from "@src/types";
 import React from "react";
 import { useRecoilState } from "recoil";
-import HTTP from "./axios";
+import { SERVER } from "./axios";
 
 /* TODO: 
     setAppStateToDeafult: to backend;
