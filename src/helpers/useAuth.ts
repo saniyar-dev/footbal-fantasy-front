@@ -1,4 +1,3 @@
-import React from "react";
 import { USER } from "./axios";
 
 type AuthStateType = "in" | "out" | "Error";

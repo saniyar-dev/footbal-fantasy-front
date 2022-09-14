@@ -27,7 +27,7 @@ const DeletePlayerModal: FC<{
                 gap: '24px',
                 width: '370px'
             }}>
-                <ModalPrimaryButton onClick={() => removePlayer(playerInfo.squad_place)}>حذف</ModalPrimaryButton>
+                <ModalPrimaryButton onClick={() => {removePlayer(playerInfo.squad_place, playerInfo.player_id); removeLastModal()}}>حذف</ModalPrimaryButton>
                 <ModalSecondaryButton onClick={removeLastModal}>لغو</ModalSecondaryButton>
             </Row>
         </Modal>
