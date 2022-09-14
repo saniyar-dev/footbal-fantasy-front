@@ -1,33 +1,44 @@
 import { myPlayers } from "@src/state/players";
 import myWallet from "@src/state/wallet";
-import { PLAYER, USERPLAYER } from "@src/types";
-import React from "react";
+import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "./axios";
-
-/* TODO: 
-    setAppStateToDeafult: to backend;
-    getAllPlayers: to backend;
-    getWallet: to backend;
-*/
+import { selectedSquadId } from "@src/state/players";
 
 const useAppState = (): {
-  setAppStateToDefault: () => void;
   getAppState: () => void;
   players: Array<USERPLAYER>;
   wallet: number;
-  setAppState: (playerList: Array<USERPLAYER>) => void;
 } => {
   const [players, setPlayers] = useRecoilState(myPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
+  const [, setSelectedId] = useRecoilState(selectedSquadId);
 
-  // const playerListModifier = (data) => {};
+  const formatPositionId = (
+    data: Array<Omit<USERPLAYER, "position"> & { position_id?: number }>
+  ): Array<USERPLAYER> => {
+    const newPlayerList = data.map((player): USERPLAYER => {
+      const positionRole = RoleDict[player.position_id!];
+      delete player.position_id;
 
-  const setAppStateToDefault = () => {
-    const userPlayerList = [...Array(15)]
+      return {
+        ...player,
+        position: positionRole,
+      };
+    });
+    return newPlayerList;
+  };
+
+  const formatPlayers = (data: Array<USERPLAYER>): Array<USERPLAYER> => {
+    const newPlayerList = [...Array(15)]
       .map((_, index) => index + 1)
-      .reduce(
-        (prev: Array<USERPLAYER>, curr: number): Array<USERPLAYER> => [
+      .reduce((prev: Array<USERPLAYER>, curr: number): Array<USERPLAYER> => {
+        const currentPlayer = data.find(
+          (player) => player.squad_place === curr
+        );
+
+        if (currentPlayer) return [...prev, currentPlayer];
+        return [
           ...prev,
           {
             player_id: -1,
@@ -42,62 +53,43 @@ const useAppState = (): {
             team_id: 0,
             squad_place: curr,
           },
-        ],
-        [] as Array<USERPLAYER>
-      );
-    setPlayers(userPlayerList);
-    setWallet(100);
+        ];
+      }, [] as Array<USERPLAYER>);
+    return newPlayerList;
   };
 
-  const getPlayers = (): Array<USERPLAYER> => {
+  const getPlayers = async (): Promise<Array<USERPLAYER>> => {
     try {
-      // connect to server
-      // const response = HTTP.get("user/players");
-
-      const playersList = [] as Array<USERPLAYER>;
-      return playersList;
+      const response = await SERVER.get("user/get-players");
+      return formatPlayers(formatPositionId(response.data));
     } catch (err) {
       return [];
     }
   };
 
-  const getWallet = (): number => {
+  const getWallet = async (): Promise<number> => {
     try {
-      // connect to server
-      // const response = HTTP.get('user/wallet')
-
-      return 100;
+      const response = await SERVER.get("user/get-wallet");
+      return response.data.wallet as unknown as number;
     } catch (err) {
       return -1;
     }
   };
 
-  const getAppState = () => {
-    const playersList = getPlayers();
+  const getAppState = async () => {
+    const playersList = await getPlayers();
     setPlayers(playersList);
 
-    const walletValue = getWallet();
+    const walletValue = await getWallet();
     setWallet(walletValue);
-  };
 
-  const setAppState = (playerList: Array<USERPLAYER>) => {
-    try {
-      // connect to server
-      if (playerList) {
-        setPlayers(playerList);
-      }
-      return;
-    } catch (err) {
-      return;
-    }
+    setSelectedId(0);
   };
 
   return {
-    setAppStateToDefault,
     getAppState,
     players,
     wallet,
-    setAppState,
   };
 };
 

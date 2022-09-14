@@ -12,6 +12,7 @@ import previousUrl from '@assets/Icons/Pagination/next.svg'
 import previousLastUrl from '@assets/Icons/Pagination/nextLast.svg'
 import ButtonGroup, { ButtonGroupBtn } from "@src/atomComponents/Button/ButtonGroup"
 import { RoleDict } from "@src/types"
+import useManagePlayer from "@src/helpers/useManagePlayer"
 
 const SpecialContainer = styled(Column)`
     width: 273px;
@@ -79,6 +80,7 @@ const Header = styled.h2`
 
 const ChoosePlayerComponent: FC = (): ReactElement => {
     const {playerList, getByLimit, nextPage, previousPage, currentPage, filterPlayers, searchPlayer} = useChoosePlayer()
+    const {addPlayer} = useManagePlayer()
 
     useEffect(() => {
         getByLimit()
@@ -140,8 +142,8 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                         <Column>
                             {
                                 playerList.map(player => {
-                                    return <TableRow styles={{height: '40px'}}>
-                                        <Row styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+                                    return <TableRow styles={{height: '40px'}} >
+                                        <Row onClick={() => addPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
                                             <Column styles={{width: '50%' }}>
                                                 <Row>
                                                     {player.web_name}

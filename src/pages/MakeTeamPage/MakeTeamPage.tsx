@@ -50,10 +50,10 @@ type MainViewType = "SoccerFieldView" | "ListView"
 const MakeTeamPage = () => {
     const [mainView, setMainView] = useState<MainViewType>("SoccerFieldView")
 
-    const {setAppStateToDefault: setAppState} = useAppState()
+    const {getAppState} = useAppState()
     
     useEffect(() => {
-        setAppState()
+        getAppState()
     }, [])
     return (
         <Container styles={{

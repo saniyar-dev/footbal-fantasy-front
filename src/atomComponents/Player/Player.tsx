@@ -108,17 +108,17 @@ export const Player: FC<{
 
     useEffect(() => {
         switch (playerInfo.squad_place) {
-            case hoveredId:
-                setStatus('Hovered')
-                break;
             case selectedId:
                 setStatus('Selected')
+                break;
+            case hoveredId:
+                setStatus('Hovered')
                 break;
             default:
                 setStatus('Default')
         }
 
-        if (_status !== 'Hovered' && _status !== 'Selected' && playerInfo.player_id !== -1) {
+        if (playerInfo.player_id !== -1) {
             setStatus('Active')
         }
     }, [hoveredId, selectedId, playerInfo])
@@ -143,7 +143,7 @@ export const Player: FC<{
                 justifyContent: 'center'
             }}
 
-            onMouseOver={(e) => {
+            onMouseEnter={(e) => {
                 e.preventDefault()
                 if (_status !== 'Active' && _status !== 'Selected') setHoveredId(playerInfo.squad_place)
             }}
