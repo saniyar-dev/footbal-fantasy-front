@@ -1,6 +1,7 @@
+import useChoosePlayer from "@src/helpers/useChoosePlayer";
 import useManagePlayer from "@src/helpers/useManagePlayer";
 import { serverPlayers } from "@src/state/players";
-import React, {FC, ReactElement} from "react"
+import React, {FC, ReactElement, useEffect} from "react"
 import { useRecoilState } from "recoil";
 import styled from "styled-components"
 import Button from "../../../atomComponents/Button/Button";
@@ -61,6 +62,11 @@ const PaginationControl = styled.span<{
 const ListComponent: FC = (): ReactElement => {
     const {addPlayer} = useManagePlayer()
     const [playerList,] = useRecoilState(serverPlayers)
+    const {getAllPlayers} = useChoosePlayer()
+
+    useEffect(() => {
+        getAllPlayers()
+    }, [])
     return (
         <Container>
             <ListHeader>
