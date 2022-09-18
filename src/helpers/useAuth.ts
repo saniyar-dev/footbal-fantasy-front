@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { USER } from "./axios";
 
 type AuthStateType = "in" | "out" | "Error";
@@ -23,6 +24,8 @@ const useAuth = (): {
   GetTokenFromLocal: () => TokenType;
   Signup: (data: SignupDataType) => AuthStateType;
 } => {
+  const navigate = useNavigate();
+
   const GetTokenFromLocal = (): TokenType => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
@@ -54,6 +57,7 @@ const useAuth = (): {
 
       const response = await USER.post("user/login", data);
       SetToken(response.data.token);
+      navigate("/create-team");
       return "in";
     } catch (err) {
       console.log(err);
