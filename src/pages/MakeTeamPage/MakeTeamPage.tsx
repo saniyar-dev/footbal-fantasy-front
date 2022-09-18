@@ -13,7 +13,7 @@ import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
 import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
-import useAppState from '@src/helpers/useAppState'
+import useAppState from '@src/services/useAppState'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;

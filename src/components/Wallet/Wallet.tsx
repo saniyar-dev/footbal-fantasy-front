@@ -1,4 +1,5 @@
-import useAppState from '@src/helpers/useAppState';
+import useTranslate from '@src/helpers/useTranslate';
+import useAppState from '@src/services/useAppState';
 import React, {FC, ReactElement} from 'react';
 import styled from 'styled-components';
 import ImageUrl from "../../assets/Icons/empty-wallet.svg"
@@ -49,6 +50,7 @@ color: #3D195B;`
 
 const Wallet: FC = () : ReactElement => {
     const {wallet} = useAppState()
+    const translate = useTranslate()
     return(
         <Container>
             <LogoContainer>
@@ -56,7 +58,7 @@ const Wallet: FC = () : ReactElement => {
             </WalletLogo>
             <Title>باقی مانده پول</Title>
             </LogoContainer>
-            <WalletAmount>{wallet}</WalletAmount>
+            <WalletAmount>{translate(wallet)}</WalletAmount>
 
         </Container>
     )

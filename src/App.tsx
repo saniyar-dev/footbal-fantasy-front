@@ -3,7 +3,7 @@ import MakeTeamPage from './pages/MakeTeamPage/MakeTeamPage';
 import {Route, Routes, useNavigate} from "react-router-dom"
 import SignUpPage from './pages/SignupPage/SignUpPage';
 import ModalHandler from './components/ModalHandler/ModalHandler';
-import useAuth from './helpers/useAuth';
+import useAuth from './services/useAuth';
 
 function App() {
   const navigate = useNavigate();

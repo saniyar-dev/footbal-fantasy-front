@@ -2,7 +2,7 @@ import React, {Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
 import Column from "@src/atomComponents/Grid/Column";
 import Row from "@src/atomComponents/Grid/Row";
-import useAuth from "@src/helpers/useAuth";
+import useAuth from "@src/services/useAuth";
 
 type FormStatusType = "login" | "signup" | "confirm"
 

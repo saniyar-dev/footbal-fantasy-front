@@ -4,7 +4,7 @@ import ImageUrl from '@assets/Images/Player/ActivePlayer.svg'
 import { USERPLAYER } from "@src/types";
 import Row from "@src/atomComponents/Grid/Row";
 import useModal from "@src/helpers/useModal";
-import useManagePlayer from "@src/helpers/useManagePlayer";
+import useManagePlayer from "@src/services/useManagePlayer";
 
 const Image = () => <img src={ImageUrl} alt="active player" width="100px" />
 

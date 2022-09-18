@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { USER, SERVER } from "./useAxios";
+import { USER, SERVER } from "@src/helpers/useAxios";
 
 type AuthStateType = "in" | "out" | "Error";
 type TokenType = string | false;
