@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MakeTeamPage from './pages/MakeTeamPage/MakeTeamPage';
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {Route, Routes, useNavigate} from "react-router-dom"
 import SignUpPage from './pages/SignupPage/SignUpPage';
 import ModalHandler from './components/ModalHandler/ModalHandler';
+import useAuth from './helpers/useAuth';
 
 function App() {
+  const navigate = useNavigate();
+  const {CheckAuth} = useAuth();
+
+  useEffect(() => {
+    if (CheckAuth()) {
+      navigate('/create-team')
+    } else {
+      navigate('/user/login')
+    }
+  }, [])
   return (
     <>
       <ModalHandler />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/create-team' element={<MakeTeamPage />} />
-        </Routes>
-      </BrowserRouter>
-      
+      <Routes>
+        <Route path='/user/:type' element={<SignUpPage />} />
+        <Route path='/create-team' element={<MakeTeamPage />} />
+      </Routes>
     </>
   );
 }
