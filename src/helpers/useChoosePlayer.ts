@@ -2,7 +2,7 @@ import { serverPlayers } from "@src/state/players";
 import { PLAYER, RoleDict } from "@src/types";
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
-import { SERVER } from "./axios";
+import { SERVER } from "./useAxios";
 
 const useChoosePlayer = (): {
   getAllPlayers: () => Promise<void>;

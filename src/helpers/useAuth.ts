@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { USER } from "./axios";
+import { USER, SERVER } from "./useAxios";
 
 type AuthStateType = "in" | "out" | "Error";
 type TokenType = string | false;
@@ -57,7 +57,16 @@ const useAuth = (): {
 
       const response = await USER.post("user/login", data);
       SetToken(response.data.token);
+
+      SERVER.interceptors.request.use((config) => {
+        config.headers!.Authorization = `Bearer ${window.localStorage.getItem(
+          "token"
+        )}`;
+        return config;
+      });
+
       navigate("/create-team");
+
       return "in";
     } catch (err) {
       console.log(err);
