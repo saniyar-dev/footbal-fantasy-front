@@ -1,7 +1,7 @@
 import Column from "@src/atomComponents/Grid/Column"
 import Row from "@src/atomComponents/Grid/Row"
 import { Table, TableHeader, TableRow } from "@src/atomComponents/Table/Table"
-import useChoosePlayer from "@src/helpers/useChoosePlayer"
+import useChoosePlayer from "@src/services/useChoosePlayer"
 import React, {FC, ReactElement, useEffect} from "react"
 import styled from "styled-components"
 import SearchComponent from "../../atomComponents/SearchComponent/SearchComponent"
@@ -12,7 +12,8 @@ import previousUrl from '@assets/Icons/Pagination/next.svg'
 import previousLastUrl from '@assets/Icons/Pagination/nextLast.svg'
 import ButtonGroup, { ButtonGroupBtn } from "@src/atomComponents/Button/ButtonGroup"
 import { RoleDict } from "@src/types"
-import useManagePlayer from "@src/helpers/useManagePlayer"
+import useManagePlayer from "@src/services/useManagePlayer"
+import useTranslate from "@src/helpers/useTranslate"
 
 const SpecialContainer = styled(Column)`
     width: 273px;
@@ -81,6 +82,7 @@ const Header = styled.h2`
 const ChoosePlayerComponent: FC = (): ReactElement => {
     const {playerList, getByLimit, nextPage, previousPage, currentPage, filterPlayers, searchPlayer} = useChoosePlayer()
     const {addPlayer} = useManagePlayer()
+    const translate = useTranslate();
 
     useEffect(() => {
         getByLimit()
@@ -166,7 +168,7 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                             <PreviousIcon onClick={previousPage} />
                         </Row>
                         <Row>
-                            صفحه {currentPage} از ۱۷
+                            صفحه {translate(currentPage)} از ۱۷
                         </Row>
                         <Row>
                             <NextIcon onClick={nextPage} />

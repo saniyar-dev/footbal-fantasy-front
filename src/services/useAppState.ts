@@ -2,7 +2,7 @@ import { myPlayers } from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
-import { SERVER } from "./useAxios";
+import { SERVER } from "@src/helpers/useAxios";
 import { selectedSquadId } from "@src/state/players";
 
 const useAppState = (): {

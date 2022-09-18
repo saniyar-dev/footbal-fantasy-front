@@ -1,5 +1,5 @@
-import useChoosePlayer from "@src/helpers/useChoosePlayer";
-import useManagePlayer from "@src/helpers/useManagePlayer";
+import useChoosePlayer from "@src/services/useChoosePlayer";
+import useManagePlayer from "@src/services/useManagePlayer";
 import { serverPlayers } from "@src/state/players";
 import React, {FC, ReactElement, useEffect} from "react"
 import { useRecoilState } from "recoil";
