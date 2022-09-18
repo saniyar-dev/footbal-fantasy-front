@@ -2,7 +2,7 @@ import { myPlayers } from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
-import { SERVER } from "./axios";
+import { SERVER } from "./useAxios";
 import { selectedSquadId } from "@src/state/players";
 
 const useAppState = (): {
@@ -67,10 +67,14 @@ const useAppState = (): {
     }
   };
 
+  const formatWallet = (value: number): number => {
+    return value.toFixed(2) as unknown as number;
+  };
+
   const getWallet = async (): Promise<number> => {
     try {
       const response = await SERVER.get("user/get-wallet");
-      return response.data.wallet as unknown as number;
+      return formatWallet(response.data.wallet as unknown as number);
     } catch (err) {
       return -1;
     }

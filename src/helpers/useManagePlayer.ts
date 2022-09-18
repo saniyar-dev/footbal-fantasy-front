@@ -1,7 +1,7 @@
 import { selectedSquadId } from "@src/state/players";
 import { PLAYER } from "@src/types";
 import { useRecoilState } from "recoil";
-import { SERVER } from "./axios";
+import { SERVER } from "./useAxios";
 import useAppState from "./useAppState";
 
 const useManagePlayer = (): {
