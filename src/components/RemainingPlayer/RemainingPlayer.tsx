@@ -1,4 +1,6 @@
-import React, {FC, ReactElement} from "react";
+import useTranslate from "@src/helpers/useTranslate";
+import useAppState from "@src/services/useAppState";
+import React, {FC, ReactElement, useMemo} from "react";
 import styled from "styled-components";
 import ImageUrl from "../../assets/Icons/user-octagon.svg"
 const Container = styled.div<{
@@ -50,6 +52,13 @@ align-items: center;
 `
 
 const RemainingPlayer: FC = (): ReactElement => {
+    const {players} = useAppState();
+    const translate = useTranslate();
+    const playerCount = useMemo(() => {
+        const value = players.filter(player => player.player_id !== -1).length
+        return value
+    },[players])
+
     return (
         <Container>
             <LogoContainer>
@@ -60,7 +69,7 @@ const RemainingPlayer: FC = (): ReactElement => {
             </Title>
             </LogoContainer>
             <RemainingPlayerCount>
-                ۱۵/۱۲
+                ۱۵/{translate(playerCount)}
             </RemainingPlayerCount>
         </Container>
     )

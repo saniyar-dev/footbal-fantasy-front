@@ -57,13 +57,13 @@ const ListView: FC = (): ReactElement => {
                 width: '541px',
             }}>
                 <TableHeader styles={{width: '541px', height: '30px'}}>
-                    <Column styles={{}}>
+                    <Column styles={{width: '50%', alignItems: 'start'}}>
                         {' '}
                     </Column>
-                    <Column styles={{}}>
+                    <Column styles={{width: '20%', alignItems: 'center'}}>
                         عملکرد
                     </Column>
-                    <Column styles={{}}>
+                    <Column styles={{width: '20%', alignItems: 'center'}}>
                         قیمت
                     </Column>
                 </TableHeader>
@@ -78,9 +78,9 @@ const ListView: FC = (): ReactElement => {
                                 {
                                     players.filter(player => player.position === roleHeader.type).map(player => {
                                         return <TableRow styles={{}}>
-                                                <Column styles={{}}>{player.web_name}</Column>
-                                                <Column styles={{}}>{player.score}</Column>
-                                                <Column styles={{}}>{player.price}</Column>
+                                                <Column styles={{width: '50%', alignItems: 'start'}}>{player.web_name}</Column>
+                                                <Column styles={{width: '20%', alignItems: 'center'}}>{player.score}</Column>
+                                                <Column styles={{width: '20%', alignItems: 'center'}}>{player.price}</Column>
                                         </TableRow>
                                     })
                                 }

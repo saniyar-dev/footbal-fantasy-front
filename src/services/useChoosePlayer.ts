@@ -93,7 +93,6 @@ const useChoosePlayer = (): {
 
   const searchPlayer = async (str: string) => {
     currentSearchString.current = str;
-    console.log(currentSearchString.current);
     try {
       const response = await SERVER.get("player/search", {
         params: {
