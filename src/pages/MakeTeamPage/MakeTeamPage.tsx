@@ -88,7 +88,7 @@ const MakeTeamPage = () => {
                             <SpecialLogoColumn styles={{}}>
                                 <RahnemaLogo />
                                 <SpecialButtonRow styles={{}}>
-                                    <ButtonGroup defaultId={0} onChange={(id) => console.log('شماتیک و لیست', id)}
+                                    <ButtonGroup defaultId={0} onChange={() => {}}
                                     styles={{
                                         defaultHeight: 30,
                                         defaultWidth: 131,
