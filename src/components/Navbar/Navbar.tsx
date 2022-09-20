@@ -1,14 +1,44 @@
-import React, {FC, ReactElement} from "react";
+import React, {FC, ReactElement, useCallback} from "react";
 import styled from "styled-components";
 import {ButtonGroup, ButtonGroupBtn} from "../../atomComponents/Button/ButtonGroup";
+import Row from "@src/atomComponents/Grid/Row";
+import { useNavigate } from "react-router-dom";
 
-const Container = styled.div`
+const NavItemsList = [
+    {
+        id: 0,
+        title: 'تیم من',
+        path: 'create-team',
+    },
+    {
+        id: 1,
+        title: 'نقل و انتقالات',
+        path: 'change-players',
+    },
+    {
+        id: 2,
+        title: 'آخرین رویداد‌ها',
+        path: 'recent-events',
+    },
+    {
+        id: 3,
+        title: 'پروفایل',
+        path: 'profile',
+    },
+    {
+        id: 4,
+        title: 'جوایز',
+        path: 'rewards',
+    },
+]
+
+
+const Container = styled(Row)`
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     width: 770px;
     height: 80px;
-    display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -19,29 +49,12 @@ const Container = styled.div`
 `
 
 const CreateTeamNavbar: FC = (): ReactElement => {
-    const NavItemsList = [
-        {
-            id: 0,
-            title: 'تیم من',
-        },
-        {
-            id: 1,
-            title: 'نقل و انتقالات',
-        },
-        {
-            id: 2,
-            title: 'آخرین رویداد‌ها',
-        },
-        {
-            id: 3,
-            title: 'پروفایل',
-        },
-        {
-            id: 4,
-            title: 'جوایز',
-        },
-    ]
+    const navigate = useNavigate()
 
+    const changePage = useCallback((id: number): void => {
+        const path = NavItemsList.find(item => item.id === id)?.path
+        navigate(`/app/${path}`)
+    }, [navigate])
 
     return (
         <Container>
@@ -60,7 +73,7 @@ const CreateTeamNavbar: FC = (): ReactElement => {
                     fontWeight: 900,
                 }
             }}
-            onChange={(id) => console.log(id)}
+            onChange={(id) => changePage(id)}
             defaultId={0}
             >
                 {
