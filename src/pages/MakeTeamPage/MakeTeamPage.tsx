@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Header from '../../components/Header/Header'
-import CreateTeamNavbar from '../../components/Navbar/Navbar'
 import WeakSeason from '../../components/WeakSeason/WeakSeason'
 import Container from '@atomComponents/Grid/Container'
 import Row from '@src/atomComponents/Grid/Row'
@@ -60,14 +58,8 @@ const MakeTeamPage = () => {
             width: '100%',
             height: '100%',
             gridTemplateColumns: 'auto',
-            gridTemplateRows: 'auto auto auto'
+            gridTemplateRows: 'auto auto'
         }}>
-            <Column styles={{
-                width: '100%',
-            }}>
-                <Header />
-                <CreateTeamNavbar />
-            </Column>
             <Row styles={{
             }}>
                 <WeakSeason />
