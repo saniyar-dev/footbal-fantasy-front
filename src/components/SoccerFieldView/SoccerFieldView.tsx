@@ -36,10 +36,10 @@ const SoccerFieldView: FC = (): ReactElement => {
                                 height: '155px',
                                 gap: '56px',
                                 justifyContent: 'center'
-                            }}>
+                            }} key={role}>
                                 {
-                                    players.filter(player => player.position === role).map(player => {
-                                        return <Player playerInfo={player} />
+                                    players.filter(player => player.position === role).map((player, index) => {
+                                        return <Player playerInfo={player} key={index} />
                                     })
                                 }
                             </Row>
