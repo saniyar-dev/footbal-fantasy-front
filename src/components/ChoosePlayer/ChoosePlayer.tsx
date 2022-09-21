@@ -5,7 +5,6 @@ import useChoosePlayer from "@src/services/useChoosePlayer"
 import React, {FC, ReactElement, useEffect} from "react"
 import styled from "styled-components"
 import SearchComponent from "../../atomComponents/SearchComponent/SearchComponent"
-import PlayerCount from "./PlayerCount/PlayerCount"
 import nextUrl from '@assets/Icons/Pagination/previous.svg'
 import nextLastUrl from '@assets/Icons/Pagination/previousLast.svg'
 import previousUrl from '@assets/Icons/Pagination/next.svg'
@@ -17,9 +16,9 @@ import useTranslate from "@src/helpers/useTranslate"
 
 const SpecialContainer = styled(Column)`
     width: 273px;
-    height: 828px;
+    height: 838px;
 
-    padding: 0 14px 14px 12px;
+    padding: 0 14px 12px 14px;
 
     background: white;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.12));
@@ -78,8 +77,28 @@ const Header = styled.h2`
     color: #FFFFFF;
 `
 
+const PlayerCount = styled.div`
+width: 180px;
+height: 30px;
+
+background: linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%);
+border-radius: 8px;
+
+font-family: 'Vazirmatn';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+
+color: #000000;
+`
+
 const ChoosePlayerComponent: FC = (): ReactElement => {
-    const {playerList, getByLimit, nextPage, previousPage, currentPage, filterPlayers, searchPlayer} = useChoosePlayer()
+    const {playerList, getByLimit, nextPage, previousPage, pager, filterPlayers, searchPlayer, firstPage, lastPage} = useChoosePlayer()
     const {addPlayer} = useManagePlayer()
     const translate = useTranslate();
 
@@ -124,56 +143,60 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                         }
                         </Row>
                     </ButtonGroup>
-                    <PlayerCount />
-                    <Table styles={{
-                        width: '225px',
-                        gap: '8px'
-                    }}>
-                        <TableHeader styles={{}}>
-                            <Column styles={{width: '50%', alignItems: 'start'}}>
-                                نام بازیکن
+                    <PlayerCount>
+                        {translate(pager.totalItems)} بازیکن نمایش داده شده است
+                    </PlayerCount>
+                    <Column styles={{justifyContent: 'space-between', height: '78%'}}>
+                        <Table styles={{
+                            width: '225px',
+                            gap: '8px'
+                        }}>
+                            <TableHeader styles={{}}>
+                                <Column styles={{width: '50%', alignItems: 'start'}}>
+                                    نام بازیکن
+                                </Column>
+                                <Column styles={{width: '20%'}}>
+                                    عملکرد
+                                </Column>
+                                <Column styles={{width: '20%'}}>
+                                قیمت 
+                                </Column>
+                            </TableHeader>
+                            <Column>
+                                {
+                                    playerList.map(player => {
+                                        return <TableRow styles={{height: '40px'}} >
+                                            <Row onClick={() => addPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+                                                <Column styles={{width: '50%' }}>
+                                                    <Row>
+                                                        {player.web_name}
+                                                    </Row>
+                                                    <PositionRow>
+                                                        {player.position}
+                                                    </PositionRow>
+                                                </Column>
+                                                <Column styles={{width: '20%', alignItems: 'center'}}>{player.score}</Column>
+                                                <Column styles={{width: '20%', alignItems: 'center'}}>{player.price}</Column>
+                                            </Row>
+                                        </TableRow>
+                                    })
+                                }
                             </Column>
-                            <Column styles={{width: '20%'}}>
-                                عملکرد
-                            </Column>
-                            <Column styles={{width: '20%'}}>
-                            قیمت 
-                            </Column>
-                        </TableHeader>
-                        <Column>
-                            {
-                                playerList.map(player => {
-                                    return <TableRow styles={{height: '40px'}} >
-                                        <Row onClick={() => addPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
-                                            <Column styles={{width: '50%' }}>
-                                                <Row>
-                                                    {player.web_name}
-                                                </Row>
-                                                <PositionRow>
-                                                    {player.position}
-                                                </PositionRow>
-                                            </Column>
-                                            <Column styles={{width: '20%', alignItems: 'center'}}>{player.score}</Column>
-                                            <Column styles={{width: '20%', alignItems: 'center'}}>{player.price}</Column>
-                                        </Row>
-                                    </TableRow>
-                                })
-                            }
-                        </Column>
-                    </Table>
-                    <Row styles={{justifyContent: 'center', alignItems: 'center', gap: '8px'}}>
-                        <Row>
-                            <PreviousLastIcon onClick={() => {}} />
-                            <PreviousIcon onClick={previousPage} />
+                        </Table>
+                        <Row styles={{justifyContent: 'center', alignItems: 'center', gap: '8px'}}>
+                            <Row>
+                                <PreviousLastIcon onClick={firstPage} />
+                                <PreviousIcon onClick={previousPage} />
+                            </Row>
+                            <Row>
+                                صفحه {translate(pager.currentPage)} از {translate(pager.totalPages)} 
+                            </Row>
+                            <Row>
+                                <NextIcon onClick={nextPage} />
+                                <NextLastIcon onClick={lastPage} />
+                            </Row>
                         </Row>
-                        <Row>
-                            صفحه {translate(currentPage)} از ۱۷
-                        </Row>
-                        <Row>
-                            <NextIcon onClick={nextPage} />
-                            <NextLastIcon onClick={() => {}} />
-                        </Row>
-                    </Row>
+                    </Column>
                 </SpecialContainer>
             </Column>
     )
