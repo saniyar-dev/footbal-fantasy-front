@@ -1,8 +1,8 @@
-import React, {FC, ReactElement, useCallback} from "react";
+import React, {FC, ReactElement, useCallback, useMemo, useState} from "react";
 import styled from "styled-components";
 import {ButtonGroup, ButtonGroupBtn} from "../../atomComponents/Button/ButtonGroup";
 import Row from "@src/atomComponents/Grid/Row";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NavItemsList = [
     {
@@ -50,6 +50,11 @@ const Container = styled(Row)`
 
 const CreateTeamNavbar: FC = (): ReactElement => {
     const navigate = useNavigate()
+    const location = useLocation()
+    const selectedId = useMemo<number>((): number => {
+        const value = NavItemsList.filter(item => `/app/${item.path}` === location.pathname)[0]?.id
+        return value ? value : 0;
+    }, [location])
 
     const changePage = useCallback((id: number): void => {
         const path = NavItemsList.find(item => item.id === id)?.path
@@ -74,7 +79,7 @@ const CreateTeamNavbar: FC = (): ReactElement => {
                 }
             }}
             onChange={(id) => changePage(id)}
-            defaultId={0}
+            defaultId={selectedId}
             >
                 {
                     NavItemsList.map((navItem) => <ButtonGroupBtn id={navItem.id} key={navItem.id   }>{navItem.title}</ButtonGroupBtn>)

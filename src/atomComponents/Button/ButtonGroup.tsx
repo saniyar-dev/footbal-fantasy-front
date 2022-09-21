@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useContext, useState} from "react"
+import React, {FC, ReactElement, useContext, useEffect, useState} from "react"
 import Button from "./Button";
 import {Styles} from '../../types/index'
 
@@ -29,6 +29,7 @@ export const ButtonGroup: FC<{
 }): ReactElement => {
     const [selectedId, setSelectedId] = useState(defaultId)
 
+    useEffect(() => setSelectedId(defaultId), [defaultId])
     return <ButtonGroupContext.Provider value={{styles, selectedId: selectedId, onClickFn: (id) => {
         onChange(id)
         setSelectedId(id)
