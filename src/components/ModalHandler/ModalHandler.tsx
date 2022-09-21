@@ -3,6 +3,7 @@ import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import DeletePlayerModal from "../DeletePlayerModal/DeletePlayerModal";
+import FollowUserModal from "../FollowUserModal/FollowUserModal";
 import Container from "@src/atomComponents/Grid/Container";
 import useModal from "@src/helpers/useModal";
 
@@ -31,7 +32,7 @@ const ModalHandler: FC = (): ReactElement => {
     return (
         <>
         {
-            modalList.length ? 
+            modalList.length > 0 && 
             <CustomContainer>
                 <CustomBackground onClick={() => {
                     removeLastModal();
@@ -39,10 +40,11 @@ const ModalHandler: FC = (): ReactElement => {
                 }} />
                 {
                     modalList.map(modal => {
-                        return <DeletePlayerModal playerInfo={modal.playerInfo} />
+                        return modal._tag === 'player-delete' ? <DeletePlayerModal playerInfo={modal.playerInfo} /> :
+                        <FollowUserModal />
                     })
                 }
-            </CustomContainer> : undefined
+            </CustomContainer>
         }
         </>
     )

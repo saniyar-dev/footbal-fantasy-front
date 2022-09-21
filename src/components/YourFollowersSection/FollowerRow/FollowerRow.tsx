@@ -3,6 +3,7 @@ import React, {FC, ReactElement} from 'react';
 import styled from 'styled-components';
 import profileUrl from '@assets/Images/profile/fake1.jpg'
 import Row from '@src/atomComponents/Grid/Row';
+import useModal from '@src/helpers/useModal';
 
 const StyledName = styled.p`
 font-family: 'Vazirmatn';
@@ -45,6 +46,7 @@ color: #555555;
 `
 
 const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
+    const {addModal} = useModal()
     return <TableRow styles={{}}>
         <Row styles={{
             justifyContent: 'space-between',
@@ -62,7 +64,13 @@ const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
                     شایان رضایی
                 </StyledName>
             </Row>
-            <ViewButton>
+            <ViewButton onClick={(e) => {
+                e.preventDefault()
+                addModal({
+                    _tag: 'follow-user',
+                    userInfo: {}
+                })
+            }}>
                 مشاهده
             </ViewButton>
         </Row>

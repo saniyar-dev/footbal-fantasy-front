@@ -31,10 +31,15 @@ export interface USERPLAYER extends PLAYER {
   squad_place: number;
 }
 
-export type ModalTypes = {
-  _tag: "player-delete";
-  playerInfo: USERPLAYER;
-};
+export type ModalTypes =
+  | {
+      _tag: "player-delete";
+      playerInfo: USERPLAYER;
+    }
+  | {
+      _tag: "follow-user";
+      userInfo: Object;
+    };
 
 export const RoleDict: Record<number, Role> = {
   1: "GK",
