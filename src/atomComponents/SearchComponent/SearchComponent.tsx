@@ -8,11 +8,13 @@ const SearchContext = createContext<{
     setInputValue: React.Dispatch<React.SetStateAction<string>>;
     isFocused: boolean;
     setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
+    placeHolder: string;
 }>({
     inputValue: '', 
     setInputValue: () => {throw new Error("search input value doesn't have init values")}, 
     isFocused: false,
     setIsFocused: () => console.log(1),
+    placeHolder: '',
 })
 
 const SearchStyledRow = styled(Row)`
@@ -31,7 +33,8 @@ border-bottom: 1px solid #E4E4E4;
 
 const SearchComponent: FC<{
     searchFn: (str: string) => Promise<void>;
-}> = ({searchFn}): ReactElement => {
+    placeHolder?: string;
+}> = ({searchFn, placeHolder}): ReactElement => {
     const [inputValue, setInputValue] = useState<string>('')
     const [isFocused, setIsFocused] = useState<boolean>(false)
 
@@ -39,7 +42,7 @@ const SearchComponent: FC<{
         searchFn(inputValue)
     }, [inputValue])
     return (
-        <SearchContext.Provider value={{inputValue, setInputValue, isFocused, setIsFocused}}>
+        <SearchContext.Provider value={{inputValue, setInputValue, isFocused, setIsFocused, placeHolder: placeHolder ? placeHolder : 'جستجو'}}>
             <SearchStyledRow>
                 <SearchIcon />
                 <Input />
@@ -55,7 +58,7 @@ flex-grow: 1;
 
 box-sizing: border-box;
 height: 40px;
-width: 244px;
+width: 100%;
 background: none;
 padding-right: 32px;
 
@@ -73,12 +76,12 @@ color: rgba(61, 25, 91, 0.67);
 `
 
 const Input: FC = () => {
-    const {setInputValue, inputValue} = useContext(SearchContext)
+    const {setInputValue, inputValue, placeHolder} = useContext(SearchContext)
     return <InputStyled value={inputValue} onChange={(e) => {
         e.preventDefault();
         setInputValue(e.target.value)
     }}
-    placeholder="جستجو"
+    placeholder={placeHolder}
     />
 }
 
