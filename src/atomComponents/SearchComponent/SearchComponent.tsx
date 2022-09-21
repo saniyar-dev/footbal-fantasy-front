@@ -23,7 +23,7 @@ padding: 0 20px 0 20px;
 
 box-sizing: border-box;
 height: 40px;
-width: 244px;
+width: 100%;
 
 background: #FFFFFF;
 border-bottom: 1px solid #E4E4E4;

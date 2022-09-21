@@ -18,9 +18,8 @@ import useTranslate from "@src/helpers/useTranslate"
 const SpecialContainer = styled(Column)`
     width: 273px;
     height: 828px;
-    box-sizing: content-box;
 
-    padding-bottom: 12px;
+    padding: 0 14px 14px 12px;
 
     background: white;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.12));
