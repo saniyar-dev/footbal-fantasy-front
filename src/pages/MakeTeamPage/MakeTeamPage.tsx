@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import WeakSeason from '../../components/WeakSeason/WeakSeason'
 import Container from '@atomComponents/Grid/Container'
 import Row from '@src/atomComponents/Grid/Row'
 import Column from '@src/atomComponents/Grid/Column'
@@ -12,6 +11,7 @@ import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGr
 import ListView from '@src/components/ListView/ListView'
 import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
 import useAppState from '@src/services/useAppState'
+import WeakSeason from '@src/components/WeakSeason/WeakSeason'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -58,9 +58,11 @@ const MakeTeamPage = () => {
             width: '100%',
             height: '100%',
             gridTemplateColumns: 'auto',
-            gridTemplateRows: 'auto auto'
+            gridTemplateRows: 'auto',
+            gap: '32px'
         }}>
             <Row styles={{
+                justifyContent: 'center',
             }}>
                 <WeakSeason />
             </Row>
