@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {CSSProperties} from "react";
 
-type Style = Pick<CSSProperties, "gap" | "width" | "height" | "justifyContent" | "alignItems">
+type Style = Pick<CSSProperties, "gap" | "width" | "height" | "justifyContent" | "alignItems" | "gridArea">
 
 const Row = styled.div<{
     styles?: Style
@@ -12,6 +12,7 @@ const Row = styled.div<{
     gap: ${props => props.styles?.gap};
     align-items: ${props => props.styles?.alignItems};
     justify-content: ${props => props.styles?.justifyContent};
+    grid-area: ${props => props.styles?.gridArea};
 `
 export default Row
 
