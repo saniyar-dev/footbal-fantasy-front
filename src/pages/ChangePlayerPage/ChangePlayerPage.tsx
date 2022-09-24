@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 const StyledContainer = styled(Container)`
 margin: 0 auto 0 auto;
+box-sizing: 'content-box';
 `
 
 const ChangePlayerPage: FC = (): ReactElement => {
@@ -16,7 +17,8 @@ const ChangePlayerPage: FC = (): ReactElement => {
         gap: '24px',
     }}>
         <Row styles={{
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            gridArea: '1 / 2 / 1 / 2',
         }}>
             <WeakSeason />
             <ChangeTimebar />
