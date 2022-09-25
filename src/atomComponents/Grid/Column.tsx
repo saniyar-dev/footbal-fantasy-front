@@ -14,5 +14,6 @@ const Column = styled.div<{
     align-items: ${props => props.styles?.alignItems};
     justify-content: ${props => props.styles?.justifyContent};
     grid-area: ${props => props.styles?.gridArea};
+    position: relative;
 `
 export default Column

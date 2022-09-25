@@ -12,5 +12,6 @@ const Container = styled.div<{
     gap: ${props => props.styles?.gap};
     grid-template-columns: ${props => props.styles?.gridTemplateColumns};
     grid-template-rows: ${props => props.styles?.gridTemplateRows};
+    position: relative;
 `
 export default Container
