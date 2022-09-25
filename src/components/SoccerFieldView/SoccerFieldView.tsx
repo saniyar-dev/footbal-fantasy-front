@@ -1,12 +1,8 @@
-import React, {FC, ReactElement} from "react";
+import React, {FC, ReactElement, ReactNode} from "react";
 import styled from "styled-components";
 import BackgroundUrl from "@assets/Images/SoccerField.png"
 import Column from "@src/atomComponents/Grid/Column";
-import Row from "@src/atomComponents/Grid/Row";
-import { Role } from "@src/types";
-import { useRecoilState } from "recoil";
-import {myPlayers} from "@src/state/players";
-import {Player, PlayersContainer} from "@src/atomComponents/Player/Player";
+import { PlayersContainer } from "@src/atomComponents/Player/Player";
 
 const Background = styled.img.attrs({
     src: BackgroundUrl
@@ -14,15 +10,20 @@ const Background = styled.img.attrs({
     position: absolute;
     background-size: cover;
     width: 100%;
+    height: 100%;
     z-index: -1;
 `
 
-const roleList: Array<Role> = ["GK", "DEF", "MID", "ATT"]
+const StyledColumn = styled(Column)`
+    position: relative;
+    justify-content: center;
+    width: 100%;
+`
 
-const SoccerFieldView: FC = (): ReactElement => {
-    const [players, ] = useRecoilState(myPlayers)
+
+const SoccerFieldView: FC<{children: ReactNode}> = ({children}): ReactElement => {
     return (
-        <Column styles={{
+        <StyledColumn styles={{
             justifyContent: 'center'
         }}>
             <Background />
@@ -30,24 +31,10 @@ const SoccerFieldView: FC = (): ReactElement => {
                 <Column styles={{
                     gap: '24px',
                 }}>
-                    {
-                        roleList.map(role => {
-                            return <Row styles={{
-                                height: '155px',
-                                gap: '56px',
-                                justifyContent: 'center'
-                            }} key={role}>
-                                {
-                                    players.filter(player => player.position === role).map((player, index) => {
-                                        return <Player playerInfo={player} key={index} />
-                                    })
-                                }
-                            </Row>
-                        })
-                    }
+                    {children}
                 </Column>
             </PlayersContainer>
-        </Column>
+        </StyledColumn>
     )
 }
 

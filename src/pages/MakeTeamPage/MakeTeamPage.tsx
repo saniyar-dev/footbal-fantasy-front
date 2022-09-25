@@ -9,9 +9,9 @@ import RahnemaLogo from '@src/components/RahnemaLogo/RahnemaLogo'
 import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
-import SoccerFieldView from '@src/components/SoccerFieldView/SoccerFieldView'
 import useAppState from '@src/services/useAppState'
 import WeakSeason from '@src/components/WeakSeason/WeakSeason'
+import CreateTeamSoccerField from '@src/components/SoccerFieldView/CreateTeamSoccerField'
 
 const SpecialButtonRow = styled(Row)`
     width: 272px;
@@ -114,7 +114,7 @@ const MakeTeamPage = () => {
                             gridTemplateRows: 'auto'
                         }}>
                             {
-                                mainView === "SoccerFieldView" ? <SoccerFieldView /> : <ListView />
+                                mainView === "SoccerFieldView" ? <CreateTeamSoccerField /> : <ListView />
                             }
                         </SpecialMainViewContainer>
                     </Column>
