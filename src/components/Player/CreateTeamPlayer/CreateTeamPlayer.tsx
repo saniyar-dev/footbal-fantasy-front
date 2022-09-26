@@ -64,6 +64,7 @@ position: absolute;
 top: 0;
 right: 0;
 cursor: pointer;
+z-index: 10;
 `
 
 const CreateTeamPlayer: FC<{
