@@ -60,7 +60,7 @@ const useAppState = (): {
 
   const getPlayers = async (): Promise<Array<USERPLAYER>> => {
     try {
-      const response = await SERVER.get("user/get-players");
+      const response = await SERVER.get("user/squad");
       return formatPlayers(formatPositionId(response.data));
     } catch (err) {
       return [];

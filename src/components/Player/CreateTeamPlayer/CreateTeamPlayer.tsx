@@ -70,7 +70,7 @@ z-index: 10;
 const CreateTeamPlayer: FC<{
     playerInfo: USERPLAYER;
 }> = ({playerInfo}): ReactElement => {
-    const {status, setHoveredId, setSelectedId} = usePlayerLogic(playerInfo)
+    const {status, setHoveredId, setSelectedId} = usePlayerLogic({playerInfo})
     const {addModal} = useModal()
 
     return (

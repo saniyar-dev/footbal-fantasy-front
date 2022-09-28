@@ -63,8 +63,8 @@ bottom: 30px;
 cursor: pointer;
 `
 
-const SubstitutePlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElement => {
-  const {status, setHoveredId, setSelectedId} = usePlayerLogic(playerInfo, true)
+const MainPlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElement => {
+  const {status, setSelectedId} = usePlayerLogic({playerInfo, clickActive: true})
 
   return <CustomPlayerColumn>
       {
@@ -98,4 +98,4 @@ const SubstitutePlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElem
   </CustomPlayerColumn>
 };
 
-export default SubstitutePlayer;
+export default MainPlayer;

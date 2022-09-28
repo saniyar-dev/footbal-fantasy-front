@@ -2,12 +2,13 @@ import Container from '@src/atomComponents/Grid/Container'
 import Row from '@src/atomComponents/Grid/Row'
 import ChangeTimebar from '@src/components/ChangeTimebar/ChangeTimebar'
 import ChangePlayerSoccerField from '@src/components/SoccerFieldView/ChangePlayerSoccerField'
+import SubtituteField from '@src/components/SubtituteField/SubtituteField'
 import WeakSeason from '@src/components/WeakSeason/WeakSeason'
 import React, {FC, ReactElement} from 'react'
 import styled from 'styled-components'
 
 const StyledContainer = styled(Container)`
-margin: 0 auto 0 auto;
+margin: 0 auto 128px auto;
 width: fit-content;
 box-sizing: 'content-box';
 `
@@ -26,13 +27,19 @@ const ChangePlayerPage: FC = (): ReactElement => {
             <ChangeTimebar />
         </Row>
         <Row styles={{
-            gridArea: '2 / 2 / 2 /2',
+            gridArea: '3 / 2 / 3 /2',
             width: '869px',
             height: '768px',
         }}>
             <ChangePlayerSoccerField />
         </Row>
-
+        <Row styles={{
+            gridArea: '3 / 1 / 3 / 1',
+            width: '273px',
+            height: '764px'
+        }}>
+            <SubtituteField />
+        </Row>
     </StyledContainer>
 }
 
