@@ -3,7 +3,7 @@ import { myPlayers } from "@src/state/players";
 import { Role } from "@src/types";
 import React, {FC, ReactElement} from "react";
 import { useRecoilState } from "recoil";
-import SubstitutePlayer from "../Player/SubstitutePlayer/SubstitutePlayer";
+import MainPlayer from "../Player/MainPlayer/MainPlayer";
 import SoccerFieldView from "./SoccerFieldView";
 
 const roleList: Array<Role> = ["GK", "DEF", "MID", "ATT"]
@@ -20,7 +20,7 @@ const ChangePlayerSoccerField: FC = (): ReactElement => {
                 }} key={role}>
                     {
                         players.filter(player => player.position === role).map((player, index) => {
-                            return <SubstitutePlayer playerInfo={player} key={index} />
+                            return <MainPlayer playerInfo={player} key={index} />
                         })
                     }
                 </Row>
