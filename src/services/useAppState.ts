@@ -1,4 +1,8 @@
-import { myPlayers } from "@src/state/players";
+import {
+  _squadPlayers,
+  _mainPlayers,
+  _reservePlayers,
+} from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
@@ -7,11 +11,15 @@ import { selectedSquadId } from "@src/state/players";
 
 const useAppState = (): {
   getAppState: () => void;
-  players: Array<USERPLAYER>;
+  squadPlayers: Array<USERPLAYER>;
+  mainPlayers: Array<USERPLAYER>;
   wallet: number;
+  reservePlayers: Array<USERPLAYER>;
 } => {
-  const [players, setPlayers] = useRecoilState(myPlayers);
+  const [squadPlayers, setSquadPlayers] = useRecoilState(_squadPlayers);
+  const [mainPlayers, setMainPlayers] = useRecoilState(_mainPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
+  const [reservePlayers, setReservePlayers] = useRecoilState(_reservePlayers);
   const [, setSelectedId] = useRecoilState(selectedSquadId);
 
   const formatPositionId = (
@@ -58,7 +66,7 @@ const useAppState = (): {
     return newPlayerList;
   };
 
-  const getPlayers = async (): Promise<Array<USERPLAYER>> => {
+  const getSquadPlayers = async (): Promise<Array<USERPLAYER>> => {
     try {
       const response = await SERVER.get("user/squad");
       return formatPlayers(formatPositionId(response.data));
@@ -80,19 +88,40 @@ const useAppState = (): {
     }
   };
 
-  const getAppState = async () => {
-    const playersList = await getPlayers();
-    setPlayers(playersList);
+  const getMainPlayers = async (): Promise<Array<USERPLAYER>> => {
+    try {
+      const response = await SERVER.get("user/main-team");
+      return formatPlayers(formatPositionId(response.data));
+    } catch (err) {
+      return [];
+    }
+  };
 
-    const walletValue = await getWallet();
-    setWallet(walletValue);
+  const calculateReservePlayers = (): Array<USERPLAYER> => {
+    return squadPlayers.filter((squadPlayer) =>
+      mainPlayers.some(
+        (mainPlayer) => squadPlayer.player_id === mainPlayer.player_id
+      )
+    );
+  };
+
+  const getAppState = async () => {
+    setSquadPlayers(await getSquadPlayers());
+
+    setWallet(await getWallet());
+
+    setMainPlayers(await getMainPlayers());
+
+    setReservePlayers(calculateReservePlayers());
 
     setSelectedId(0);
   };
 
   return {
     getAppState,
-    players,
+    squadPlayers,
+    mainPlayers,
+    reservePlayers,
     wallet,
   };
 };

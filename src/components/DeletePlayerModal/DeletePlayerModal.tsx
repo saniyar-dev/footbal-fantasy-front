@@ -12,7 +12,7 @@ const DeletePlayerModal: FC<{
     playerInfo: USERPLAYER 
 }> = ({playerInfo}): ReactElement => {
     const {removeLastModal} = useModal()
-    const {removePlayer} = useManagePlayer()
+    const {removeSquadPlayer} = useManagePlayer()
     return (
         <Modal styles={{
             justifyContent: 'center',
@@ -27,7 +27,7 @@ const DeletePlayerModal: FC<{
                 gap: '24px',
                 width: '370px'
             }}>
-                <ModalPrimaryButton onClick={() => {removePlayer(playerInfo.squad_place, playerInfo.player_id); removeLastModal()}}>حذف</ModalPrimaryButton>
+                <ModalPrimaryButton onClick={() => {removeSquadPlayer(playerInfo.squad_place, playerInfo.player_id); removeLastModal()}}>حذف</ModalPrimaryButton>
                 <ModalSecondaryButton onClick={removeLastModal}>لغو</ModalSecondaryButton>
             </Row>
         </Modal>

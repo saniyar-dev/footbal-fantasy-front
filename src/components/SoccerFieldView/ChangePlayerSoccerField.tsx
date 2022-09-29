@@ -1,15 +1,14 @@
 import Row from "@src/atomComponents/Grid/Row";
-import { myPlayers } from "@src/state/players";
+import useAppState from "@src/services/useAppState";
 import { Role } from "@src/types";
 import React, {FC, ReactElement} from "react";
-import { useRecoilState } from "recoil";
 import MainPlayer from "../Player/MainPlayer/MainPlayer";
 import SoccerFieldView from "./SoccerFieldView";
 
 const roleList: Array<Role> = ["GK", "DEF", "MID", "ATT"]
 
 const ChangePlayerSoccerField: FC = (): ReactElement => {
-    const [players, ] = useRecoilState(myPlayers)
+    const {mainPlayers} = useAppState()
     return <SoccerFieldView>
         {
             roleList.map(role => {
@@ -19,7 +18,7 @@ const ChangePlayerSoccerField: FC = (): ReactElement => {
                     justifyContent: 'center'
                 }} key={role}>
                     {
-                        players.filter(player => player.position === role).map((player, index) => {
+                        mainPlayers.filter(player => player.position === role).map((player, index) => {
                             return <MainPlayer playerInfo={player} key={index} />
                         })
                     }

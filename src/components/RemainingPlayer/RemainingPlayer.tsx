@@ -52,12 +52,12 @@ align-items: center;
 `
 
 const RemainingPlayer: FC = (): ReactElement => {
-    const {players} = useAppState();
+    const {squadPlayers} = useAppState();
     const translate = useTranslate();
     const playerCount = useMemo(() => {
-        const value = players.filter(player => player.player_id !== -1).length
+        const value = squadPlayers.filter(player => player.player_id !== -1).length
         return value
-    },[players])
+    },[squadPlayers])
 
     return (
         <Container>
