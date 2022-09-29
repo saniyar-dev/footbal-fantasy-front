@@ -33,6 +33,9 @@ export const PlayersContainer: FC<{
     const [selectedId, setSelectedId] = useRecoilState(selectedSquadId)
     const [localSelectedId, setLocalSelectedId] = useState(0)
     const [hoveredId, setHoveredId] = useState(0)
+    useEffect(() => {
+        setSelectedId(0)
+    }, [])
     return <PlayersContext.Provider value={{selectedId, hoveredId, setSelectedId, setHoveredId, localSelectedId, setLocalSelectedId}}>
         <PlayersBackground onClick={() => {setSelectedId(0); setHoveredId(0);}}/>
         {children}

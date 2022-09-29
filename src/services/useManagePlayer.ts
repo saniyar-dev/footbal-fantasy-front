@@ -5,13 +5,13 @@ import { SERVER } from "../helpers/useAxios";
 import useAppState from "./useAppState";
 
 const useManagePlayer = (): {
-  addPlayer: (player: PLAYER) => void;
-  removePlayer: (squad_place: number, player_id: number) => void;
+  addSquadPlayer: (player: PLAYER) => void;
+  removeSquadPlayer: (squad_place: number, player_id: number) => void;
 } => {
   const { getAppState } = useAppState();
   const [selectedId] = useRecoilState(selectedSquadId);
 
-  const addPlayer = async (newPlayer: PLAYER) => {
+  const addSquadPlayer = async (newPlayer: PLAYER) => {
     await SERVER.post("user/squad", {
       playerId: newPlayer.player_id,
       squadPlace: selectedId.toString(),
@@ -20,7 +20,7 @@ const useManagePlayer = (): {
     getAppState();
   };
 
-  const removePlayer = async (squad_place: number, player_id: number) => {
+  const removeSquadPlayer = async (squad_place: number, player_id: number) => {
     await SERVER.delete("user/squad", {
       data: {
         squadPlace: squad_place.toString(),
@@ -32,8 +32,8 @@ const useManagePlayer = (): {
   };
 
   return {
-    addPlayer,
-    removePlayer,
+    addSquadPlayer,
+    removeSquadPlayer,
   };
 };
 

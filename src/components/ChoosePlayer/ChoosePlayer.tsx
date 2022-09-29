@@ -99,7 +99,7 @@ color: #000000;
 
 const ChoosePlayerComponent: FC = (): ReactElement => {
     const {playerList, getByLimit, nextPage, previousPage, pager, filterPlayers, searchPlayer, firstPage, lastPage} = useChoosePlayer()
-    const {addPlayer} = useManagePlayer()
+    const {addSquadPlayer} = useManagePlayer()
     const translate = useTranslate();
 
     useEffect(() => {
@@ -166,7 +166,7 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                                 {
                                     playerList.map(player => {
                                         return <TableRow styles={{height: '40px'}} >
-                                            <Row onClick={() => addPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+                                            <Row onClick={() => addSquadPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
                                                 <Column styles={{width: '50%' }}>
                                                     <Row>
                                                         {player.web_name}

@@ -1,12 +1,13 @@
 import React, {FC, ReactElement} from "react";
-import {myPlayers} from "@state/players"
+// import {squadPlayers} from "@state/players"
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+// import { useRecoilState } from "recoil";
 import { Role } from "@src/types";
 import { Table, TableHeader, TableRow, TableTitle } from "@src/atomComponents/Table/Table";
 import Container from "@src/atomComponents/Grid/Container";
 import Column from "@src/atomComponents/Grid/Column";
 import LogoUrl from "@assets/PremierLogoWhite.svg"
+import useAppState from "@src/services/useAppState";
 
 const roleHeaderList: Array<{type: Role, title: string}> = [
     {
@@ -46,7 +47,8 @@ border-radius: 16px 0px 0px 16px;
 `
 
 const ListView: FC = (): ReactElement => {
-    const [players, ] = useRecoilState(myPlayers)
+    // const [players, ] = useRecoilState(squadPlayers)
+    const {squadPlayers} = useAppState()
     return (
         <Container styles={{
             gridTemplateColumns: 'auto 274px',
@@ -76,7 +78,7 @@ const ListView: FC = (): ReactElement => {
                                     height: '25px',
                                 }}>{roleHeader.title}</TableTitle>
                                 {
-                                    players.filter(player => player.position === roleHeader.type).map(player => {
+                                    squadPlayers.filter(player => player.position === roleHeader.type).map(player => {
                                         return <TableRow styles={{}}>
                                                 <Column styles={{width: '50%', alignItems: 'start'}}>{player.web_name}</Column>
                                                 <Column styles={{width: '20%', alignItems: 'center'}}>{player.score}</Column>
