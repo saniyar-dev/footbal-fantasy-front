@@ -5,6 +5,7 @@ import profileUrl from '@assets/Images/profile/fake1.jpg'
 import Row from '@src/atomComponents/Grid/Row';
 import useModal from '@src/helpers/useModal';
 import Button from '@src/atomComponents/Button/Button';
+import ProfilePic from '@src/atomComponents/ProfilePic/ProfilePic';
 
 const StyledName = styled.p`
 font-family: 'Vazirmatn';
@@ -16,13 +17,6 @@ align-items: center;
 text-align: right;
 
 color: #3D195B;
-`
-
-const Profile = styled.img`
-width: 40px;
-height: 40px;
-
-border-radius: 60px;
 `
 
 const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
@@ -39,7 +33,7 @@ const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
                 gap: '16px',
                 justifyContent: 'center'
             }}>
-                <Profile src={profileUrl} />
+                <ProfilePic styles={{width: '40px'}} src={profileUrl} />
                 <StyledName>
                     شایان رضایی
                 </StyledName>

@@ -1,4 +1,5 @@
 import React, {FC, ReactElement} from "react";
+import Icon from "@src/atomComponents/Icon/Icon";
 import Row from "@src/atomComponents/Grid/Row";
 import styled from "styled-components";
 import fakeUrl from '@assets/Images/profile/fake1.jpg'
@@ -7,6 +8,7 @@ import starIconUrl from '@assets/Icons/star.svg'
 import arrowUpUrl from '@assets/Icons/arrow-up.svg'
 import arrowDownUrl from '@assets/Icons/arrow-down.svg'
 import Column from "@src/atomComponents/Grid/Column";
+import ProfilePic from "@src/atomComponents/ProfilePic/ProfilePic";
 
 const StyledRow = styled(Row)`
 width: 640px;
@@ -35,11 +37,6 @@ font-size: 12px;
 text-align: center;
 
 color: #3D195B;
-`
-
-const Icon = styled.img`
-width: 20px;
-height: 20px;
 `
 
 const StyledDetail = styled(Row)`
@@ -117,12 +114,12 @@ const UserRecentActions: FC<{
             <Column styles={{
                 gap: '8px'
             }}>
-                <ProfileImage src={fakeUrl} />
+                <ProfilePic styles={{width: '80px'}} src={fakeUrl} />
                 <StyledName>
                     شایان رضایی
                 </StyledName>
             </Column>
-            <Icon src={heartIconUrl} />
+            <Icon width='20px' height='20px' src={heartIconUrl} />
         </Column>
         <StyledDetail>
             <Column styles={{
@@ -133,7 +130,7 @@ const UserRecentActions: FC<{
                 }}>
                     <StyledDetailTitle>امتیاز هفته</StyledDetailTitle>
                     <StyledScore>
-                        <Icon src={starIconUrl} />
+                        <Icon width='20px' height='20px' src={starIconUrl} />
                         <div>
                         ۱۰۴
                         </div>
@@ -149,13 +146,13 @@ const UserRecentActions: FC<{
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowUpUrl} />
+                            <Icon width='20px' height='20px' src={arrowUpUrl} />
                             <StyledName>Yasin</StyledName>
                         </Row>
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowDownUrl} />
+                            <Icon width='20px' height='20px' src={arrowDownUrl} />
                             <StyledName>Handerson</StyledName>
                         </Row>
                     </Row>
@@ -165,13 +162,13 @@ const UserRecentActions: FC<{
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowUpUrl} />
+                            <Icon width='20px' height='20px' src={arrowUpUrl} />
                             <StyledName>Yasin</StyledName>
                         </Row>
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowDownUrl} />
+                            <Icon width='20px' height='20px' src={arrowDownUrl} />
                             <StyledName>Handerson</StyledName>
                         </Row>
                     </Row>
@@ -181,13 +178,13 @@ const UserRecentActions: FC<{
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowUpUrl} />
+                            <Icon width='20px' height='20px' src={arrowUpUrl} />
                             <StyledName>Yasin</StyledName>
                         </Row>
                         <Row styles={{
                             gap: '4px'
                         }}>
-                            <Icon src={arrowDownUrl} />
+                            <Icon width='20px' height='20px' src={arrowDownUrl} />
                             <StyledName>Handerson</StyledName>
                         </Row>
                     </Row>
