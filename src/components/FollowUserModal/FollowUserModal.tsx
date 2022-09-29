@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import fakeProfileUrl from '@assets/Images/profile/fake1.jpg'
 import Button from '@src/atomComponents/Button/Button'
 import useModal from '@src/helpers/useModal'
+import ProfilePic from '@src/atomComponents/ProfilePic/ProfilePic'
 
 const StyledColumn = styled(Column)`
 width: 575px;
@@ -17,13 +18,6 @@ gap: 32px;
 background: #FFFFFF;
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 border-radius: 16px;
-`
-
-const Profile = styled.img`
-width: 150px;
-height: 150px;
-
-border-radius: 75px;
 `
 
 const FieldName = styled.span`
@@ -55,7 +49,7 @@ color: #000000;
 const FollowUserModal: FC = (): ReactElement => {
     const {removeLastModal} = useModal()
     return <StyledColumn>
-        <Profile src={fakeProfileUrl} />
+        <ProfilePic styles={{width: '150px'}} src={fakeProfileUrl} />
         <Button styles={{
             width: '200px',
             height: '50px',
