@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useCallback, useMemo, useState} from "react";
+import React, {FC, ReactElement, useCallback, useMemo} from "react";
 import styled from "styled-components";
 import {ButtonGroup, ButtonGroupBtn} from "../../atomComponents/Button/ButtonGroup";
 import Row from "@src/atomComponents/Grid/Row";
@@ -65,18 +65,12 @@ const CreateTeamNavbar: FC = (): ReactElement => {
         <Container>
             <ButtonGroup
             styles={{
-                defaultWidth: 142,
-                defaultHeight: 60,
-                activeBgColor: 'linear-gradient(262.49deg, #05F4F1 -27.69%, #00FF87 112.29%)',
-                defaultBgColor: 'white',
-                border: {
-                    radius: 8,
-                    value: '',
-                },
-                font: {
-                    fontSize: 17,
-                    fontWeight: 900,
-                }
+                width: '142px',
+                height: '60px',
+                background: 'linear-gradient(262.49deg, #05F4F1 -27.69%, #00FF87 112.29%)',
+                borderRadius: '8px',
+                fontSize: '17px',
+                fontWeight: '900'
             }}
             onChange={(id) => changePage(id)}
             defaultId={selectedId}

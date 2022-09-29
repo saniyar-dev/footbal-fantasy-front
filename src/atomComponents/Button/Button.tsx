@@ -1,20 +1,24 @@
+import { CSSProperties } from "react";
 import styled from "styled-components";
-import { Styles } from "../../types/index";
+// import { Styles } from "../../types/index";
 
 const Button = styled.button<{
-    styles: Styles;
-    active: boolean
+    styles?: Pick<CSSProperties, "width" | "height" | "background" | "fontSize" | "fontWeight" | "borderRadius" | "border" | "color">;
 }>`
-    width: ${props => props.styles.defaultWidth + 'px'};
-    height: ${props => props.styles.defaultHeight + 'px'};
-    background: ${props => props.active ? props.styles.activeBgColor : props.styles.defaultBgColor};
-    font-family: 'Vazirmatn';
-    font-style: normal;
-    font-weight: ${props => props.styles.font?.fontWeight ? props.styles.font.fontWeight : 900};
-    font-size: ${props => props.styles.font?.fontSize ? props.styles.font.fontSize + 'px' : '17px'};
-    text-align: center;
-    border-radius: ${props => props.styles.border?.radius ? props.styles.border.radius + 'px' : '8px'};
-    border: ${props => props.styles.border?.value ? props.styles.border.value : ''};
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+width: ${props => props.styles?.width};
+height: ${props => props.styles?.height};
+background: ${props => props.styles?.background };
+font-family: 'Vazirmatn';
+font-style: normal;
+font-weight: ${props => props.styles?.fontWeight};
+font-size: ${props => props.styles?.fontSize};
+border-radius: ${props => props.styles?.borderRadius};
+border: ${props => props.styles?.border};
+color: ${props => props.styles?.color}
 `
 
 export default Button

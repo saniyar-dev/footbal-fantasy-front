@@ -84,18 +84,12 @@ const MakeTeamPage = () => {
                                 <SpecialButtonRow styles={{}}>
                                     <ButtonGroup defaultId={0} onChange={() => {}}
                                     styles={{
-                                        defaultHeight: 30,
-                                        defaultWidth: 131,
-                                        defaultBgColor: undefined,
-                                        activeBgColor: 'white',
-                                        border: {
-                                            radius: 8,
-                                            value: '',
-                                        },
-                                        font: {
-                                            fontSize: 14,
-                                            fontWeight: 700,
-                                        },
+                                        height: '30px',
+                                        width: '131px',
+                                        background: 'white',
+                                        borderRadius: '8px',
+                                        fontSize: '14px',
+                                        fontWeight: '700',
                                     }}
                                     >
                                         <span onClick={() => setMainView("SoccerFieldView")}>

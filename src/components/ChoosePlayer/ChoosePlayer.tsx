@@ -115,18 +115,13 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                     <SearchComponent searchFn={searchPlayer} />
                     <ButtonGroup
                     styles={{
-                        defaultHeight: 30,
-                        defaultWidth: 40,
-                        activeBgColor:  "linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)",
-                        defaultBgColor: 'white',
-                        border: {
-                            radius: 8,
-                            value: '1px solid #EFEFEF'
-                        },
-                        font: {
-                            fontSize: 12,
-                            fontWeight: 400,
-                        },
+                        height: '30px',
+                        width: '40px',
+                        background: 'linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)',
+                        border: '1px solid #EFEFEF',
+                        borderRadius: '8px',
+                        fontSize: '12px',
+                        fontWeight: '400',
                     }}
                     defaultId={0}
                     onChange={filterPlayers}

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import profileUrl from '@assets/Images/profile/fake1.jpg'
 import Row from '@src/atomComponents/Grid/Row';
 import useModal from '@src/helpers/useModal';
+import Button from '@src/atomComponents/Button/Button';
 
 const StyledName = styled.p`
 font-family: 'Vazirmatn';
@@ -22,27 +23,6 @@ width: 40px;
 height: 40px;
 
 border-radius: 60px;
-`
-
-const ViewButton = styled.button`
-width: 70px;
-height: 30px;
-
-background: #FFFFFF;
-border: 1px solid #E8E8E8;
-border-radius: 4px;
-
-font-family: 'Vazirmatn';
-font-style: normal;
-font-weight: 300;
-font-size: 12px;
-
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-
-color: #555555;
 `
 
 const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
@@ -64,15 +44,18 @@ const FollowerRow: FC<{userId: number}> = ({userId}): ReactElement => {
                     شایان رضایی
                 </StyledName>
             </Row>
-            <ViewButton onClick={(e) => {
-                e.preventDefault()
-                addModal({
-                    _tag: 'follow-user',
-                    userInfo: {}
-                })
-            }}>
+            <Button styles={{
+                width: '70px',
+                height: '30px',
+                background: 'white',
+                color: '#555555',
+                fontSize: '12px',
+                fontWeight: '300',
+                border: '1px solid #E8E8E8',
+                borderRadius: '4px'
+            }} onClick={() => addModal({_tag: 'follow-user', userInfo: {}})} >
                 مشاهده
-            </ViewButton>
+            </Button>
         </Row>
     </TableRow>
 }

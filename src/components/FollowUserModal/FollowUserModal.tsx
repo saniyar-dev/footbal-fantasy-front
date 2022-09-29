@@ -57,15 +57,12 @@ const FollowUserModal: FC = (): ReactElement => {
     return <StyledColumn>
         <Profile src={fakeProfileUrl} />
         <Button styles={{
-            defaultWidth: 200,
-            defaultHeight: 50,
-            activeBgColor: "#05D6E2",
-            font: {
-                fontSize: 16,
-                fontWeight: 800,
-            }
+            width: '200px',
+            height: '50px',
+            background: '#05D6E2',
+            fontSize: '16px',
+            fontWeight: '800',
         }}
-        active={true}
         onClick={(e) => {
             e.preventDefault()
             // connect to server

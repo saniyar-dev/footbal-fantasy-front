@@ -54,18 +54,13 @@ const YourFollowersSection: FC = (): ReactElement => {
             }}>
                 <ButtonGroup 
                 styles={{
-                    defaultWidth: 148,
-                    defaultHeight: 30,
-                    activeBgColor: "linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)",
-                    defaultBgColor: 'white',
-                    border: {
-                        value: '1px solid #03FBB8',
-                        radius: 4
-                    },
-                    font: {
-                        fontSize: 12,
-                        fontWeight: 800,
-                    }
+                    width: '148px',
+                    height: '30px',
+                    background: 'linear-gradient(269.48deg, #04F5EC -30.14%, #03FBB8 109.7%)',
+                    border: '1px solid #03FBB8',
+                    borderRadius: '4px',
+                    fontSize: '12px',
+                    fontWeight: '800'
                 }}
                 onChange={(id) => console.log(id) }
                 defaultId={0}
