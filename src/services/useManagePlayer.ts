@@ -1,4 +1,4 @@
-import { selectedSquadId } from "@src/state/players";
+import { _selectedSquadId } from "@src/state/players";
 import { PLAYER } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "../helpers/useAxios";
@@ -9,7 +9,7 @@ const useManagePlayer = (): {
   removeSquadPlayer: (squad_place: number, player_id: number) => void;
 } => {
   const { getAppState } = useAppState();
-  const [selectedId] = useRecoilState(selectedSquadId);
+  const [selectedId] = useRecoilState(_selectedSquadId);
 
   const addSquadPlayer = async (newPlayer: PLAYER) => {
     await SERVER.post("user/squad", {

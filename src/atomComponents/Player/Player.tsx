@@ -1,7 +1,7 @@
 import React, {FC, ReactElement, createContext, ReactNode, useState, useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
-import { selectedSquadId } from "@src/state/players";
+import { _selectedSquadId } from "@src/state/players";
 import { USERPLAYER } from '@src/types';
 
 export const PlayersContext = createContext<{
@@ -30,7 +30,7 @@ const PlayersBackground = styled.div`
 export const PlayersContainer: FC<{
     children: ReactNode
 }> = ({children}): ReactElement => {
-    const [selectedId, setSelectedId] = useRecoilState(selectedSquadId)
+    const [selectedId, setSelectedId] = useRecoilState(_selectedSquadId)
     const [localSelectedId, setLocalSelectedId] = useState(0)
     const [hoveredId, setHoveredId] = useState(0)
     useEffect(() => {

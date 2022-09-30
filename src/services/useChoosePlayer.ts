@@ -1,5 +1,7 @@
+import { _selectedSquadId } from "@src/state/players";
 import { PLAYER, RoleDict } from "@src/types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 import { SERVER } from "../helpers/useAxios";
 
 const useChoosePlayer = (): {
@@ -13,7 +15,10 @@ const useChoosePlayer = (): {
   pager: { currentPage: number; totalPages: number; totalItems: number };
   filterPlayers: (filterId: number) => Promise<void>;
   searchPlayer: (str: string) => Promise<void>;
+  filterId: number;
 } => {
+  const [selectedSquadId] = useRecoilState(_selectedSquadId);
+  const [filterId, setFilterId] = useState<number>(0);
   const [playerList, setPlayerList] = useState<Array<PLAYER>>([]);
   const pager = useRef<{
     currentPage: number;
@@ -102,6 +107,25 @@ const useChoosePlayer = (): {
     getByLimit();
   };
 
+  useEffect(() => {
+    if (selectedSquadId === 0) {
+      setFilterId(0);
+      filterPlayers(0);
+    } else if (selectedSquadId < 3) {
+      setFilterId(1);
+      filterPlayers(1);
+    } else if (selectedSquadId < 8) {
+      setFilterId(2);
+      filterPlayers(2);
+    } else if (selectedSquadId < 13) {
+      setFilterId(3);
+      filterPlayers(3);
+    } else {
+      setFilterId(4);
+      filterPlayers(4);
+    }
+  }, [selectedSquadId]);
+
   const filterPlayers = async (filterId: number) => {
     currentFilterId.current = filterId;
     pager.current.currentPage = 1;
@@ -149,6 +173,7 @@ const useChoosePlayer = (): {
     pager: pager.current,
     filterPlayers,
     searchPlayer,
+    filterId,
   };
 };
 

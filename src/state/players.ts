@@ -16,7 +16,7 @@ export const _reservePlayers = atom<Array<USERPLAYER>>({
   default: [],
 });
 
-export const selectedSquadId = atom<number>({
-  key: "selectedSquadId",
+export const _selectedSquadId = atom<number>({
+  key: "_selectedSquadId",
   default: 0,
 });
