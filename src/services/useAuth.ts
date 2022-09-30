@@ -1,32 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { USER, SERVER } from "@src/helpers/useAxios";
+import { FormInputTypes } from "@src/helpers/useFormValidator";
+import { useRecoilState } from "recoil";
+import { _userEmail } from "@src/state/global";
 
-type AuthStateType = "in" | "out" | "Error";
 type TokenType = string | false;
-
-interface LoginDataType {
-  username: string;
-  password: string;
-}
-
-interface SignupDataType {
-  username: string;
-  password: string;
-  country: string;
-  email: string;
-  name: string;
-  lastname: string;
-}
 
 const useAuth = (): {
   CheckAuth: () => boolean;
-  Login: (data: LoginDataType) => Promise<AuthStateType>;
+  Login: (data: Partial<Record<FormInputTypes, string>>) => void;
   GetTokenFromLocal: () => TokenType;
-  Signup: (data: SignupDataType) => AuthStateType;
+  Signup: (data: Partial<Record<FormInputTypes, string>>) => void;
+  confirmSignup: (data: Partial<Record<FormInputTypes, string>>) => void;
 } => {
   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useRecoilState(_userEmail);
 
-  const GetTokenFromLocal = (): TokenType => {
+  const getTokenFromLocal = (): TokenType => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
       return false;
@@ -34,63 +24,82 @@ const useAuth = (): {
     return token;
   };
 
-  const SetToken = (token: TokenType): void => {
+  const setToken = (token: TokenType): void => {
     if (token) {
       window.localStorage.setItem("token", token);
     }
+    setServerToken();
+  };
+
+  const setServerToken = () => {
+    SERVER.interceptors.request.use((config) => {
+      config.headers!.Authorization = `Bearer ${window.localStorage.getItem(
+        "token"
+      )}`;
+      return config;
+    });
   };
 
   const CheckAuth = (): boolean => {
-    const token = GetTokenFromLocal();
+    const token = getTokenFromLocal();
     if (token) {
       return true;
     }
     return false;
   };
 
-  const Login = async (data: LoginDataType): Promise<AuthStateType> => {
+  const Login = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
-      const token = GetTokenFromLocal();
-      if (token) {
-        return "in";
-      }
-
       const response = await USER.post("user/login", data);
-      SetToken(response.data.token);
+      setToken(response.data.token);
 
-      SERVER.interceptors.request.use((config) => {
-        config.headers!.Authorization = `Bearer ${window.localStorage.getItem(
-          "token"
-        )}`;
-        return config;
-      });
-
-      navigate("/create-team");
-
-      return "in";
+      navigate("/app/create-team");
     } catch (err) {
       console.log(err);
-      return "Error";
     }
   };
 
-  const Signup = (data: SignupDataType): AuthStateType => {
+  const formatSignupData = (
+    data: Partial<Record<FormInputTypes, string>>
+  ): Partial<Record<FormInputTypes | "fullname", string>> => {
+    const fullname = data.name?.concat(" ", data.lastname ? data.lastname : "");
+    delete data.name;
+    delete data.lastname;
+    return { ...data, fullname };
+  };
+
+  const Signup = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
-      // signup with server
-      // HTTP.post("user/signup", data);
-      const token = "";
-      SetToken(token);
-      return "in";
+      await USER.post("user/signup", formatSignupData(data));
+
+      navigate("/user/confirm");
+      setUserEmail(data.email);
     } catch (err) {
-      return "Error";
+      console.log(err);
+    }
+  };
+
+  const confirmSignup = async (
+    data: Partial<Record<FormInputTypes, string>>
+  ) => {
+    try {
+      await USER.post("user/verify", {
+        ...data,
+        email: userEmail,
+      });
+
+      navigate("/user/login");
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return {
     Login,
-    GetTokenFromLocal,
+    GetTokenFromLocal: getTokenFromLocal,
     Signup,
     CheckAuth,
+    confirmSignup,
   };
 };
 

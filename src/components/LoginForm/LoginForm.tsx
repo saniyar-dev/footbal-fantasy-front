@@ -1,18 +1,16 @@
-import React, {Dispatch, FC, ReactElement, SetStateAction} from "react";
+import React, {FC, ReactElement} from "react";
 import { Form, FormHeader, FormInput, FormPrimaryButton, FormSecondaryButton } from "@src/atomComponents/Form/Form";
 import Column from "@src/atomComponents/Grid/Column";
 import Row from "@src/atomComponents/Grid/Row";
 import useAuth from "@src/services/useAuth";
+import { useNavigate } from "react-router-dom";
 
-type FormStatusType = "login" | "signup" | "confirm"
-
-const LoginFormComponent: FC<{
-    setStatus: Dispatch<SetStateAction<FormStatusType>>,
-}> = ({setStatus}) : ReactElement => {
+const LoginFormComponent: FC = () : ReactElement => {
     const {Login} = useAuth()
+    const navigate = useNavigate()
 
     return(
-    <Form onSubmitFn={(data) => {Login(data as {username: string; password: string;})}} styles={{
+    <Form onSubmitFn={(data) => Login(data)} styles={{
         gridTemplateColumns: 'auto',
         gridTemplateRows: 'auto auto auto',
         gap: '56px',
@@ -32,7 +30,7 @@ const LoginFormComponent: FC<{
             gap: '24px'
         }}>
             <FormPrimaryButton>ورود</FormPrimaryButton>
-            <FormSecondaryButton onClickFn={() => {setStatus("signup")}}>ثبت نام</FormSecondaryButton>
+            <FormSecondaryButton onClickFn={() => {navigate("/user/signup")}}>ثبت نام</FormSecondaryButton>
         </Row>
     </Form>
     )

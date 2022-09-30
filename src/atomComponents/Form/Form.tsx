@@ -21,8 +21,6 @@ export const Form: FC<{
     styles?: Pick<CSSProperties, "gap" | "gridTemplateColumns" | "gridTemplateRows" | "width" | "height">,
     onSubmitFn: (data: Partial<Record<FormInputTypes, string>>) => void,
 }> = ({children, styles, onSubmitFn}): ReactElement => {
-    const [values, setValues] = useState<Partial<Record<FormInputTypes, string>>>({})
-
     const childValues = useRef<Partial<Record<FormInputTypes, string>>>({})
     const childValidate = useRef<Partial<Record<FormInputTypes, () => boolean>>>({})
 
@@ -35,8 +33,7 @@ export const Form: FC<{
             }
         }
         if (willSubmit) {
-            setValues(childValues.current)
-            onSubmitFn(values)
+            onSubmitFn(childValues.current)
         }
     }
 
