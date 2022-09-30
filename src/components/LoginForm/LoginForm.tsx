@@ -25,8 +25,8 @@ const LoginFormComponent: FC<{
         <Column styles={{
             gap: '16px'
         }}>
-            <FormInput id="username" label="نام کاربری" placeHolder="" />
-            <FormInput id="password" label="رمز عبور" placeHolder="" />
+            <FormInput id="username" label="نام کاربری" placeHolder="asghar" errMessage="از گوگل ترنسلیت استفاده کن و اینو خارجکی بده" />
+            <FormInput id="password" label="رمز عبور" placeHolder="" errMessage="رمز عبورت باید حداقل ۸ حرف باشه و توش یه عددم داشته باشه" />
         </Column>
         <Row styles={{
             gap: '24px'
