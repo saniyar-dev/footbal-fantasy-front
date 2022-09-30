@@ -27,12 +27,12 @@ const SignupFormComponent: FC<{
                 gap: '24px',
             }}>
 
-                <FormInput id="name" label="نام" placeHolder="مثلا محمود" />
-                <FormInput id="lastname" label="نام خانوادگی" placeHolder="مثلا محمودی" />
-                <FormInput id="email" label="ایمیل" placeHolder="mahmood@gmail.com" />
+                <FormInput id="name" label="نام" placeHolder="مثلا محمود" errMessage="اینجا ایرانه ولی تو اسمتو خارجکی تایپ کن" />
+                <FormInput id="lastname" label="نام خانوادگی" placeHolder="مثلا محمودی" errMessage="اینم خارجکی لطف کن" />
+                <FormInput id="email" label="ایمیل" placeHolder="mahmood@gmail.com" errMessage="این قراره کار کنه یه واقعیشو بده" />
                 <FormInput id="country" label="کشور" placeHolder="قم" />
-                <FormInput id="username" label="نام کاربری" placeHolder="mahmoodMahmoodi" />
-                <FormInput id="password" label="رمز عبور" placeHolder="" />
+                <FormInput id="username" label="نام کاربری" placeHolder="mahmoodMahmoodi" errMessage="اینجا همه چی خارجکیه" />
+                <FormInput id="password" label="رمز عبور" placeHolder="" errMessage="رمز عبورت باید حداقل ۸ حرف و یه عدد توش باشه و البته که خارجکی" />
             </Container>
             <FormPrimaryButton >ثبت نام</FormPrimaryButton>
         </Form>
