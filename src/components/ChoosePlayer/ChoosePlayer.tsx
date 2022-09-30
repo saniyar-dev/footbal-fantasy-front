@@ -159,8 +159,8 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                             </TableHeader>
                             <Column>
                                 {
-                                    playerList.map(player => {
-                                        return <TableRow styles={{height: '40px'}} >
+                                    playerList.map((player, index) => {
+                                        return <TableRow styles={{height: '40px'}} key={index} >
                                             <Row onClick={() => addSquadPlayer(player)} styles={{alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
                                                 <Column styles={{width: '50%' }}>
                                                     <Row>

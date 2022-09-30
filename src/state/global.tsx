@@ -1,6 +1,6 @@
 import {atom} from 'recoil'
 
-export const ActivePage = atom({
-    key: 'ActivePage',
+export const _userEmail = atom<string | undefined>({
+    key: "_userEmail",
     default: ''
 })

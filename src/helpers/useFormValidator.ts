@@ -5,7 +5,7 @@ export type FormInputTypes =
   | "name"
   | "lastname"
   | "country"
-  | "confirmCode";
+  | "code";
 
 const useFormValidator = (): (({
   type,
@@ -33,14 +33,14 @@ const useFormValidator = (): (({
         if (/\w/g.test(value)) return true;
         else return false;
       case "lastname":
-        if (/w/g.test(value)) return true;
+        if (/\w/g.test(value)) return true;
         else return false;
       case "email":
         if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) return true;
         else return false;
       case "country":
         return true;
-      case "confirmCode":
+      case "code":
         return true;
     }
 
