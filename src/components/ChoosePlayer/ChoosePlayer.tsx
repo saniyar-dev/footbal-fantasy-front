@@ -2,7 +2,7 @@ import Column from "@src/atomComponents/Grid/Column"
 import Row from "@src/atomComponents/Grid/Row"
 import { Table, TableHeader, TableRow } from "@src/atomComponents/Table/Table"
 import useChoosePlayer from "@src/services/useChoosePlayer"
-import React, {FC, ReactElement, useEffect} from "react"
+import React, {FC, ReactElement} from "react"
 import styled from "styled-components"
 import SearchComponent from "../../atomComponents/SearchComponent/SearchComponent"
 import nextUrl from '@assets/Icons/Pagination/previous.svg'
@@ -98,13 +98,10 @@ color: #000000;
 `
 
 const ChoosePlayerComponent: FC = (): ReactElement => {
-    const {playerList, getByLimit, nextPage, previousPage, pager, filterPlayers, searchPlayer, firstPage, lastPage} = useChoosePlayer()
+    const {filterId, playerList, nextPage, previousPage, pager, filterPlayers, searchPlayer, firstPage, lastPage} = useChoosePlayer()
     const {addSquadPlayer} = useManagePlayer()
     const translate = useTranslate();
 
-    useEffect(() => {
-        getByLimit()
-    }, [])
     return (
             <Column styles={{}}>
                 <Header>انتخاب بازیکن</Header>
@@ -123,7 +120,7 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                         fontSize: '12px',
                         fontWeight: '400',
                     }}
-                    defaultId={0}
+                    defaultId={filterId}
                     onChange={filterPlayers}
                     >
                         <Row styles={{
@@ -132,8 +129,8 @@ const ChoosePlayerComponent: FC = (): ReactElement => {
                         }}>
                             <ButtonGroupBtn id={0} key={0}>All</ButtonGroupBtn>
                         {
-                            Object.keys(RoleDict).map((id) => 
-                            <ButtonGroupBtn id={id as unknown as number} key={id}>{RoleDict[id as unknown as number]}</ButtonGroupBtn>
+                            Object.keys(RoleDict).map((id, index) => 
+                            <ButtonGroupBtn id={index + 1} key={id}>{RoleDict[id as unknown as number]}</ButtonGroupBtn>
                             )
                         }
                         </Row>

@@ -7,7 +7,7 @@ import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
-import { selectedSquadId } from "@src/state/players";
+import { _selectedSquadId } from "@src/state/players";
 
 const useAppState = (): {
   getAppState: () => void;
@@ -20,7 +20,7 @@ const useAppState = (): {
   const [mainPlayers, setMainPlayers] = useRecoilState(_mainPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
   const [reservePlayers, setReservePlayers] = useRecoilState(_reservePlayers);
-  const [, setSelectedId] = useRecoilState(selectedSquadId);
+  const [, setSelectedId] = useRecoilState(_selectedSquadId);
 
   const formatPositionId = (
     data: Array<Omit<USERPLAYER, "position"> & { position_id?: number }>
