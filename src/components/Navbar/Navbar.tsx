@@ -57,7 +57,7 @@ const CreateTeamNavbar: FC = (): ReactElement => {
     const navigate = useNavigate()
     const location = useLocation()
     const selectedId = useMemo<number>((): number => {
-        const value = NavItemsList.filter(item => `/app/${item.path}` === location.pathname)[0]?.id
+        const value = NavItemsList.filter(item => location.pathname.startsWith(`/app/${item.path}`))[0]?.id
         return value ? value : 0;
     }, [location])
     const {Signout} = useAuth()
