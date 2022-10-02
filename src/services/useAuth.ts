@@ -67,8 +67,17 @@ const useAuth = (): {
     }
   };
 
-  const Signout = () => {
-    removeToken();
+  const Signout = async () => {
+    try {
+      await USER.delete("user/logout", {
+        headers: {
+          Authorization: getTokenFromLocal(),
+        },
+      });
+      removeToken();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const formatSignupData = (
