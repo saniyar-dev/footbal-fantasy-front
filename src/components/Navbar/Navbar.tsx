@@ -31,10 +31,6 @@ const NavItemsList = [
         title: 'جوایز',
         path: 'rewards',
     },
-    {
-        id: 5,
-        title: 'خروج'
-    }
 ]
 
 
@@ -51,6 +47,10 @@ const Container = styled(Row)`
 
     position: relative;
     bottom: 40px;
+`
+
+const StyledSignoutText = styled.span`
+font-weight: 400 !important;
 `
 
 const CreateTeamNavbar: FC = (): ReactElement => {
@@ -89,6 +89,11 @@ const CreateTeamNavbar: FC = (): ReactElement => {
                 {
                     NavItemsList.map((navItem) => <ButtonGroupBtn id={navItem.id} key={navItem.id   }>{navItem.title}</ButtonGroupBtn>)
                 }
+                <ButtonGroupBtn id={5} key={5}>
+                    <StyledSignoutText>
+                        خروج
+                    </StyledSignoutText>
+                </ButtonGroupBtn>
             </ButtonGroup>
        </Container>
     )
