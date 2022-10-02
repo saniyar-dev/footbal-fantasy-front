@@ -14,7 +14,7 @@ const useManagePlayer = (): {
   const addSquadPlayer = async (newPlayer: PLAYER) => {
     await SERVER.post("user/squad", {
       playerId: newPlayer.player_id,
-      squadPlace: selectedId.toString(),
+      squadPlace: selectedId,
     });
 
     getAppState();
@@ -23,7 +23,7 @@ const useManagePlayer = (): {
   const removeSquadPlayer = async (squad_place: number, player_id: number) => {
     await SERVER.delete("user/squad", {
       data: {
-        squadPlace: squad_place.toString(),
+        squadPlace: squad_place,
         playerId: player_id,
       },
     });

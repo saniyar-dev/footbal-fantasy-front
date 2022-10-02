@@ -54,3 +54,8 @@ export const positionIdDict: Record<Role, number> = {
   MID: 3,
   ATT: 4,
 };
+
+export type ToastTypes = {
+  _tag: "error";
+  message: string;
+};
