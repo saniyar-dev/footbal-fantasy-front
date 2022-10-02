@@ -11,6 +11,7 @@ const useAuth = (): {
   Login: (data: Partial<Record<FormInputTypes, string>>) => void;
   GetTokenFromLocal: () => TokenType;
   Signup: (data: Partial<Record<FormInputTypes, string>>) => void;
+  Signout: () => void;
   confirmSignup: (data: Partial<Record<FormInputTypes, string>>) => void;
 } => {
   const navigate = useNavigate();
@@ -29,6 +30,10 @@ const useAuth = (): {
       window.localStorage.setItem("token", token);
     }
     setServerToken();
+  };
+
+  const removeToken = () => {
+    window.localStorage.removeItem("token");
   };
 
   const setServerToken = () => {
@@ -57,6 +62,10 @@ const useAuth = (): {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const Signout = () => {
+    removeToken();
   };
 
   const formatSignupData = (
@@ -100,6 +109,7 @@ const useAuth = (): {
     Signup,
     CheckAuth,
     confirmSignup,
+    Signout,
   };
 };
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {ButtonGroup, ButtonGroupBtn} from "../../atomComponents/Button/ButtonGroup";
 import Row from "@src/atomComponents/Grid/Row";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "@src/services/useAuth";
 
 const NavItemsList = [
     {
@@ -30,6 +31,10 @@ const NavItemsList = [
         title: 'جوایز',
         path: 'rewards',
     },
+    {
+        id: 5,
+        title: 'خروج'
+    }
 ]
 
 
@@ -37,7 +42,7 @@ const Container = styled(Row)`
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
-    width: 770px;
+    width: 924px;
     height: 80px;
     gap: 10px;
     justify-content: center;
@@ -55,8 +60,14 @@ const CreateTeamNavbar: FC = (): ReactElement => {
         const value = NavItemsList.filter(item => `/app/${item.path}` === location.pathname)[0]?.id
         return value ? value : 0;
     }, [location])
+    const {Signout} = useAuth()
 
     const changePage = useCallback((id: number): void => {
+        if (id === 5) {
+            Signout()
+            navigate('/user/login')
+            return;
+        }
         const path = NavItemsList.find(item => item.id === id)?.path
         navigate(`/app/${path}`)
     }, [navigate])

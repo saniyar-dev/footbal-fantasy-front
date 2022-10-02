@@ -12,7 +12,7 @@ const useManagePlayer = (): {
   const [selectedId] = useRecoilState(_selectedSquadId);
 
   const addSquadPlayer = async (newPlayer: PLAYER) => {
-    await SERVER.post("user/squad", {
+    await SERVER.post("squad", {
       playerId: newPlayer.player_id,
       squadPlace: selectedId,
     });
@@ -21,7 +21,7 @@ const useManagePlayer = (): {
   };
 
   const removeSquadPlayer = async (squad_place: number, player_id: number) => {
-    await SERVER.delete("user/squad", {
+    await SERVER.delete("squad", {
       data: {
         squadPlace: squad_place,
         playerId: player_id,
