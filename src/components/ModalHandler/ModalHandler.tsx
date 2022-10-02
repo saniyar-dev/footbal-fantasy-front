@@ -6,6 +6,7 @@ import DeletePlayerModal from "../DeletePlayerModal/DeletePlayerModal";
 import FollowUserModal from "../FollowUserModal/FollowUserModal";
 import Container from "@src/atomComponents/Grid/Container";
 import useModal from "@src/helpers/useModal";
+import ChangePlayerModal from "../ChangePlayerModal/ChangePlayerModal";
 
 const CustomContainer = styled(Container)`
     justify-content: center;
@@ -39,8 +40,14 @@ const ModalHandler: FC = (): ReactElement => {
                 }} />
                 {
                     modalList.map(modal => {
-                        return modal._tag === 'player-delete' ? <DeletePlayerModal playerInfo={modal.playerInfo} /> :
-                        <FollowUserModal />
+                        switch (modal._tag) {
+                            case 'player-delete':
+                                return <DeletePlayerModal playerInfo={modal.playerInfo} />
+                            case 'follow-user':
+                                return <FollowUserModal />
+                            case 'change-player':
+                                return <ChangePlayerModal playerIn={modal.playerIn} playerOut={modal.playerOut} />
+                        }
                     })
                 }
             </CustomContainer>

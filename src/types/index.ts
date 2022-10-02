@@ -39,6 +39,11 @@ export type ModalTypes =
   | {
       _tag: "follow-user";
       userInfo: Object;
+    }
+  | {
+      _tag: "change-player";
+      playerIn: USERPLAYER;
+      playerOut: USERPLAYER;
     };
 
 export const RoleDict: Record<number, Role> = {
