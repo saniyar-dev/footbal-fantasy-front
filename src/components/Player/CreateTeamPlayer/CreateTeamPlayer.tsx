@@ -70,7 +70,7 @@ z-index: 10;
 const CreateTeamPlayer: FC<{
     playerInfo: USERPLAYER;
 }> = ({playerInfo}): ReactElement => {
-    const {status, setHoveredId, setSelectedId} = usePlayerLogic({playerInfo})
+    const {status, setHoveredId, setToSelected} = usePlayerLogic({playerInfo})
     const {addModal} = useModal()
 
     return (
@@ -109,7 +109,7 @@ const CreateTeamPlayer: FC<{
                     status === 'Default' ?
                     <DefaultImg /> : 
                     status === 'Hovered' ? 
-                    <HoveredImg onClick={() => setSelectedId(playerInfo.squad_place)} /> : 
+                    <HoveredImg onClick={() => setToSelected(playerInfo)} /> : 
                     <SelectedImg />
                 }
             </Row>

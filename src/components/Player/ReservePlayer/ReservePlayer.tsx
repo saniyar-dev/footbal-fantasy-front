@@ -4,6 +4,9 @@ import { USERPLAYER } from "@src/types";
 import React, {FC, ReactElement} from "react";
 import styled from "styled-components";
 import Row from "@src/atomComponents/Grid/Row";
+import useModal from "@src/helpers/useModal";
+import { useRecoilState } from "recoil";
+import { _selectedPlayer } from "@src/state/players";
 
 import ActivePlayerUrl from '@assets/Images/Player/ActivePlayer.svg'
 
@@ -33,7 +36,7 @@ color: #FFFFFF;
 `
 
 const SelectedPlayerDetail = styled(Row)`
-background: #37013B;
+background: #05F4F1;
 border-radius: 4px;
 justify-content: center;
 align-items: center;
@@ -54,16 +57,29 @@ color: #FFFFFF;
 const ReservePlayer: FC<{
     playerInfo: USERPLAYER
 }> = ({playerInfo}): ReactElement => {
-    const {status, setSelectedId} = usePlayerLogic({playerInfo, local: true, clickActive: true})
+    const {status, setToSelected} = usePlayerLogic({playerInfo, local: false, clickActive: true})
+    const {addModal} = useModal()
+    const [selectedPlayer, ] = useRecoilState(_selectedPlayer)
+
     return <CustomPlayerColumn>
     {
-            status === 'Active' ? <Column onClick={() => setSelectedId(playerInfo.player_id)}>
+            status === 'Active' ? <Column onClick={() => {
+                if (selectedPlayer) {
+                    addModal({
+                        _tag: 'change-player',
+                        playerIn: playerInfo,
+                        playerOut: selectedPlayer
+                    })
+                } else {
+                    setToSelected(playerInfo)
+                }
+            }}>
                 <ActiveImg />
                 <ActivePlayerDetail>{playerInfo.web_name}</ActivePlayerDetail>
             </ Column> : undefined
     }
     {
-        status === 'Selected' ? <Column>
+        status === 'Selected' ? <Column onClick={() => setToSelected("none")}>
             <ActiveImg />
             <SelectedPlayerDetail>
                 {playerInfo.web_name}

@@ -9,6 +9,9 @@ import DefaultPlayerUrl from '@assets/Images/Player/DefaultPlayer.svg'
 import ActivePlayerUrl from '@assets/Images/Player/ActivePlayer.svg'
 import Row from "@src/atomComponents/Grid/Row";
 import Icon from "@src/atomComponents/Icon/Icon";
+import { useRecoilState } from "recoil";
+import { _selectedPlayer } from "@src/state/players";
+import useModal from "@src/helpers/useModal";
 
 const DefaultImg = () => <img src={DefaultPlayerUrl} alt="default player" />
 const ActiveImg = () => <img src={ActivePlayerUrl} alt="active player" />
@@ -64,7 +67,9 @@ cursor: pointer;
 `
 
 const MainPlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElement => {
-  const {status, setSelectedId} = usePlayerLogic({playerInfo, clickActive: true})
+  const {status, setToSelected} = usePlayerLogic({playerInfo, clickActive: true})
+  const [selectedPlayer] = useRecoilState(_selectedPlayer)
+  const {addModal} = useModal()
 
   return <CustomPlayerColumn>
       {
@@ -81,7 +86,17 @@ const MainPlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElement =>
             {playerInfo.web_name}
           </ActivePlayerDetail>
           <SubstituteIcon src={subtituteIconUrl}
-           onClick={(e) => setSelectedId(playerInfo.squad_place) } />
+           onClick={(e) => {
+            if (selectedPlayer !== undefined) {
+              addModal({
+                _tag: 'change-player',
+                playerIn: playerInfo,
+                playerOut: selectedPlayer
+              })
+            } else {
+              setToSelected(playerInfo)
+            }
+           }} />
         </Column>
         : undefined
       }
@@ -92,7 +107,7 @@ const MainPlayer: FC<{playerInfo: USERPLAYER}> = ({playerInfo}): ReactElement =>
             {playerInfo.web_name}
           </SelectedPlayerDetail>
           <SubstituteIcon src={subtituteIconUrl}
-           onClick={(e) => setSelectedId(0) } />
+           onClick={(e) => setToSelected("none")} />
         </Column> : undefined
       }
   </CustomPlayerColumn>

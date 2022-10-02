@@ -1,4 +1,5 @@
 import Column from "@src/atomComponents/Grid/Column";
+import { PlayersContainer } from "@src/atomComponents/Player/Player";
 import SectionHeader from "@src/atomComponents/SectionHeader/SectionHeader";
 import useAppState from "@src/services/useAppState";
 import React, {FC, ReactElement} from "react";
@@ -19,18 +20,20 @@ const SubtituteField: FC = (): ReactElement => {
         <SectionHeader>
             بازیکنان ذخیره
         </SectionHeader>
-        <Column styles={{
-            gap: '24px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%'
-        }}>
-            {
-                reservePlayers.map((player, index) => {
-                    return <ReservePlayer playerInfo={player} key={index} />
-                })
-            }
-        </Column>
+        <PlayersContainer>
+            <Column styles={{
+                gap: '24px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%'
+            }}>
+                {
+                    reservePlayers.map((player, index) => {
+                        return <ReservePlayer playerInfo={player} key={index} />
+                    })
+                }
+            </Column>
+        </PlayersContainer>
     </StyledColumn>
 }
 

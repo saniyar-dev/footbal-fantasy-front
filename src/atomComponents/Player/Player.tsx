@@ -1,22 +1,22 @@
 import React, {FC, ReactElement, createContext, ReactNode, useState, useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
-import { _selectedSquadId } from "@src/state/players";
+import { _selectedPlayer, _selectedSquadId } from "@src/state/players";
 import { USERPLAYER } from '@src/types';
 
 export const PlayersContext = createContext<{
     selectedId: number;
-    setSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelected: (player: USERPLAYER | "none") => void;
     setHoveredId: React.Dispatch<React.SetStateAction<number>>;
     hoveredId: number;
     localSelectedId: number;
-    setLocalSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelectedLocal: (player: USERPLAYER | "none") => void;
 }>({
     hoveredId: 0,
     selectedId: 0,
-    setSelectedId: () => {throw new Error('')},
+    setToSelected: () => {throw new Error('')},
     setHoveredId: () => {throw new Error('')},
-    setLocalSelectedId: () => {throw new Error('')},
+    setToSelectedLocal: () => {throw new Error('')},
     localSelectedId: 0,
 })
 
@@ -33,42 +33,65 @@ export const PlayersContainer: FC<{
     const [selectedId, setSelectedId] = useRecoilState(_selectedSquadId)
     const [localSelectedId, setLocalSelectedId] = useState(0)
     const [hoveredId, setHoveredId] = useState(0)
+    const [, setSelectedPlayer] = useRecoilState(_selectedPlayer)
+
+    const setToSelected = (player: USERPLAYER | "none") => {
+        if (player === "none") {
+            setSelectedId(0);
+            setSelectedPlayer(undefined)
+            return;
+        }
+        setSelectedId(player.squad_place)
+        setSelectedPlayer(player)
+    }
+
+    const setToSelectedLocal = (player: USERPLAYER | "none") => {
+        if (player === "none") {
+            setLocalSelectedId(0);
+            setSelectedPlayer(undefined)
+            return;
+        }
+        setLocalSelectedId(player.squad_place)
+        setSelectedPlayer(player)
+    }
+
     useEffect(() => {
-        setSelectedId(0)
+        setToSelected("none")
+        setToSelectedLocal("none")
     }, [])
-    return <PlayersContext.Provider value={{selectedId, hoveredId, setSelectedId, setHoveredId, localSelectedId, setLocalSelectedId}}>
-        <PlayersBackground onClick={() => {setSelectedId(0); setHoveredId(0);}}/>
+    return <PlayersContext.Provider value={{selectedId, hoveredId, setToSelected, setHoveredId, localSelectedId, setToSelectedLocal }}>
+        <PlayersBackground onClick={() => {setToSelected("none"); setHoveredId(0); setToSelectedLocal("none")}}/>
         {children}
     </PlayersContext.Provider>
 }
 
 type StatusType = "Active" | "Default" | "Selected" | "Hovered"
 
-const formatContext = ({selectedId, setSelectedId, hoveredId, setHoveredId, localSelectedId, setLocalSelectedId, local} :{
+const formatContext = ({selectedId, setToSelected, hoveredId, setHoveredId, localSelectedId, setToSelectedLocal, local} :{
     selectedId: number;
-    setSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelected: (player: USERPLAYER | "none") => void;
     setHoveredId: React.Dispatch<React.SetStateAction<number>>;
     hoveredId: number;
     localSelectedId: number;
-    setLocalSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelectedLocal: (player: USERPLAYER | "none") => void;
     local: boolean;
 }): {
     selectedId: number;
-    setSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelected: (player: USERPLAYER | "none") => void;
     setHoveredId: React.Dispatch<React.SetStateAction<number>>;
     hoveredId: number;
 } => {
     if (local) {
         return {
             selectedId: localSelectedId,
-            setSelectedId: setLocalSelectedId,
+            setToSelected: setToSelectedLocal,
             hoveredId,
             setHoveredId,
         }
     } else {
         return {
             selectedId,
-            setSelectedId,
+            setToSelected,
             hoveredId,
             setHoveredId,
         }
@@ -79,10 +102,10 @@ export const usePlayerLogic = ({playerInfo, clickActive, local} :{
     playerInfo: USERPLAYER, clickActive?: boolean, local?: boolean
 }):{
     status: StatusType;
-    setSelectedId: React.Dispatch<React.SetStateAction<number>>;
+    setToSelected: (player: USERPLAYER | "none") => void;
     setHoveredId: React.Dispatch<React.SetStateAction<number>>;
 } => {
-    const {hoveredId, selectedId, setSelectedId, setHoveredId} = formatContext({
+    const {hoveredId, selectedId, setToSelected, setHoveredId} = formatContext({
         ...useContext(PlayersContext),
         local: local ? local : false
     })
@@ -118,7 +141,7 @@ export const usePlayerLogic = ({playerInfo, clickActive, local} :{
 
     return {
         status,
-        setSelectedId,
-        setHoveredId
+        setHoveredId,
+        setToSelected,
     }
 }
