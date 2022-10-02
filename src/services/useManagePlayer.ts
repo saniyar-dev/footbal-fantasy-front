@@ -1,5 +1,5 @@
 import { _selectedSquadId } from "@src/state/players";
-import { PLAYER } from "@src/types";
+import { PLAYER, USERPLAYER } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "../helpers/useAxios";
 import useAppState from "./useAppState";
@@ -7,33 +7,65 @@ import useAppState from "./useAppState";
 const useManagePlayer = (): {
   addSquadPlayer: (player: PLAYER) => void;
   removeSquadPlayer: (squad_place: number, player_id: number) => void;
+  substitutePlayer: (
+    playerIn: USERPLAYER,
+    playerOut: USERPLAYER
+  ) => Promise<void>;
 } => {
   const { getAppState } = useAppState();
   const [selectedId] = useRecoilState(_selectedSquadId);
 
   const addSquadPlayer = async (newPlayer: PLAYER) => {
-    await SERVER.post("squad", {
-      playerId: newPlayer.player_id,
-      squadPlace: selectedId,
-    });
+    try {
+      await SERVER.post("squad", {
+        playerId: newPlayer.player_id,
+        squadPlace: selectedId,
+      });
 
-    getAppState();
+      getAppState();
+    } catch (err) {
+      getAppState();
+      console.log(err);
+    }
   };
 
   const removeSquadPlayer = async (squad_place: number, player_id: number) => {
-    await SERVER.delete("squad", {
-      data: {
-        squadPlace: squad_place,
-        playerId: player_id,
-      },
-    });
+    try {
+      await SERVER.delete("squad", {
+        data: {
+          squadPlace: squad_place,
+          playerId: player_id,
+        },
+      });
 
-    getAppState();
+      getAppState();
+    } catch (err) {
+      getAppState();
+      console.log(err);
+    }
+  };
+
+  const substitutePlayer = async (
+    playerIn: USERPLAYER,
+    playerOut: USERPLAYER
+  ) => {
+    try {
+      await SERVER.patch("squad", {
+        playerInId: playerIn.player_id,
+        playerOutId: playerOut.player_id,
+      });
+
+      getAppState();
+    } catch (err) {
+      getAppState();
+      console.log(err);
+    }
   };
 
   return {
     addSquadPlayer,
     removeSquadPlayer,
+    substitutePlayer,
   };
 };
 

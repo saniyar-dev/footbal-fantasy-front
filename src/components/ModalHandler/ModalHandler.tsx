@@ -39,14 +39,14 @@ const ModalHandler: FC = (): ReactElement => {
                     removeLastModal();
                 }} />
                 {
-                    modalList.map(modal => {
+                    modalList.map((modal, index) => {
                         switch (modal._tag) {
                             case 'player-delete':
-                                return <DeletePlayerModal playerInfo={modal.playerInfo} />
+                                return <DeletePlayerModal playerInfo={modal.playerInfo} key={index} />
                             case 'follow-user':
-                                return <FollowUserModal />
+                                return <FollowUserModal key={index} />
                             case 'change-player':
-                                return <ChangePlayerModal playerIn={modal.playerIn} playerOut={modal.playerOut} />
+                                return <ChangePlayerModal playerIn={modal.playerIn} playerOut={modal.playerOut} key={index} />
                         }
                     })
                 }

@@ -2,13 +2,13 @@ import {
   _squadPlayers,
   _mainPlayers,
   _reservePlayers,
+  _selectedPlayer,
 } from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
 import { _selectedSquadId } from "@src/state/players";
-import { useCallback } from "react";
 
 const useAppState = (): {
   getAppState: () => void;
@@ -22,6 +22,7 @@ const useAppState = (): {
   const [wallet, setWallet] = useRecoilState(myWallet);
   const [reservePlayers, setReservePlayers] = useRecoilState(_reservePlayers);
   const [, setSelectedId] = useRecoilState(_selectedSquadId);
+  const [, setSelectedPlayer] = useRecoilState(_selectedPlayer);
 
   const formatPositionId = (
     data: Array<Omit<USERPLAYER, "position"> & { position_id?: number }>
@@ -111,6 +112,9 @@ const useAppState = (): {
   };
 
   const getAppState = async () => {
+    setSelectedId(0);
+    setSelectedPlayer(undefined);
+
     const newSquadPlayers = await getSquadPlayers();
     setSquadPlayers(newSquadPlayers);
 
@@ -121,8 +125,6 @@ const useAppState = (): {
     setMainPlayers(newMainPlayers);
 
     setReservePlayers(calculateReservePlayers(newSquadPlayers, newMainPlayers));
-
-    setSelectedId(0);
   };
 
   return {

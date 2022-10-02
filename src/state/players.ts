@@ -20,3 +20,8 @@ export const _selectedSquadId = atom<number>({
   key: "_selectedSquadId",
   default: 0,
 });
+
+export const _selectedPlayer = atom<USERPLAYER | undefined>({
+  key: "_selectedPlayer",
+  default: undefined,
+});
