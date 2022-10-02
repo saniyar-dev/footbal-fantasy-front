@@ -14,6 +14,7 @@ import SignupFormComponent from './components/SignUpForm/SignUpForm';
 import SignupConfirmFormComponent from './components/SignupConfirmForm/SignupConfirmForm';
 import ToastHandler from './atomComponents/ToastHandler/ToastHandler';
 import useAppState from './services/useAppState';
+import ProfilePreview from './components/Profile/ProfilePreview';
 
 function App() {
   const navigate = useNavigate();
@@ -44,7 +45,10 @@ function App() {
           <Route path='create-team' element={<MakeTeamPage />} />
           <Route path='recent-events' element={<EventPage />} />
           <Route path='change-players' element={<ChangePlayerPage />} />
-          <Route path='profile' element={<ProfilePage />} />
+          <Route path='profile' element={<ProfilePage />}>
+            <Route index element={<ProfilePreview />} />
+            <Route path='edit' />
+          </Route>
           <Route path='rewards' element={<RewardsPage />} />
         </Route>
       </Routes>
