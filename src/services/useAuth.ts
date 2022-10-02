@@ -3,6 +3,7 @@ import { USER, SERVER } from "@src/helpers/useAxios";
 import { FormInputTypes } from "@src/helpers/useFormValidator";
 import { useRecoilState } from "recoil";
 import { _userEmail } from "@src/state/global";
+import useAppState from "./useAppState";
 
 type TokenType = string | false;
 
@@ -16,6 +17,7 @@ const useAuth = (): {
 } => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useRecoilState(_userEmail);
+  const { getAppState } = useAppState();
 
   const getTokenFromLocal = (): TokenType => {
     const token = window.localStorage.getItem("token");
@@ -59,6 +61,7 @@ const useAuth = (): {
       setToken(response.data.token);
 
       navigate("/app/create-team");
+      getAppState();
     } catch (err) {
       console.log(err);
     }
