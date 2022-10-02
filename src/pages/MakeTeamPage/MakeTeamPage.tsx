@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Container from '@atomComponents/Grid/Container'
 import Row from '@src/atomComponents/Grid/Row'
@@ -9,7 +9,6 @@ import RahnemaLogo from '@src/components/RahnemaLogo/RahnemaLogo'
 import RemainingPlayer from '@src/components/RemainingPlayer/RemainingPlayer'
 import ButtonGroup, { ButtonGroupBtn } from '@src/atomComponents/Button/ButtonGroup'
 import ListView from '@src/components/ListView/ListView'
-import useAppState from '@src/services/useAppState'
 import WeakSeason from '@src/components/WeakSeason/WeakSeason'
 import CreateTeamSoccerField from '@src/components/SoccerFieldView/CreateTeamSoccerField'
 
@@ -48,11 +47,6 @@ type MainViewType = "SoccerFieldView" | "ListView"
 const MakeTeamPage = () => {
     const [mainView, setMainView] = useState<MainViewType>("SoccerFieldView")
 
-    const {getAppState} = useAppState()
-    
-    useEffect(() => {
-        getAppState()
-    }, [])
     return (
         <Container styles={{
             width: '100%',

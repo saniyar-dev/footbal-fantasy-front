@@ -19,7 +19,12 @@ const SubtituteField: FC = (): ReactElement => {
         <SectionHeader>
             بازیکنان ذخیره
         </SectionHeader>
-        <Column>
+        <Column styles={{
+            gap: '24px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%'
+        }}>
             {
                 reservePlayers.map((player, index) => {
                     return <ReservePlayer playerInfo={player} key={index} />

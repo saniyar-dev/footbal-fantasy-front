@@ -13,15 +13,18 @@ import LoginFormComponent from './components/LoginForm/LoginForm';
 import SignupFormComponent from './components/SignUpForm/SignUpForm';
 import SignupConfirmFormComponent from './components/SignupConfirmForm/SignupConfirmForm';
 import ToastHandler from './atomComponents/ToastHandler/ToastHandler';
+import useAppState from './services/useAppState';
 
 function App() {
   const navigate = useNavigate();
   const {CheckAuth} = useAuth();
   const location = useLocation()
+  const {getAppState} = useAppState()
 
   useEffect(() => {
     if (CheckAuth()) {
       if (location.pathname.length <= 1) navigate('/app/create-team')
+      getAppState()
     } else {
       navigate('/user/login')
     }

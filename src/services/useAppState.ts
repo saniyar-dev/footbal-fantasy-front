@@ -8,6 +8,7 @@ import { USERPLAYER, RoleDict } from "@src/types";
 import { useRecoilState } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
 import { _selectedSquadId } from "@src/state/players";
+import { useCallback } from "react";
 
 const useAppState = (): {
   getAppState: () => void;
@@ -68,7 +69,7 @@ const useAppState = (): {
 
   const getSquadPlayers = async (): Promise<Array<USERPLAYER>> => {
     try {
-      const response = await SERVER.get("user/squad");
+      const response = await SERVER.get("squad");
       return formatPlayers(formatPositionId(response.data));
     } catch (err) {
       return [];
@@ -81,7 +82,7 @@ const useAppState = (): {
 
   const getWallet = async (): Promise<number> => {
     try {
-      const response = await SERVER.get("user/get-wallet");
+      const response = await SERVER.get("squad/get-wallet");
       return formatWallet(response.data.wallet.money as unknown as number);
     } catch (err) {
       return -1;
@@ -90,29 +91,36 @@ const useAppState = (): {
 
   const getMainPlayers = async (): Promise<Array<USERPLAYER>> => {
     try {
-      const response = await SERVER.get("user/main-team");
-      return formatPlayers(formatPositionId(response.data));
+      const response = await SERVER.get("squad/main-squad");
+      return formatPositionId(response.data);
     } catch (err) {
       return [];
     }
   };
 
-  const calculateReservePlayers = (): Array<USERPLAYER> => {
-    return squadPlayers.filter((squadPlayer) =>
-      mainPlayers.some(
-        (mainPlayer) => squadPlayer.player_id === mainPlayer.player_id
-      )
+  const calculateReservePlayers = (
+    newSquadPlayers: Array<USERPLAYER>,
+    newMainPlayers: Array<USERPLAYER>
+  ): Array<USERPLAYER> => {
+    return newSquadPlayers.filter(
+      (squadPlayer) =>
+        newMainPlayers.some(
+          (mainPlayer) => squadPlayer.player_id === mainPlayer.player_id
+        ) === false
     );
   };
 
   const getAppState = async () => {
-    setSquadPlayers(await getSquadPlayers());
+    const newSquadPlayers = await getSquadPlayers();
+    setSquadPlayers(newSquadPlayers);
 
-    setWallet(await getWallet());
+    const newWallet = await getWallet();
+    setWallet(newWallet);
 
-    setMainPlayers(await getMainPlayers());
+    const newMainPlayers = await getMainPlayers();
+    setMainPlayers(newMainPlayers);
 
-    setReservePlayers(calculateReservePlayers());
+    setReservePlayers(calculateReservePlayers(newSquadPlayers, newMainPlayers));
 
     setSelectedId(0);
   };
