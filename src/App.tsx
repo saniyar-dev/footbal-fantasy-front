@@ -12,6 +12,7 @@ import RewardsPage from './pages/RewardsPage/RewardsPage';
 import LoginFormComponent from './components/LoginForm/LoginForm';
 import SignupFormComponent from './components/SignUpForm/SignUpForm';
 import SignupConfirmFormComponent from './components/SignupConfirmForm/SignupConfirmForm';
+import ToastHandler from './atomComponents/ToastHandler/ToastHandler';
 
 function App() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function App() {
   return (
     <>
       <ModalHandler />
+      <ToastHandler />
       <Routes>
         <Route path='user' element={<SignUpPage />} >
           <Route path='login' element={<LoginFormComponent />} />

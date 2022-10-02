@@ -36,7 +36,6 @@ const ModalHandler: FC = (): ReactElement => {
             <CustomContainer>
                 <CustomBackground onClick={() => {
                     removeLastModal();
-                    console.log(modalList)
                 }} />
                 {
                     modalList.map(modal => {

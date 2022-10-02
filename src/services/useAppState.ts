@@ -82,7 +82,7 @@ const useAppState = (): {
   const getWallet = async (): Promise<number> => {
     try {
       const response = await SERVER.get("user/get-wallet");
-      return formatWallet(response.data.wallet as unknown as number);
+      return formatWallet(response.data.wallet.money as unknown as number);
     } catch (err) {
       return -1;
     }
