@@ -23,8 +23,16 @@ const LoginFormComponent: FC = () : ReactElement => {
         <Column styles={{
             gap: '16px'
         }}>
-            <FormInput id="username" label="نام کاربری" placeHolder="asghar" errMessage="از گوگل ترنسلیت استفاده کن و اینو خارجکی بده" />
-            <FormInput id="password" label="رمز عبور" placeHolder="" errMessage="رمز عبورت باید حداقل ۸ حرف باشه و توش یه عددم داشته باشه" />
+            <FormInput styles={{
+                background: '#3D185B',
+                color: '#EDD8FF',
+                border: '1px solid #A057DB',
+            }} id="username" label="نام کاربری" placeHolder="asghar" errMessage="از گوگل ترنسلیت استفاده کن و اینو خارجکی بده" />
+            <FormInput  styles={{
+                background: '#3D185B',
+                color: '#EDD8FF',
+                border: '1px solid #A057DB',
+            }} id="password" label="رمز عبور" placeHolder="" errMessage="رمز عبورت باید حداقل ۸ حرف باشه و توش یه عددم داشته باشه" />
         </Column>
         <Row styles={{
             gap: '24px'

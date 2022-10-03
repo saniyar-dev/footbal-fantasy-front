@@ -83,13 +83,14 @@ export const FormHeader: FC<{
     )
 }
 
-const StyledInput = styled.input<{styles?: Pick<CSSProperties, "color" | "background">}>`
+const StyledInput = styled.input<{styles?: Pick<CSSProperties, "color" | "background" | "border">}>`
     box-sizing: border-box;
     padding-right: 16px;
     height: 48px;
 
     color: ${props => props.styles?.color ? props.styles.color : '#333333'};
     background: ${props => props.styles?.background ? props.styles.background : '#F4F4F4'};
+    border: ${props => props.styles?.border};
 
     border-radius: 8px;
 `
@@ -118,7 +119,7 @@ export const FormInput: FC<{
     label: string;
     placeHolder: string;
     errMessage?: string;
-    styles?: Pick<CSSProperties, "background" | "color">
+    styles?: Pick<CSSProperties, "background" | "color" | "border">
 }> = ({label, placeHolder, id, errMessage, styles}): ReactElement => {
     const {childValues, childValidate} = useContext(FormContext)
     const [value, setValue] = useState<string>('')
