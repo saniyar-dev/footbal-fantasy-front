@@ -13,7 +13,11 @@ const SignupConfirmFormComponent : FC = () : ReactElement => {
             gap: '72px'
         }}>
             <FormHeader>تایید ثبت نام</FormHeader>
-            <FormInput id="code" label="لطفا کدی که برایتان ارسال شده رو در کارد زیر وارد کنید" placeHolder="" />
+            <FormInput styles={{
+                background: '#3D185B',
+                color: '#EDD8FF',
+                border: '1px solid #A057DB',
+                }} id="code" label="لطفا کدی که برایتان ارسال شده رو در کارد زیر وارد کنید" placeHolder="" />
             <FormPrimaryButton>تایید ثبت نام</FormPrimaryButton>
         </Form>
     )
