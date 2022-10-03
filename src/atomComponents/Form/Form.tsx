@@ -83,26 +83,24 @@ export const FormHeader: FC<{
     )
 }
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{styles?: Pick<CSSProperties, "color" | "background">}>`
     box-sizing: border-box;
     padding-right: 16px;
     height: 48px;
 
-    background: #3D185B;
-    border: 1px solid #A057DB;
-    border-radius: 8px;
+    color: ${props => props.styles?.color ? props.styles.color : '#333333'};
+    background: ${props => props.styles?.background ? props.styles.background : '#F4F4F4'};
 
-    color: #EDD8FF;
+    border-radius: 8px;
 `
 
-const StyledLabel = styled.div`
+const StyledLabel = styled.div<{styles?: Pick<CSSProperties, "color">}>`
     font-family: 'Vazirmatn';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     text-align: right;
-
-    color: #EDD8FF;
+    color: ${props => props.styles?.color ? props.styles.color : '#333333'};
 `
 
 const StyledError = styled.div`
@@ -120,7 +118,8 @@ export const FormInput: FC<{
     label: string;
     placeHolder: string;
     errMessage?: string;
-}> = ({label, placeHolder, id, errMessage}): ReactElement => {
+    styles?: Pick<CSSProperties, "background" | "color">
+}> = ({label, placeHolder, id, errMessage, styles}): ReactElement => {
     const {childValues, childValidate} = useContext(FormContext)
     const [value, setValue] = useState<string>('')
     const [err, setErr] = useState<string>('')
@@ -157,8 +156,8 @@ export const FormInput: FC<{
 
     return (
         <Column styles={{justifyContent: 'center', gap: '16px'}}>
-            <StyledLabel>{label}</StyledLabel>
-            <StyledInput placeholder={placeHolder} onChange={(e) => setValue(e.target.value)} type={id} />
+            <StyledLabel styles={styles}>{label}</StyledLabel>
+            <StyledInput placeholder={placeHolder} onChange={(e) => setValue(e.target.value)} type={id} styles={styles} />
             <StyledError>{err}</StyledError>
         </Column>
     )
