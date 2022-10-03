@@ -4,6 +4,7 @@ import { FormInputTypes } from "@src/helpers/useFormValidator";
 import { useRecoilState } from "recoil";
 import { _userEmail } from "@src/state/global";
 import useAppState from "./useAppState";
+import { useCallback } from "react";
 
 type TokenType = string | false;
 
@@ -67,7 +68,7 @@ const useAuth = (): {
     }
   };
 
-  const Signout = async () => {
+  const Signout = useCallback(async () => {
     try {
       await USER.delete("user/logout", {
         headers: {
@@ -78,7 +79,7 @@ const useAuth = (): {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
 
   const formatSignupData = (
     data: Partial<Record<FormInputTypes, string>>

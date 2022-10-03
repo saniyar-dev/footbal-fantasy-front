@@ -70,7 +70,7 @@ const CreateTeamNavbar: FC = (): ReactElement => {
         }
         const path = NavItemsList.find(item => item.id === id)?.path
         navigate(`/app/${path}`)
-    }, [navigate])
+    }, [Signout, navigate])
 
     return (
         <Container>

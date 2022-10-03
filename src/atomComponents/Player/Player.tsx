@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, createContext, ReactNode, useState, useContext, useEffect} from 'react';
+import React, {FC, ReactElement, createContext, ReactNode, useState, useContext, useEffect, useCallback} from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
 import { _selectedPlayer, _selectedSquadId } from "@src/state/players";
@@ -35,7 +35,7 @@ export const PlayersContainer: FC<{
     const [hoveredId, setHoveredId] = useState(0)
     const [, setSelectedPlayer] = useRecoilState(_selectedPlayer)
 
-    const setToSelected = (player: USERPLAYER | "none") => {
+    const setToSelected = useCallback((player: USERPLAYER | "none") => {
         if (player === "none") {
             setSelectedId(0);
             setSelectedPlayer(undefined)
@@ -43,9 +43,9 @@ export const PlayersContainer: FC<{
         }
         setSelectedId(player.squad_place)
         setSelectedPlayer(player)
-    }
+    }, [setSelectedId, setSelectedPlayer])
 
-    const setToSelectedLocal = (player: USERPLAYER | "none") => {
+    const setToSelectedLocal = useCallback((player: USERPLAYER | "none") => {
         if (player === "none") {
             setLocalSelectedId(0);
             setSelectedPlayer(undefined)
@@ -53,12 +53,12 @@ export const PlayersContainer: FC<{
         }
         setLocalSelectedId(player.squad_place)
         setSelectedPlayer(player)
-    }
+    }, [setSelectedPlayer])
 
     useEffect(() => {
         setToSelected("none")
         setToSelectedLocal("none")
-    }, [])
+    }, [setToSelected, setToSelectedLocal])
     return <PlayersContext.Provider value={{selectedId, hoveredId, setToSelected, setHoveredId, localSelectedId, setToSelectedLocal }}>
         <PlayersBackground onClick={() => {setToSelected("none"); setHoveredId(0); setToSelectedLocal("none")}}/>
         {children}

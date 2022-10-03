@@ -1,5 +1,5 @@
 import { USERPLAYER } from "@src/types";
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export const _squadPlayers = atom<Array<USERPLAYER>>({
   key: "_squadPlayers",
@@ -11,9 +11,18 @@ export const _mainPlayers = atom<Array<USERPLAYER>>({
   default: [],
 });
 
-export const _reservePlayers = atom<Array<USERPLAYER>>({
+export const _reservePlayers = selector<Array<USERPLAYER>>({
   key: "_reservePlayers",
-  default: [],
+  get: ({ get }) => {
+    const newSquadPlayers = get(_squadPlayers);
+    const newMainPlayers = get(_mainPlayers);
+    return newSquadPlayers.filter(
+      (squadPlayer) =>
+        newMainPlayers.some(
+          (mainPlayer) => squadPlayer.player_id === mainPlayer.player_id
+        ) === false
+    );
+  },
 });
 
 export const _selectedSquadId = atom<number>({

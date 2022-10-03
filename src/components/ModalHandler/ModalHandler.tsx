@@ -39,7 +39,7 @@ const ModalHandler: FC = (): ReactElement => {
                     removeLastModal();
                 }} />
                 {
-                    modalList.map((modal, index) => {
+                    modalList.map((modal, index): React.ReactNode => {
                         switch (modal._tag) {
                             case 'player-delete':
                                 return <DeletePlayerModal playerInfo={modal.playerInfo} key={index} />

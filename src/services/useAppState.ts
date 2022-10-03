@@ -1,12 +1,12 @@
 import {
   _squadPlayers,
   _mainPlayers,
-  _reservePlayers,
   _selectedPlayer,
+  _reservePlayers,
 } from "@src/state/players";
 import myWallet from "@src/state/wallet";
 import { USERPLAYER, RoleDict } from "@src/types";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
 import { _selectedSquadId } from "@src/state/players";
 
@@ -20,7 +20,8 @@ const useAppState = (): {
   const [squadPlayers, setSquadPlayers] = useRecoilState(_squadPlayers);
   const [mainPlayers, setMainPlayers] = useRecoilState(_mainPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
-  const [reservePlayers, setReservePlayers] = useRecoilState(_reservePlayers);
+  const reservePlayers = useRecoilValue(_reservePlayers);
+  // const [reservePlayers, setReservePlayers] = useRecoilState(_reservePlayers);
   const [, setSelectedId] = useRecoilState(_selectedSquadId);
   const [, setSelectedPlayer] = useRecoilState(_selectedPlayer);
 
@@ -99,32 +100,16 @@ const useAppState = (): {
     }
   };
 
-  const calculateReservePlayers = (
-    newSquadPlayers: Array<USERPLAYER>,
-    newMainPlayers: Array<USERPLAYER>
-  ): Array<USERPLAYER> => {
-    return newSquadPlayers.filter(
-      (squadPlayer) =>
-        newMainPlayers.some(
-          (mainPlayer) => squadPlayer.player_id === mainPlayer.player_id
-        ) === false
-    );
-  };
-
   const getAppState = async () => {
     setSelectedId(0);
     setSelectedPlayer(undefined);
 
-    const newSquadPlayers = await getSquadPlayers();
-    setSquadPlayers(newSquadPlayers);
+    setSquadPlayers(await getSquadPlayers());
 
-    const newWallet = await getWallet();
-    setWallet(newWallet);
+    setWallet(await getWallet());
 
     const newMainPlayers = await getMainPlayers();
     setMainPlayers(newMainPlayers);
-
-    setReservePlayers(calculateReservePlayers(newSquadPlayers, newMainPlayers));
   };
 
   return {
