@@ -2,7 +2,11 @@ import Column from "@src/atomComponents/Grid/Column";
 import React, { FC, ReactElement } from "react";
 import Row from "@src/atomComponents/Grid/Row";
 import ProfilePic from "@src/atomComponents/ProfilePic/ProfilePic";
-import { Form, FormInput } from "@src/atomComponents/Form/Form";
+import {
+  Form,
+  FormInput,
+  FormPrimaryButton,
+} from "@src/atomComponents/Form/Form";
 import styled from "styled-components";
 import Container from "@src/atomComponents/Grid/Container";
 import Button from "@src/atomComponents/Button/Button";
@@ -67,11 +71,7 @@ const EditProfile: FC = (): ReactElement => {
             errMessage="رمز عبورت باید حداقل ۸ حرف و یه عدد توش باشه و البته که خارجکی"
           />
         </StyledContainer>
-        <Row
-          styles={{
-            justifyContent: "center",
-          }}
-        >
+        <FormPrimaryButton>
           <Button
             styles={{
               width: "373px",
@@ -82,7 +82,7 @@ const EditProfile: FC = (): ReactElement => {
           >
             تایید
           </Button>
-        </Row>
+        </FormPrimaryButton>
       </Form>
     </Column>
   );
