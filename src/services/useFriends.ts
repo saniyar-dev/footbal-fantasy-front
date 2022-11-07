@@ -1,12 +1,16 @@
+import { _followersList, _followingsList } from "@src/state/friends";
 import { User } from "@src/types";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 const useFriends = (): {
   followersList: Array<User>;
   followingsList: Array<User>;
 } => {
-  const [followersList, setFollowersList] = useState<Array<User>>([]);
-  const [followingsList, setFollowingsList] = useState<Array<User>>([]);
+  const [followersList, setFollowersList] =
+    useRecoilState<Array<User>>(_followersList);
+  const [followingsList, setFollowingsList] =
+    useRecoilState<Array<User>>(_followingsList);
 
   const formatFollowingUsers = (data: Array<User>): Array<User> => {
     return data.reduce<Array<User>>((prev, curr) => {
