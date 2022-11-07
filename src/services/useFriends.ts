@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 const useFriends = (): {
   followersList: Array<User>;
   followingsList: Array<User>;
+  followUser: () => Promise<void>;
 } => {
   const [followersList, setFollowersList] =
     useRecoilState<Array<User>>(_followersList);
@@ -115,6 +116,7 @@ const useFriends = (): {
   return {
     followersList,
     followingsList,
+    followUser,
   };
 };
 
