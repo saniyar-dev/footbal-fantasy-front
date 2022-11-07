@@ -110,7 +110,7 @@ const YourFollowersSection: FC = (): ReactElement => {
         <SearchComponent searchFn={async (str) => console.log(str)} />
         <Table styles={{ gap: "16px" }}>
           {userList.map((user) => {
-            return <FollowerRow user={user} />;
+            return <FollowerRow userInfo={user} />;
           })}
         </Table>
       </StyledBox>

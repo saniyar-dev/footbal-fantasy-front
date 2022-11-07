@@ -20,7 +20,7 @@ const StyledName = styled.p`
   color: #3d195b;
 `;
 
-const FollowerRow: FC<{ user: User }> = ({ user }): ReactElement => {
+const FollowerRow: FC<{ userInfo: User }> = ({ userInfo }): ReactElement => {
   const { addModal } = useModal();
   return (
     <TableRow styles={{}}>
@@ -40,7 +40,7 @@ const FollowerRow: FC<{ user: User }> = ({ user }): ReactElement => {
           }}
         >
           <ProfilePic styles={{ width: "40px" }} src={profileUrl} />
-          <StyledName>{user.name}</StyledName>
+          <StyledName>{userInfo.name}</StyledName>
         </Row>
         <Button
           styles={{
@@ -53,7 +53,7 @@ const FollowerRow: FC<{ user: User }> = ({ user }): ReactElement => {
             border: "1px solid #E8E8E8",
             borderRadius: "4px",
           }}
-          onClick={() => addModal({ _tag: "follow-user", userInfo: user })}
+          onClick={() => addModal({ _tag: "follow-user", userInfo })}
         >
           مشاهده
         </Button>

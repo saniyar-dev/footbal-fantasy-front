@@ -1,5 +1,5 @@
 import { myModals } from "@src/state/modals";
-import React, {FC, ReactElement} from "react";
+import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import DeletePlayerModal from "../DeletePlayerModal/DeletePlayerModal";
@@ -9,51 +9,63 @@ import useModal from "@src/helpers/useModal";
 import ChangePlayerModal from "../ChangePlayerModal/ChangePlayerModal";
 
 const CustomContainer = styled(Container)`
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 110;
-    top: 0;
-    width: 100%;
-    height: 100%;
-`
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 110;
+  top: 0;
+  width: 100%;
+  height: 100%;
+`;
 
 const CustomBackground = styled.div`
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
 
-    background: rgba(0, 0, 0, 0.2);
-`
+  background: rgba(0, 0, 0, 0.2);
+`;
 
 const ModalHandler: FC = (): ReactElement => {
-    const [modalList, ] = useRecoilState(myModals)
-    const {removeLastModal} = useModal()
-    return (
-        <>
-        {
-            modalList.length > 0 && 
-            <CustomContainer>
-                <CustomBackground onClick={() => {
-                    removeLastModal();
-                }} />
-                {
-                    modalList.map((modal, index): React.ReactNode => {
-                        switch (modal._tag) {
-                            case 'player-delete':
-                                return <DeletePlayerModal playerInfo={modal.playerInfo} key={index} />
-                            case 'follow-user':
-                                return <FollowUserModal key={index} />
-                            case 'change-player':
-                                return <ChangePlayerModal playerIn={modal.playerIn} playerOut={modal.playerOut} key={index} />
-                        }
-                    })
-                }
-            </CustomContainer>
-        }
-        </>
-    )
-}
+  const [modalList] = useRecoilState(myModals);
+  const { removeLastModal } = useModal();
+  return (
+    <>
+      {modalList.length > 0 && (
+        <CustomContainer>
+          <CustomBackground
+            onClick={() => {
+              removeLastModal();
+            }}
+          />
+          {modalList.map((modal, index): React.ReactNode => {
+            switch (modal._tag) {
+              case "player-delete":
+                return (
+                  <DeletePlayerModal
+                    playerInfo={modal.playerInfo}
+                    key={index}
+                  />
+                );
+              case "follow-user":
+                return (
+                  <FollowUserModal userInfo={modal.userInfo} key={index} />
+                );
+              case "change-player":
+                return (
+                  <ChangePlayerModal
+                    playerIn={modal.playerIn}
+                    playerOut={modal.playerOut}
+                    key={index}
+                  />
+                );
+            }
+          })}
+        </CustomContainer>
+      )}
+    </>
+  );
+};
 
-export default ModalHandler
+export default ModalHandler;
