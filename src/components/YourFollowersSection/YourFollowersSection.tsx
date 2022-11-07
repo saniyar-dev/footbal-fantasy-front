@@ -28,28 +28,10 @@ const StyledBox = styled(Column)`
   border-radius: 0 0 16px 16px;
 `;
 
-const mockFollowers = [
-  {
-    userId: 0,
-  },
-  {
-    userId: 1,
-  },
-  {
-    userId: 2,
-  },
-  {
-    userId: 3,
-  },
-  {
-    userId: 4,
-  },
-];
-
 type Filter = "followers" | "followings";
 
 const YourFollowersSection: FC = (): ReactElement => {
-  const { getFollowers, getFollowings } = useFriends();
+  const { followersList, followingsList } = useFriends();
 
   const [filter, setFilterState] = useState<Filter>("followers");
   const setFilter = (id: number) => {
@@ -61,13 +43,9 @@ const YourFollowersSection: FC = (): ReactElement => {
   const [userList, setUserListState] = useState<Array<User>>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (filter === "followers") setUserListState(await getFollowers());
-      else setUserListState(await getFollowings());
-    };
-
-    fetchData().catch((err) => console.log(err));
-  }, [filter]);
+    if (filter === "followers") setUserListState(followersList);
+    else setUserListState(followingsList);
+  }, [filter, followersList, followingsList]);
 
   return (
     <StyledColumn>

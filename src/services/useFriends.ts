@@ -1,9 +1,13 @@
 import { User } from "@src/types";
+import { useEffect, useState } from "react";
 
 const useFriends = (): {
-  getFollowers: () => Promise<Array<User>>;
-  getFollowings: () => Promise<Array<User>>;
+  followersList: Array<User>;
+  followingsList: Array<User>;
 } => {
+  const [followersList, setFollowersList] = useState<Array<User>>([]);
+  const [followingsList, setFollowingsList] = useState<Array<User>>([]);
+
   const formatFollowingUsers = (data: Array<User>): Array<User> => {
     return data.reduce<Array<User>>((prev, curr) => {
       return [
@@ -93,9 +97,20 @@ const useFriends = (): {
     }
   };
 
+  const followUser = async () => {};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setFollowersList(await getFollowers());
+      setFollowingsList(await getFollowings());
+    };
+
+    fetchData().catch((err) => console.log(err));
+  }, []);
+
   return {
-    getFollowers,
-    getFollowings,
+    followersList,
+    followingsList,
   };
 };
 
