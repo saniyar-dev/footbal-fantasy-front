@@ -76,8 +76,8 @@ export type User = {
 
 export type RecentEvent = {
   user: User;
-  point: Number;
+  point: number;
   substitution: Array<{ playerInName: String; playerOutName: string }>;
-  week: Number;
+  week: number;
   isLiked: Boolean;
 };
