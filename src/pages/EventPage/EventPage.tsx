@@ -4,7 +4,9 @@ import SearchWithPreview from "@src/atomComponents/SearchComponent/SearchWithPre
 import RecentEventsSection from "@src/components/RecentEventsSection/RecentEventsSection";
 import FollowerRow from "@src/components/YourFollowersSection/FollowerRow/FollowerRow";
 import YourFollowersSection from "@src/components/YourFollowersSection/YourFollowersSection";
-import React, { FC, ReactElement } from "react";
+import useFriends from "@src/services/useFriends";
+import { User } from "@src/types";
+import React, { FC, ReactElement, useState } from "react";
 import styled from "styled-components";
 
 const StyledColumn = styled(Column)`
@@ -15,6 +17,8 @@ const StyledColumn = styled(Column)`
 `;
 
 const EventPage: FC = (): ReactElement => {
+  const [searchUserList, setSearchUserList] = useState<Array<User>>([]);
+  const { searchUser } = useFriends();
   return (
     <StyledColumn>
       <Row
@@ -23,9 +27,13 @@ const EventPage: FC = (): ReactElement => {
         }}
       >
         <SearchWithPreview
-          searchFn={async (str) => console.log(str)}
+          searchFn={async (str) => setSearchUserList(await searchUser(str))}
           placeHolder="اسم دوستات رو جستجو کن و دنبالشون کن"
-        ></SearchWithPreview>
+        >
+          {searchUserList.length > 0
+            ? searchUserList.map((user) => <FollowerRow userInfo={user} />)
+            : undefined}
+        </SearchWithPreview>
       </Row>
       <Row
         styles={{

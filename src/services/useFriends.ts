@@ -7,6 +7,7 @@ const useFriends = (): {
   followersList: Array<User>;
   followingsList: Array<User>;
   followUser: () => Promise<void>;
+  searchUser: (str: String) => Promise<Array<User>>;
 } => {
   const [followersList, setFollowersList] =
     useRecoilState<Array<User>>(_followersList);
@@ -104,6 +105,69 @@ const useFriends = (): {
 
   const followUser = async () => {};
 
+  const mockUsers = [
+    {
+      userId: "0",
+      username: "sasan",
+      country: "قم",
+      name: "saniyar",
+      profilePic: "",
+      isFollowing: true,
+    },
+    {
+      userId: "1",
+      username: "ali",
+      country: "قم",
+      name: "ray",
+      profilePic: "",
+      isFollowing: true,
+    },
+    {
+      userId: "0",
+      username: "sasan",
+      country: "قم",
+      name: "sasan",
+      profilePic: "",
+      isFollowing: false,
+    },
+    {
+      userId: "1",
+      username: "ali",
+      country: "قم",
+      name: "ali",
+      profilePic: "",
+      isFollowing: false,
+    },
+  ];
+
+  const formatUsers = (data: Array<User>): Array<User> => {
+    return data.reduce<Array<User>>((prev, curr) => {
+      return [
+        ...prev,
+        {
+          userId: curr!.userId,
+          username: curr!.username,
+          country: curr!.country,
+          name: curr!.name,
+          profilePic: curr!.profilePic,
+          isFollowing: true,
+        },
+      ];
+    }, []);
+  };
+  const searchUser = async (str: String): Promise<Array<User>> => {
+    if (str === "") return [];
+    try {
+      const res = mockUsers.filter((user) =>
+        user.name.toLowerCase().startsWith(str.toLowerCase())
+      );
+      return formatUsers(res);
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setFollowersList(await getFollowers());
@@ -117,6 +181,7 @@ const useFriends = (): {
     followersList,
     followingsList,
     followUser,
+    searchUser,
   };
 };
 

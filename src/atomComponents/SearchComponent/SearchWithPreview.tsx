@@ -1,5 +1,5 @@
 import FollowerRow from "@src/components/YourFollowersSection/FollowerRow/FollowerRow";
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
 import styled from "styled-components";
 import Column from "../Grid/Column";
 import SearchComponent from "./SearchComponent";
@@ -15,7 +15,7 @@ const StyledColumn = styled(Column)`
 
 const SearchWithPreview: FC<{
   placeHolder?: string;
-  children?: ReactElement;
+  children?: ReactNode;
   searchFn: (str: String) => Promise<void>;
 }> = ({ placeHolder, children, searchFn }): ReactElement => {
   return (
