@@ -38,7 +38,7 @@ export type ModalTypes =
     }
   | {
       _tag: "follow-user";
-      userInfo: Object;
+      userInfo: User;
     }
   | {
       _tag: "change-player";
@@ -71,4 +71,5 @@ export type User = {
   country: String;
   username: String;
   profilePic: unknown;
+  isFollowing: boolean;
 };

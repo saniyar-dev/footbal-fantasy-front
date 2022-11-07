@@ -53,7 +53,7 @@ const FollowerRow: FC<{ user: User }> = ({ user }): ReactElement => {
             border: "1px solid #E8E8E8",
             borderRadius: "4px",
           }}
-          onClick={() => addModal({ _tag: "follow-user", userInfo: { user } })}
+          onClick={() => addModal({ _tag: "follow-user", userInfo: user })}
         >
           مشاهده
         </Button>

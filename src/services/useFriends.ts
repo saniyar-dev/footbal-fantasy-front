@@ -4,7 +4,7 @@ const useFriends = (): {
   getFollowers: () => Promise<Array<User>>;
   getFollowings: () => Promise<Array<User>>;
 } => {
-  const formatUsers = (data: Array<User>): Array<User> => {
+  const formatFollowingUsers = (data: Array<User>): Array<User> => {
     return data.reduce<Array<User>>((prev, curr) => {
       return [
         ...prev,
@@ -14,11 +14,27 @@ const useFriends = (): {
           country: curr!.country,
           name: curr!.name,
           profilePic: curr!.profilePic,
+          isFollowing: true,
         },
       ];
     }, []);
   };
 
+  const formatFollowerUsers = (data: Array<User>): Array<User> => {
+    return data.reduce<Array<User>>((prev, curr) => {
+      return [
+        ...prev,
+        {
+          userId: curr!.userId,
+          username: curr!.username,
+          country: curr!.country,
+          name: curr!.name,
+          profilePic: curr!.profilePic,
+          isFollowing: false,
+        },
+      ];
+    }, []);
+  };
   const mockFollowers: Array<User> = [
     {
       userId: "0",
@@ -26,6 +42,7 @@ const useFriends = (): {
       country: "قم",
       name: "sasan",
       profilePic: "",
+      isFollowing: false,
     },
     {
       userId: "1",
@@ -33,6 +50,7 @@ const useFriends = (): {
       country: "قم",
       name: "ali",
       profilePic: "",
+      isFollowing: false,
     },
   ];
 
@@ -43,6 +61,7 @@ const useFriends = (): {
       country: "قم",
       name: "saniyar",
       profilePic: "",
+      isFollowing: true,
     },
     {
       userId: "1",
@@ -50,13 +69,14 @@ const useFriends = (): {
       country: "قم",
       name: "ray",
       profilePic: "",
+      isFollowing: true,
     },
   ];
 
   const getFollowers = async (): Promise<Array<User>> => {
     try {
       const res = mockFollowers;
-      return formatUsers(res);
+      return formatFollowerUsers(res);
     } catch (err) {
       console.log(err);
       return [];
@@ -66,7 +86,7 @@ const useFriends = (): {
   const getFollowings = async (): Promise<Array<User>> => {
     try {
       const res = mockFollowings;
-      return formatUsers(res);
+      return formatFollowingUsers(res);
     } catch (err) {
       console.log(err);
       return [];
