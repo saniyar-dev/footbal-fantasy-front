@@ -50,7 +50,7 @@ const useManagePlayer = (): {
     playerOut: USERPLAYER
   ) => {
     try {
-      await SERVER.patch("squad", {
+      await SERVER.patch("squad/substituation", {
         playerInId: playerIn.player_id,
         playerOutId: playerOut.player_id,
       });
