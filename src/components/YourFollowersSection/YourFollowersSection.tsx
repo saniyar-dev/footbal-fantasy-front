@@ -30,6 +30,10 @@ const StyledBox = styled(Column)`
 
 type Filter = "followers" | "followings";
 
+const searchUser = (users: Array<User>, searchStr: string): Array<User> => {
+  return users.filter((user) => user.name.startsWith(searchStr));
+};
+
 const YourFollowersSection: FC = (): ReactElement => {
   const { followersList, followingsList } = useFriends();
 
@@ -85,7 +89,13 @@ const YourFollowersSection: FC = (): ReactElement => {
             </Row>
           </ButtonGroup>
         </Row>
-        <SearchComponent searchFn={async (str) => console.log(str)} />
+        <SearchComponent
+          searchFn={async (str) => {
+            if (filter === "followers")
+              setUserListState(searchUser(followersList, str));
+            else setUserListState(searchUser(followingsList, str));
+          }}
+        />
         <Table styles={{ gap: "16px" }}>
           {userList.map((user) => {
             return <FollowerRow userInfo={user} />;
