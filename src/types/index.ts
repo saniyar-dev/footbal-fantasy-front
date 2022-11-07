@@ -73,3 +73,11 @@ export type User = {
   profilePic: unknown;
   isFollowing: boolean;
 };
+
+export type RecentEvent = {
+  user: User;
+  point: Number;
+  substitution: Array<{ playerInName: String; playerOutName: string }>;
+  week: Number;
+  isLiked: Boolean;
+};
