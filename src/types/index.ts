@@ -64,3 +64,13 @@ export type ToastTypes = {
   _tag: "error";
   message: string;
 };
+
+export type User = {
+  userId: String;
+  name: String;
+  country: String;
+  email: String;
+  username: String;
+  password: String;
+  profilePic: unknown;
+};
