@@ -6,7 +6,9 @@ import Row from "@src/atomComponents/Grid/Row";
 import SearchComponent from "@src/atomComponents/SearchComponent/SearchComponent";
 import SectionHeader from "@src/atomComponents/SectionHeader/SectionHeader";
 import { Table } from "@src/atomComponents/Table/Table";
-import React, { FC, ReactElement } from "react";
+import useFriends from "@src/services/useFriends";
+import { User } from "@src/types";
+import React, { FC, ReactElement, useState, useEffect } from "react";
 import styled from "styled-components";
 import FollowerRow from "./FollowerRow/FollowerRow";
 
@@ -44,7 +46,29 @@ const mockFollowers = [
   },
 ];
 
+type Filter = "followers" | "followings";
+
 const YourFollowersSection: FC = (): ReactElement => {
+  const { getFollowers, getFollowings } = useFriends();
+
+  const [filter, setFilterState] = useState<Filter>("followers");
+  const setFilter = (id: number) => {
+    console.log(id);
+    if (id === 0) setFilterState("followers");
+    else setFilterState("followings");
+  };
+
+  const [userList, setUserListState] = useState<Array<User>>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (filter === "followers") setUserListState(await getFollowers());
+      else setUserListState(await getFollowings());
+    };
+
+    fetchData().catch((err) => console.log(err));
+  }, [filter]);
+
   return (
     <StyledColumn>
       <SectionHeader>دوستان شما</SectionHeader>
@@ -66,7 +90,7 @@ const YourFollowersSection: FC = (): ReactElement => {
               fontSize: "12px",
               fontWeight: "800",
             }}
-            onChange={(id) => console.log(id)}
+            onChange={(id) => setFilter(id)}
             defaultId={0}
           >
             <Row
@@ -85,8 +109,8 @@ const YourFollowersSection: FC = (): ReactElement => {
         </Row>
         <SearchComponent searchFn={async (str) => console.log(str)} />
         <Table styles={{ gap: "16px" }}>
-          {mockFollowers.map((follower) => {
-            return <FollowerRow userId={follower.userId} />;
+          {userList.map((user) => {
+            return <FollowerRow user={user} />;
           })}
         </Table>
       </StyledBox>
