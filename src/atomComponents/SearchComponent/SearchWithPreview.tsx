@@ -5,9 +5,7 @@ import Column from "../Grid/Column";
 import SearchComponent from "./SearchComponent";
 
 const StyledColumn = styled(Column)`
-  width: 571px;
-  height: 211px;
-
+  width: 100%;
   gap: 16px;
 
   background: #ffffff;
@@ -17,17 +15,17 @@ const StyledColumn = styled(Column)`
 
 const SearchWithPreview: FC<{
   placeHolder?: string;
-  children: ReactElement;
+  children?: ReactElement;
   searchFn: (str: String) => Promise<void>;
 }> = ({ placeHolder, children, searchFn }): ReactElement => {
   return (
-    <StyledColumn>
+    <Column styles={{ width: "100%" }}>
       <SearchComponent
         placeHolder={placeHolder ? placeHolder : "جستجو"}
         searchFn={searchFn}
       />
-      <Column styles={{ gap: "14px" }}>{children}</Column>
-    </StyledColumn>
+      {children ? <StyledColumn>{children}</StyledColumn> : undefined}
+    </Column>
   );
 };
 
