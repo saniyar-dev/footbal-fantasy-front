@@ -5,12 +5,18 @@ import Column from "../Grid/Column";
 import SearchComponent from "./SearchComponent";
 
 const StyledColumn = styled(Column)`
-  width: 100%;
   gap: 16px;
+  width: 571px;
+  height: 211px;
+  position: absolute;
+  top: 40px;
+  z-index: 100;
 
   background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 16px 16px;
+
+  padding: 16px;
 `;
 
 const SearchWithPreview: FC<{
