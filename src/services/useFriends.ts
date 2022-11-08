@@ -182,19 +182,21 @@ const useFriends = (): {
   ];
 
   const formatUsers = (data: Array<BackendUser>): Array<User> => {
-    return data.reduce<Array<User>>((prev, curr) => {
-      return [
-        ...prev,
-        {
-          userId: curr.id,
-          username: curr.userName,
-          country: "ایران",
-          name: curr.firstName.concat(" ", curr.lastName),
-          profilePic: undefined,
-          isFollowing: true,
-        },
-      ];
-    }, []);
+    return data
+      .reduce<Array<User>>((prev, curr) => {
+        return [
+          ...prev,
+          {
+            userId: curr.id,
+            username: curr.userName,
+            country: "ایران",
+            name: curr.firstName.concat(" ", curr.lastName),
+            profilePic: undefined,
+            isFollowing: true,
+          },
+        ];
+      }, [])
+      .slice(0, 3);
   };
   const searchUser = async (str: String): Promise<Array<User>> => {
     if (str === "") return [];
@@ -202,7 +204,6 @@ const useFriends = (): {
       const res = await USER.get("users", {
         params: { search: str },
       });
-      console.log(res);
       return formatUsers(res.data as unknown as Array<BackendUser>);
     } catch (err) {
       addToast({

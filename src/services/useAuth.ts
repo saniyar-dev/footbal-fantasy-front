@@ -86,11 +86,6 @@ const useAuth = (): {
 
   const Signout = useCallback(async () => {
     try {
-      await USER.delete("logout", {
-        headers: {
-          Authorization: getTokenFromLocal(),
-        },
-      });
       removeToken();
     } catch (err) {
       addToast({
