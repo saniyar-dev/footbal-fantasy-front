@@ -100,7 +100,7 @@ const ProfilePreview: FC = (): ReactElement => {
           }}
         >
           <FieldTitle>ایمیل</FieldTitle>
-          <FieldDescription>saniyar.dev@gmail.com</FieldDescription>
+          <FieldDescription>{godInfo.email}</FieldDescription>
         </Column>
         <Column
           styles={{

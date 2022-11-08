@@ -5,6 +5,7 @@ export const USER = axios.create({
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   },
 });
 
