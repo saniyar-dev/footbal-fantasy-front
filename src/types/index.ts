@@ -86,3 +86,9 @@ export type RecentEvent = {
   week: number;
   isLiked: Boolean;
 };
+
+export type ServerErrorType = {
+  response: {
+    errors: Array<{ type: string; message: string }>;
+  };
+};

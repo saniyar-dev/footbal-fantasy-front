@@ -5,7 +5,7 @@ import {
   _reservePlayers,
 } from "@src/state/players";
 import myWallet from "@src/state/wallet";
-import { USERPLAYER, RoleDict } from "@src/types";
+import { USERPLAYER, RoleDict, ServerErrorType } from "@src/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
 import { _selectedSquadId } from "@src/state/players";
@@ -78,7 +78,8 @@ const useAppState = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       return [];
     }
@@ -95,7 +96,8 @@ const useAppState = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       return -1;
     }
@@ -108,7 +110,8 @@ const useAppState = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       return [];
     }

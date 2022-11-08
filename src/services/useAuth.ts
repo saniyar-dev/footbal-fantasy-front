@@ -79,7 +79,8 @@ const useAuth = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
     }
   };
@@ -90,7 +91,8 @@ const useAuth = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
     }
   }, []);
@@ -125,7 +127,8 @@ const useAuth = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
     }
   };
@@ -143,7 +146,8 @@ const useAuth = (): {
     } catch (err) {
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
     }
   };

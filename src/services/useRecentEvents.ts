@@ -110,7 +110,8 @@ const useRecentEvents = (): { friendsRecentEventsList: Array<RecentEvent> } => {
       console.log(err);
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       return [];
     }

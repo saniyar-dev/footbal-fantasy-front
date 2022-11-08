@@ -29,7 +29,8 @@ const useManagePlayer = (): {
       getAppState();
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       console.log(err);
     }
@@ -49,7 +50,8 @@ const useManagePlayer = (): {
       getAppState();
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       console.log(err);
     }
@@ -70,7 +72,8 @@ const useManagePlayer = (): {
       getAppState();
       addToast({
         _tag: "error",
-        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
       });
       console.log(err);
     }
