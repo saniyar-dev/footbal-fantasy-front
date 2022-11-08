@@ -40,8 +40,8 @@ const YourFollowersSection: FC = (): ReactElement => {
   const [filter, setFilterState] = useState<Filter>("followers");
   const setFilter = (id: number) => {
     console.log(id);
-    if (id === 0) setFilterState("followers");
-    else setFilterState("followings");
+    if (id === 0) setFilterState("followings");
+    else setFilterState("followers");
   };
 
   const [userList, setUserListState] = useState<Array<User>>([]);

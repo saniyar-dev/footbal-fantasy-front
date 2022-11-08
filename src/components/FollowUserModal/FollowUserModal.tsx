@@ -7,6 +7,7 @@ import Button from "@src/atomComponents/Button/Button";
 import useModal from "@src/helpers/useModal";
 import ProfilePic from "@src/atomComponents/ProfilePic/ProfilePic";
 import { User } from "@src/types";
+import useFriends from "@src/services/useFriends";
 
 const StyledColumn = styled(Column)`
   width: 575px;
@@ -51,6 +52,7 @@ const FollowUserModal: FC<{ userInfo: User }> = ({
   userInfo,
 }): ReactElement => {
   const { removeLastModal } = useModal();
+  const { followUser } = useFriends();
   return (
     <StyledColumn>
       <ProfilePic styles={{ width: "150px" }} src={fakeProfileUrl} />
@@ -63,8 +65,8 @@ const FollowUserModal: FC<{ userInfo: User }> = ({
           fontWeight: "800",
         }}
         onClick={(e) => {
-          e.preventDefault();
           // connect to server
+          followUser(userInfo.userId as string);
           removeLastModal();
         }}
       >
