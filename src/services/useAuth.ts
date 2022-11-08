@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { _userEmail } from "@src/state/global";
 import useAppState from "./useAppState";
 import { useCallback } from "react";
+import useToast from "@src/helpers/useToast";
 
 type TokenType = string | false;
 
@@ -16,6 +17,7 @@ const useAuth = (): {
   Signout: () => void;
   confirmSignup: (data: Partial<Record<FormInputTypes, string>>) => void;
 } => {
+  const { addToast } = useToast();
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useRecoilState(_userEmail);
   const { getAppState } = useAppState();
@@ -70,7 +72,10 @@ const useAuth = (): {
       navigate("/app/create-team");
       getAppState();
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 
@@ -83,7 +88,10 @@ const useAuth = (): {
       });
       removeToken();
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   }, []);
 
@@ -104,7 +112,10 @@ const useAuth = (): {
       navigate("/user/confirm");
       setUserEmail(data.email);
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 
@@ -119,7 +130,10 @@ const useAuth = (): {
 
       navigate("/user/login");
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 

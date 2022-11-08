@@ -1,3 +1,4 @@
+import useToast from "@src/helpers/useToast";
 import { RecentEvent } from "@src/types";
 import { useEffect, useState } from "react";
 import useFriends from "./useFriends";
@@ -8,6 +9,7 @@ const useRecentEvents = (): { friendsRecentEventsList: Array<RecentEvent> } => {
     Array<RecentEvent>
   >([]);
 
+  const { addToast } = useToast();
   const formatFriendsRecentEvents = (
     data: Array<RecentEvent>
   ): Array<RecentEvent> => {
@@ -106,6 +108,10 @@ const useRecentEvents = (): { friendsRecentEventsList: Array<RecentEvent> } => {
       return formatFriendsRecentEvents(res);
     } catch (err) {
       console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
       return [];
     }
   };

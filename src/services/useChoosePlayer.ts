@@ -1,3 +1,4 @@
+import useToast from "@src/helpers/useToast";
 import { _selectedSquadId } from "@src/state/players";
 import { PLAYER, RoleDict } from "@src/types";
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +18,7 @@ const useChoosePlayer = (): {
   searchPlayer: (str: string) => Promise<void>;
   filterId: number;
 } => {
+  const { addToast } = useToast();
   const [selectedSquadId] = useRecoilState(_selectedSquadId);
   const [filterId, setFilterId] = useState<number>(0);
   const [playerList, setPlayerList] = useState<Array<PLAYER>>([]);
@@ -63,7 +65,10 @@ const useChoosePlayer = (): {
       const response = await SERVER.get("player/all");
       setPlayerList(formatPlayers(response.data.data));
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 
@@ -80,7 +85,10 @@ const useChoosePlayer = (): {
       formatPagerData(response.data.pager);
       setPlayerList(formatPlayers(response.data.data));
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 
@@ -142,7 +150,10 @@ const useChoosePlayer = (): {
       formatPagerData(response.data.pager);
       setPlayerList(formatPlayers(response.data.data));
     } catch (err) {
-      console.log(err);
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
     }
   };
 
@@ -160,7 +171,12 @@ const useChoosePlayer = (): {
 
       formatPagerData(response.data.pager);
       setPlayerList(formatPlayers(response.data.data));
-    } catch (err) {}
+    } catch (err) {
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
+    }
   };
 
   const sortPlayers = async () => {};

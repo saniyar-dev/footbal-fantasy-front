@@ -1,4 +1,5 @@
 import { SERVER, USER } from "@src/helpers/useAxios";
+import useToast from "@src/helpers/useToast";
 import { _followersList, _followingsList } from "@src/state/friends";
 import { User } from "@src/types";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ const useFriends = (): {
   followUser: () => Promise<void>;
   searchUser: (str: String) => Promise<Array<User>>;
 } => {
+  const { addToast } = useToast();
   const [followersList, setFollowersList] =
     useRecoilState<Array<User>>(_followersList);
   const [followingsList, setFollowingsList] =
@@ -97,6 +99,10 @@ const useFriends = (): {
       const res = mockFollowers;
       return formatFollowerUsers(res);
     } catch (err) {
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
       console.log(err);
       return [];
     }
@@ -107,6 +113,10 @@ const useFriends = (): {
       const res = mockFollowings;
       return formatFollowingUsers(res);
     } catch (err) {
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
       console.log(err);
       return [];
     }
@@ -176,6 +186,10 @@ const useFriends = (): {
         user.name.toLowerCase().startsWith(str.toLowerCase())
       );
     } catch (err) {
+      addToast({
+        _tag: "error",
+        message: "یه چیزی رفت رو هوا صفحه رو رفرش کن",
+      });
       console.log(err);
       return [];
     }
