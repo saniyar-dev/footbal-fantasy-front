@@ -37,7 +37,7 @@ const searchUser = (users: Array<User>, searchStr: string): Array<User> => {
 const YourFollowersSection: FC = (): ReactElement => {
   const { followersList, followingsList } = useFriends();
 
-  const [filter, setFilterState] = useState<Filter>("followers");
+  const [filter, setFilterState] = useState<Filter>("followings");
   const setFilter = (id: number) => {
     console.log(id);
     if (id === 0) setFilterState("followings");
