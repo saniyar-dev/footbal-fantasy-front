@@ -8,6 +8,7 @@ import Button from "@src/atomComponents/Button/Button";
 import editIconUrl from "@assets/Icons/edit.svg";
 import Icon from "@src/atomComponents/Icon/Icon";
 import { useNavigate } from "react-router-dom";
+import useProfile from "@src/services/useProfile";
 
 const FieldTitle = styled.div`
   font-family: "Vazirmatn";
@@ -50,6 +51,7 @@ const PassDots = styled.span`
 
 const ProfilePreview: FC = (): ReactElement => {
   const navigate = useNavigate();
+  const { godInfo } = useProfile();
   return (
     <Column
       styles={{
@@ -80,7 +82,7 @@ const ProfilePreview: FC = (): ReactElement => {
           }}
         >
           <FieldTitle>نام</FieldTitle>
-          <FieldDescription>سانیار</FieldDescription>
+          <FieldDescription>{godInfo.name.split(" ")[0]}</FieldDescription>
         </Column>
         <Column
           styles={{
@@ -89,7 +91,7 @@ const ProfilePreview: FC = (): ReactElement => {
           }}
         >
           <FieldTitle>نام خانوادگی</FieldTitle>
-          <FieldDescription>کرمی</FieldDescription>
+          <FieldDescription>{godInfo.name.split(" ")[1]}</FieldDescription>
         </Column>
         <Column
           styles={{
@@ -107,7 +109,7 @@ const ProfilePreview: FC = (): ReactElement => {
           }}
         >
           <FieldTitle>کشور</FieldTitle>
-          <FieldDescription>ایران</FieldDescription>
+          <FieldDescription>{godInfo.country}</FieldDescription>
         </Column>
         <Column
           styles={{
@@ -116,7 +118,7 @@ const ProfilePreview: FC = (): ReactElement => {
           }}
         >
           <FieldTitle>نام کاربری</FieldTitle>
-          <FieldDescription>saniyar</FieldDescription>
+          <FieldDescription>{godInfo.username}</FieldDescription>
         </Column>
         <Column
           styles={{

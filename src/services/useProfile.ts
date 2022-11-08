@@ -9,7 +9,7 @@ const useProfile = (): {
 } => {
   const { addToast } = useToast();
   const [godInfo, setGodInfo] = useState<GodInfoType>({
-    name: "asghar",
+    name: "asghar baghal",
     userId: "",
     country: "ایران",
     profilePic: undefined,
@@ -19,7 +19,7 @@ const useProfile = (): {
   const getGodInfo = async (): Promise<GodInfoType> => {
     try {
       return {
-        name: "asghar",
+        name: "asghar baghal",
         userId: "",
         country: "ایران",
         profilePic: undefined,
