@@ -59,6 +59,7 @@ const useAuth = (): {
   const CheckAuth = (): boolean => {
     const token = getTokenFromLocal();
     if (token) {
+      addToast({ _tag: "success", message: "وارد بازی شدی" });
       return true;
     }
     return false;
@@ -70,6 +71,7 @@ const useAuth = (): {
       setToken(response.data.token);
 
       navigate("/app/create-team");
+      addToast({ _tag: "success", message: "وارد بازی شدی" });
       getAppState();
     } catch (err) {
       addToast({

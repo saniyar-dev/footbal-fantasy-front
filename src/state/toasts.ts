@@ -3,7 +3,7 @@ import { ToastTypes } from "@src/types";
 
 const myToasts = atom<Array<ToastTypes>>({
   key: "myToasts",
-  default: [{ _tag: "success", message: "وارد بازی شدی" }],
+  default: [],
 });
 
 export default myToasts;
