@@ -7,9 +7,9 @@ import { useRecoilState } from "recoil";
 
 type BackendUser = {
   id: string;
-  firstname: string;
-  lastname: string;
-  username: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
   email: { value: string };
 };
 
@@ -165,9 +165,9 @@ const useFriends = (): {
         ...prev,
         {
           userId: curr.id,
-          username: curr.username,
+          username: curr.userName,
           country: "ایران",
-          name: curr.firstname.concat(" ", curr.lastname),
+          name: curr.firstName.concat(" ", curr.lastName),
           profilePic: undefined,
           isFollowing: true,
         },
@@ -177,14 +177,11 @@ const useFriends = (): {
   const searchUser = async (str: String): Promise<Array<User>> => {
     if (str === "") return [];
     try {
-      // const res = await USER.get("users", {
-      //   params: { search: str },
-      // });
-      // console.log(res);
-      // return formatUsers(res as unknown as Array<BackendUser>);
-      return mockUsers.filter((user) =>
-        user.name.toLowerCase().startsWith(str.toLowerCase())
-      );
+      const res = await USER.get("users", {
+        params: { search: str },
+      });
+      console.log(res);
+      return formatUsers(res.data as unknown as Array<BackendUser>);
     } catch (err) {
       addToast({
         _tag: "error",
