@@ -31,6 +31,7 @@ const useChoosePlayer = (): {
   });
   const currentFilterId = useRef<number>(0);
   const currentSearchString = useRef<string>("");
+  const currentSortOrder = useRef<{ sortBy: "price"; order: "ASC" | "DES" }>();
 
   const formatPlayers = (
     data: Array<Omit<PLAYER, "position"> & { position_id?: number }>
@@ -161,6 +162,8 @@ const useChoosePlayer = (): {
       setPlayerList(formatPlayers(response.data.data));
     } catch (err) {}
   };
+
+  const sortPlayers = async () => {};
 
   return {
     getAllPlayers,
