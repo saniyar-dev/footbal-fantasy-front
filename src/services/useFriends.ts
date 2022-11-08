@@ -129,7 +129,13 @@ const useFriends = (): {
       const res = await USER.post("follow", {
         userId,
       });
-      console.log(res);
+      fetchData().catch((err) => {
+        addToast({
+          _tag: "error",
+          //@ts-ignore
+          message: err.response.data.errors[0].message,
+        });
+      });
     } catch (err) {
       addToast({
         _tag: "error",
@@ -206,6 +212,10 @@ const useFriends = (): {
       console.log(err);
       return [];
     }
+  };
+  const fetchData = async () => {
+    setFollowersList(await getFollowers());
+    setFollowingsList(await getFollowings());
   };
 
   useEffect(() => {

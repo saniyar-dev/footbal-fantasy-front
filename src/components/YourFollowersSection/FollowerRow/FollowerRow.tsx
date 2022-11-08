@@ -39,7 +39,10 @@ const FollowerRow: FC<{ userInfo: User }> = ({ userInfo }): ReactElement => {
             justifyContent: "center",
           }}
         >
-          <ProfilePic styles={{ width: "40px" }} src={profileUrl} />
+          <ProfilePic
+            styles={{ width: "40px" }}
+            src={require("@assets/profilePic.jpg")}
+          />
           <StyledName>{userInfo.name}</StyledName>
         </Row>
         <Button

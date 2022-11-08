@@ -55,7 +55,10 @@ const FollowUserModal: FC<{ userInfo: User }> = ({
   const { followUser } = useFriends();
   return (
     <StyledColumn>
-      <ProfilePic styles={{ width: "150px" }} src={fakeProfileUrl} />
+      <ProfilePic
+        styles={{ width: "150px" }}
+        src={require("@assets/profilePic.jpg")}
+      />
       <Button
         styles={{
           width: "200px",

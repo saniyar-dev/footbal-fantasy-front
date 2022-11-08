@@ -133,7 +133,10 @@ const UserRecentActions: FC<{
             gap: "8px",
           }}
         >
-          <ProfilePic styles={{ width: "80px" }} src={fakeUrl} />
+          <ProfilePic
+            styles={{ width: "80px" }}
+            src={require("@assets/profilePic.jpg")}
+          />
           <StyledName>{info.user.name}</StyledName>
         </Column>
         <Icon width="20px" height="20px" src={heartIconUrl} />
