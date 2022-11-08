@@ -60,10 +60,15 @@ export const positionIdDict: Record<Role, number> = {
   ATT: 4,
 };
 
-export type ToastTypes = {
-  _tag: "error";
-  message: string;
-};
+export type ToastTypes =
+  | {
+      _tag: "error";
+      message: string;
+    }
+  | {
+      _tag: "success";
+      message: string;
+    };
 
 export type User = {
   userId: String;

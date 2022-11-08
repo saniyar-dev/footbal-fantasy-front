@@ -3,6 +3,7 @@ import React, { FC, ReactElement, useEffect } from "react";
 import styled from "styled-components";
 import Column from "../Grid/Column";
 import ErrorToast from "../Toast/ErrorToast";
+import SuccessToast from "../Toast/SuccessToast";
 
 const CustomContainer = styled(Column)`
   justify-content: end;
@@ -20,7 +21,7 @@ const ToastHandler: FC = (): ReactElement => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       removeLastToast();
-    }, 5000000);
+    }, 5000);
 
     return () => {
       clearInterval(intervalId);
@@ -30,9 +31,13 @@ const ToastHandler: FC = (): ReactElement => {
     <>
       {toasts.length > 0 && (
         <CustomContainer>
-          {toasts.map((toast) => (
-            <ErrorToast>{toast.message}</ErrorToast>
-          ))}
+          {toasts.map((toast) => {
+            return toast._tag === "error" ? (
+              <ErrorToast>{toast.message}</ErrorToast>
+            ) : (
+              <SuccessToast>{toast.message}</SuccessToast>
+            );
+          })}
         </CustomContainer>
       )}
     </>
