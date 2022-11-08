@@ -67,7 +67,10 @@ const useAuth = (): {
 
   const Login = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
-      const response = await USER.post("login", data);
+      const response = await USER.post("login", {
+        userName: data.username,
+        password: data.password,
+      });
       setToken(response.data.token);
 
       navigate("/app/create-team");
@@ -97,19 +100,30 @@ const useAuth = (): {
     }
   }, []);
 
-  // const formatSignupData = (
-  //   data: Partial<Record<FormInputTypes, string>>
-  // ): Partial<Record<FormInputTypes | "fullname", string>> => {
-  //   const fullname = data.name?.concat(" ", data.lastname ? data.lastname : "");
-  //   delete data.name;
-  //   delete data.lastname;
-  //   return { ...data, fullname };
-  // };
+  const formatSignupData = (
+    data: Partial<Record<FormInputTypes, string>>
+  ): {
+    firstName: string;
+    lastName: string;
+    userName: string;
+    email: string;
+    country: string;
+    password: string;
+  } => {
+    return {
+      firstName: data.name!,
+      lastName: data.lastname!,
+      country: data.country!,
+      email: data.email!,
+      password: data.password!,
+      userName: data.username!,
+    };
+  };
 
   const Signup = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
       console.log(data);
-      await USER.post("signup", data);
+      await USER.post("signup", formatSignupData(data));
 
       navigate("/user/confirm");
       setUserEmail(data.email);
@@ -125,7 +139,7 @@ const useAuth = (): {
     data: Partial<Record<FormInputTypes, string>>
   ) => {
     try {
-      await USER.post("user/verify", {
+      await USER.post("verify", {
         ...data,
         email: userEmail,
       });
