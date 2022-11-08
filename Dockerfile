@@ -1,9 +1,14 @@
 FROM  node:16 as  builder
 WORKDIR /app
-COPY package.json /app/
-RUN npm i
+COPY package*.json /app/
+COPY yarn.lock /app/
+
+RUN npm install -g yarn
+RUN yarn install
+
 COPY ./ /app/
 RUN npm run build
+
 FROM nginx:1.23 as runner
 COPY nginx.conf /etc/nginx/
 # Set working directory to nginx asset directory

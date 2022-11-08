@@ -46,6 +46,12 @@ const useAuth = (): {
       )}`;
       return config;
     });
+    USER.interceptors.request.use((config) => {
+      config.headers!.Authorization = `Bearer ${window.localStorage.getItem(
+        "token"
+      )}`;
+      return config;
+    });
   };
 
   const CheckAuth = (): boolean => {
@@ -58,7 +64,7 @@ const useAuth = (): {
 
   const Login = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
-      const response = await USER.post("user/login", data);
+      const response = await USER.post("login", data);
       setToken(response.data.token);
 
       navigate("/app/create-team");
@@ -70,7 +76,7 @@ const useAuth = (): {
 
   const Signout = useCallback(async () => {
     try {
-      await USER.delete("user/logout", {
+      await USER.delete("logout", {
         headers: {
           Authorization: getTokenFromLocal(),
         },
@@ -81,18 +87,19 @@ const useAuth = (): {
     }
   }, []);
 
-  const formatSignupData = (
-    data: Partial<Record<FormInputTypes, string>>
-  ): Partial<Record<FormInputTypes | "fullname", string>> => {
-    const fullname = data.name?.concat(" ", data.lastname ? data.lastname : "");
-    delete data.name;
-    delete data.lastname;
-    return { ...data, fullname };
-  };
+  // const formatSignupData = (
+  //   data: Partial<Record<FormInputTypes, string>>
+  // ): Partial<Record<FormInputTypes | "fullname", string>> => {
+  //   const fullname = data.name?.concat(" ", data.lastname ? data.lastname : "");
+  //   delete data.name;
+  //   delete data.lastname;
+  //   return { ...data, fullname };
+  // };
 
   const Signup = async (data: Partial<Record<FormInputTypes, string>>) => {
     try {
-      await USER.post("user/signup", formatSignupData(data));
+      console.log(data);
+      await USER.post("signup", data);
 
       navigate("/user/confirm");
       setUserEmail(data.email);

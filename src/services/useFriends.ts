@@ -1,7 +1,16 @@
+import { SERVER, USER } from "@src/helpers/useAxios";
 import { _followersList, _followingsList } from "@src/state/friends";
 import { User } from "@src/types";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+
+type BackendUser = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: { value: string };
+};
 
 const useFriends = (): {
   followersList: Array<User>;
@@ -140,16 +149,16 @@ const useFriends = (): {
     },
   ];
 
-  const formatUsers = (data: Array<User>): Array<User> => {
+  const formatUsers = (data: Array<BackendUser>): Array<User> => {
     return data.reduce<Array<User>>((prev, curr) => {
       return [
         ...prev,
         {
-          userId: curr!.userId,
-          username: curr!.username,
-          country: curr!.country,
-          name: curr!.name,
-          profilePic: curr!.profilePic,
+          userId: curr.id,
+          username: curr.username,
+          country: "ایران",
+          name: curr.firstname.concat(" ", curr.lastname),
+          profilePic: undefined,
           isFollowing: true,
         },
       ];
@@ -158,10 +167,14 @@ const useFriends = (): {
   const searchUser = async (str: String): Promise<Array<User>> => {
     if (str === "") return [];
     try {
-      const res = mockUsers.filter((user) =>
+      // const res = await USER.get("users", {
+      //   params: { search: str },
+      // });
+      // console.log(res);
+      // return formatUsers(res as unknown as Array<BackendUser>);
+      return mockUsers.filter((user) =>
         user.name.toLowerCase().startsWith(str.toLowerCase())
       );
-      return formatUsers(res);
     } catch (err) {
       console.log(err);
       return [];
