@@ -29,7 +29,10 @@ const EditProfile: FC = (): ReactElement => {
           justifyContent: "center",
         }}
       >
-        <ProfilePic src={"oaij"} styles={{ width: "100px" }} />
+        <ProfilePic
+          src={require("@assets/profilePic.jpg")}
+          styles={{ width: "100px" }}
+        />
       </Row>
       <Form onSubmitFn={(data) => console.log(data)}>
         <StyledContainer
