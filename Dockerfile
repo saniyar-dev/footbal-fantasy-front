@@ -3,7 +3,6 @@ WORKDIR /app
 COPY package*.json /app/
 COPY yarn.lock /app/
 
-RUN npm install -g yarn
 RUN yarn install
 
 COPY ./ /app/
