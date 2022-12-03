@@ -5,10 +5,11 @@ import {
   _reservePlayers,
 } from "@src/state/players";
 import myWallet from "@src/state/wallet";
-import { USERPLAYER, RoleDict } from "@src/types";
+import { USERPLAYER, RoleDict, ServerErrorType } from "@src/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { SERVER } from "@src/helpers/useAxios";
 import { _selectedSquadId } from "@src/state/players";
+import useToast from "@src/helpers/useToast";
 
 const useAppState = (): {
   getAppState: () => void;
@@ -17,6 +18,7 @@ const useAppState = (): {
   wallet: number;
   reservePlayers: Array<USERPLAYER>;
 } => {
+  const { addToast } = useToast();
   const [squadPlayers, setSquadPlayers] = useRecoilState(_squadPlayers);
   const [mainPlayers, setMainPlayers] = useRecoilState(_mainPlayers);
   const [wallet, setWallet] = useRecoilState(myWallet);
@@ -74,6 +76,11 @@ const useAppState = (): {
       const response = await SERVER.get("squad");
       return formatPlayers(formatPositionId(response.data));
     } catch (err) {
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       return [];
     }
   };
@@ -87,6 +94,11 @@ const useAppState = (): {
       const response = await SERVER.get("squad/get-wallet");
       return formatWallet(response.data.wallet.money as unknown as number);
     } catch (err) {
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       return -1;
     }
   };
@@ -96,6 +108,11 @@ const useAppState = (): {
       const response = await SERVER.get("squad/main-squad");
       return formatPositionId(response.data);
     } catch (err) {
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       return [];
     }
   };

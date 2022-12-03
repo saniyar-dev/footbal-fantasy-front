@@ -38,7 +38,7 @@ export type ModalTypes =
     }
   | {
       _tag: "follow-user";
-      userInfo: Object;
+      userInfo: User;
     }
   | {
       _tag: "change-player";
@@ -60,7 +60,35 @@ export const positionIdDict: Record<Role, number> = {
   ATT: 4,
 };
 
-export type ToastTypes = {
-  _tag: "error";
-  message: string;
+export type ToastTypes =
+  | {
+      _tag: "error";
+      message: string;
+    }
+  | {
+      _tag: "success";
+      message: string;
+    };
+
+export type User = {
+  userId: String;
+  name: String;
+  country: String;
+  username: String;
+  profilePic: unknown;
+  isFollowing: boolean;
+};
+
+export type RecentEvent = {
+  user: User;
+  point: number;
+  substitution: Array<{ playerInName: String; playerOutName: string }>;
+  week: number;
+  isLiked: Boolean;
+};
+
+export type ServerErrorType = {
+  response: {
+    errors: Array<{ type: string; message: string }>;
+  };
 };

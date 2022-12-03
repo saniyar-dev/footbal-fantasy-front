@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 import Container from "@src/atomComponents/Grid/Container";
 import Button from "@src/atomComponents/Button/Button";
+import useProfile from "@src/services/useProfile";
 
 const StyledContainer = styled(Container)`
   justify-content: space-around;
@@ -18,6 +19,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const EditProfile: FC = (): ReactElement => {
+  const { editGodInfo } = useProfile();
   return (
     <Column
       styles={{
@@ -29,9 +31,12 @@ const EditProfile: FC = (): ReactElement => {
           justifyContent: "center",
         }}
       >
-        <ProfilePic src={"oaij"} styles={{ width: "100px" }} />
+        <ProfilePic
+          src={require("@assets/profilePic.jpg")}
+          styles={{ width: "100px" }}
+        />
       </Row>
-      <Form onSubmitFn={(data) => console.log(data)}>
+      <Form onSubmitFn={editGodInfo}>
         <StyledContainer
           styles={{
             gridTemplateColumns: "auto auto",

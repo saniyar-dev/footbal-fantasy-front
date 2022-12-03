@@ -1,3 +1,4 @@
+import useToast from "@src/helpers/useToast";
 import { _selectedSquadId } from "@src/state/players";
 import { PLAYER, USERPLAYER } from "@src/types";
 import { useRecoilState } from "recoil";
@@ -12,6 +13,7 @@ const useManagePlayer = (): {
     playerOut: USERPLAYER
   ) => Promise<void>;
 } => {
+  const { addToast } = useToast();
   const { getAppState } = useAppState();
   const [selectedId] = useRecoilState(_selectedSquadId);
 
@@ -25,6 +27,11 @@ const useManagePlayer = (): {
       getAppState();
     } catch (err) {
       getAppState();
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       console.log(err);
     }
   };
@@ -41,6 +48,11 @@ const useManagePlayer = (): {
       getAppState();
     } catch (err) {
       getAppState();
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       console.log(err);
     }
   };
@@ -58,6 +70,11 @@ const useManagePlayer = (): {
       getAppState();
     } catch (err) {
       getAppState();
+      addToast({
+        _tag: "error",
+        //@ts-ignore
+        message: err.response.data.errors[0].message,
+      });
       console.log(err);
     }
   };
