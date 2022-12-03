@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const USER = axios.create({
-  baseURL: "http://178.216.248.36:8001/",
+  baseURL: "http://localhost:8001/",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export const USER = axios.create({
 });
 
 export const SERVER = axios.create({
-  baseURL: "http://178.216.248.36:8000/",
+  baseURL: "http://localhost:8000/",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
